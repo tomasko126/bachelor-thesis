@@ -1,0 +1,27 @@
+% arara: pdflatex
+% arara: pdflatex
+% arara: pdflatex
+\documentclass[thesis=B,slovak]{FITthesis}[2019/03/21]
+
+\usepackage[utf8]{inputenc} 
+\usepackage{dirtree}
+
+\input{tex/metadata.tex}
+
+\begin{document}
+	\input{tex/uvod.tex}
+	\input{tex/ciel_prace.tex}
+	\input{tex/analyza.tex}
+	\input{tex/navrh.tex}
+	\input{tex/implementacia.tex}
+	\input{tex/testovanie.tex}
+	\input{tex/zaver.tex}
+
+	\bibliographystyle{csn690}
+	\bibliography{ref}
+
+	\appendix
+	\input{tex/abbrs.tex}
+	\input{tex/medium.tex}
+
+\end{document}
