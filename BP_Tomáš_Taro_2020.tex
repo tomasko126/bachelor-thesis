@@ -1,10 +1,11 @@
-% arara: pdflatex
-% arara: pdflatex
-% arara: pdflatex
+% arara: xelatex
+% arara: bibtex
+% arara: xelatex
 \documentclass[thesis=B,slovak]{FITthesis}[2019/03/21]
 
 \usepackage[utf8]{inputenc} 
 \usepackage{dirtree}
+\usepackage{amsmath}
 
 \input{tex/metadata.tex}
 
@@ -17,7 +18,7 @@
 	\input{tex/testovanie.tex}
 	\input{tex/zaver.tex}
 
-	\bibliographystyle{csn690}
+	\bibliographystyle{csn690.bst}
 	\bibliography{ref}
 
 	\appendix

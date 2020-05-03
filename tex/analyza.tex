@@ -1,0 +1,175 @@
+\chapter{Analýza}
+Táto kapitola sa venuje analýze súčasnej webovej aplikácie, spolu s jej architektúrou. Následne sú vymedzené jednotlivé funkčné a nefunkčné požiadavky novej webovej aplikácie, na ktoré nadväzuje sekcia používateľských rolí. Záver kapitoly je určený pre analýzu prípadov použití, ktoré vyplývajú z funkčných požiadaviek.
+
+\section{Analýza súčasnej aplikácie}
+== TO BE ADDED ==
+
+\section{Analýza požiadaviek}
+V tejto podkapitole sa nachádza popis všetkých požiadaviek kladených na vznikajúcu webovú aplikáciu.
+Tieto požiadavky delíme na funkčné a nefunkčné.
+
+\subsection{Funkčné požiadavky}\label{funkcne-poziadavky}
+Funkčné požiadavky vo všeobecnosti vymedzujú hranice aplikácie v kontexte jej funkcionality, ktorú používateľ aplikácie od systému očakáva. Ich úlohou je taktiež spresniť odhad pracnosti na vznikajúcej aplikácii.\cite{funkcne-poziadavky}
+
+\subsubsection{Evidencia zvierat}\label{evidencia-zvierat}
+Aplikácia musí umožňovať jednoduchú správu zvierat, od vytvorenia nového zvieraťa, cez jeho zobrazenia a editáciu, až po jeho prípadné zmazanie. V evidencii zvierat je pre každé zviera potrebné ukladať nasledujúce údaje:
+
+\begin{itemize}
+	\item meno a prezývku
+	\item dátum narodenia
+	\item majiteľa a chovateľa zvieraťa
+	\item vrh, v ktorom sa zviera narodilo
+	\item matku a otca zvieraťa
+	\item pohlavie
+	\item farba očí
+	\item typ uší
+	\item farba a typ srsti
+	\item znaky
+	\item dátum a dôvod úmrtia
+\end{itemize}
+
+Pre uľahčenie vytvorenia a editovania zvieraťa budú textové polia v maximálnej možnej miere interaktívne.
+
+To znamená, že polia majiteľa a chovatela zvieraťa vrátia na základe vstupu zoznam majitelov, resp. chovatelov, ktorí už sú evidovaní v aplikácii. Následne si z tohto zoznamu používateľ zvolí požadovaného človeka.
+V prípade, že aplikácia požadovaného človeka nevráti, používateľovi bude ponúknutá možnosť ho dodatočne vytvoriť.
+
+Na podobnom princípe bude fungovať aj textové pole pre vrh, s tým rozdielom, že podľa zvoleného vrhu aplikácia predvyplní matku a otca zvieraťa.
+ 
+\subsubsection{Evidencia registrácií zvieraťa}\label{evidencia-registracii-zvierata}
+Je potrebné, aby aplikácia ponúkala možnosť zaregistrovať evidované zviera pod záujmový klub.
+Pri takejto registrácií sa budú zbierať nasledovné údaje:
+
+\begin{itemize}
+	\item klub\footnote{Na výber z možností: ČKP, SOCHP alebo Ostatné}, pod ktorým bude zviera zaregistrované
+	\item typ registrácie\footnote{Vyžadované iba v prípade registrácie zvieraťa pod klubom ČKP}
+	\item registračné číslo
+	\item dátum registrácie
+	\item informáciu, či je nasledovný chov povolený
+	\item informáciu o obmedzení chovu
+\end{itemize}
+
+\subsubsection{Evidencia vrhov}
+Medzi nevyhnutnú funkcionalitu aplikácie sa radí aj evidencia vrhov. Tak ako pri evidencii zvierat, tak aj v tomto prípade používatelské rozhranie umožní vytvoriť nový vrh, zobraziť ho, respektíve ho editovať alebo vymazať. 
+
+Pre účel evidencie vrhov sa budú v aplikácii ukladať nasledovné údaje:
+
+\begin{itemize}
+	\item typ a označenie vrhu
+	\item majiteľ vrhu
+	\item meno a kontakt na chovatela
+	\item dátum narodenia
+	\item matka a otec vrhu
+	\item línia
+	\item genetické informácie
+	\item počet narodených a odchovaných mláďat
+	\item počet odchovaných samčekov a samičiek
+	\item počet mláďat určených pre maznanie a následný chov
+\end{itemize}
+
+Rovnako ako pri evidencii zvierat, tak aj tu umožní aplikácia interaktívne zvoliť matku, otca a majiteľa vrhu zobrazením zoznamu uložených zvierat/ľudí.
+
+\subsubsection{Správa žiadostí o schválenie vrhov}\label{sprava-ziadosti-o-schvalenie-vrhu}
+Pre organizáciu je žiaduce, aby aplikácia obsahovala správu žiadostí o schválenie vrhu.
+
+V rámci žiadosti o schválenie vrhu rozlišujeme dva typy osôb -- žiadateľa o schválenie vrhu\footnote{Zväčša majiteľ daného vrhu}, a registrátora vrhu.
+
+Aplikácia žiadatelovi umožní poslať žiadosť o schválenie vrhu s možnosťou zanechania poznámky pre registrátora priamo z prostredia konkrétneho vrhu.
+Po odoslaní a úspešnom spracovaní tejto žiadosti serverom sa odošle e-mail všetkým registrátorom s informáciou o vytvorení novej žiadosti o schválení vrhu. Na tento e-mail bude môcť zareagovať akýkoľvek registrátor, a na základe dostupných informácií o vrhu sa rozhodne, či danú žiadosť schváli alebo zamietne.
+O zmene stavu žiadosti bude žiadateľ informovaný e-mailom.
+
+\subsubsection{Zobrazenie rodokmeňu zvieraťa a vrhu}\label{rodokmene}
+Pre jednoduchšiu vizualizáciu predkov konkrétneho zvieraťa aplikácia ponúkne zobrazenie rodokmeňu zvieraťa vo forme jednoduchej tabuľky. V tejto tabuľke budú okrem mien zvierat zobrazené aj dodatočné informácie, definované v sekcii \ref{evidencia-zvierat}. Rodokmeň bude zobrazený v rámci jednotlivých zvierat a vrhov.
+
+\subsubsection{Tvorba poznámok pre zviera a vrh}
+V rámci aplikácie bude potrebné implementovať poznámky, ktoré budú môcť byť priradené jednotlivým zvieratám a vrhom.
+Takáto poznámka by mala mať nastaviteľnú viditelnosť\footnote{Poznámka môže byť buď verejná alebo súkromná} a typ\footnote{Typ poznámky je jeden z nasledujúcich: všeobecná, upozornenie alebo výstraha}.
+Taktiež poznámka musí poskytnúť informáciu, kedy bola vytvorená, respektíve editovaná.
+Nakoľko sa jedná o poznámky pre zviera a vrh, budú zobrazené u príslušných zvieratách, resp. vrhoch, ku ktorým sa vzťahujú.
+
+\subsubsection{Zobrazenie histórie zmien zvierat a vrhov}
+Medzi želanú funkcionalitu novej webovej aplikácie patrí sledovanie a následné zobrazenie histórie zmien u všetkých zvierat a vrhoch.
+
+Aplikácia bude zaznamenávať nasledujúce zmeny v systéme:
+\begin{itemize}
+	\item vytvorenie zvieraťa/vrhu
+	\item úprava údajov u zvieraťa/vrhu
+	\item zmazanie zvieraťa/vrhu
+	\item obnova\footnote{Obnoviť zviera/vrh bude možné iba administrátor aplikácie} zmazaného zvieraťa/vrhu
+\end{itemize}
+
+Pri každej zmene popísanej vyššie je taktiež nutné ukladať, kto a kedy danú zmenu vykonal. V prípade úpravy údajov budú navyše zaznamenané tie údaje, ktoré boli zmenené používatelom. Túto históriu zmien bude možné vidieť vo forme tabuľky u každého zvieraťa, resp. vrhu.
+
+
+\subsubsection{Generovanie preukazov}\label{generovanie-preukazov}
+Pre potreby organizácie je nevyhnutné implementovať generovanie preukazov (osvedčení) vo forme PDF súboru. V tomto súbore bude prvá strana vyplnená informáciami o danom zvierati zo sekcie \ref{evidencia-zvierat}, vrátane jeho registrácie zo sekcie \ref{evidencia-registracii-zvierata}. V niektorých prípadoch bude taktiež zobrazená registrácia vrhu, ktorej obsah je definovaný v \ref{sprava-ziadosti-o-schvalenie-vrhu}, v ktorom sa zviera narodilo. Druhá strana súboru bude vyplnená rodokmeňom zvieraťa (\ref{rodokmene}).
+
+Preukaz bude možné vygenerovať tlačidlom na stránke konkrétneho zvieraťa.
+
+\subsubsection{Filtrovanie a radenie}
+Pre vylepšenie používateľskej skúseností bude potrebné implementovať filtrovanie a radenie zvierat a ako aj vrhov na príslušných stránkach. To umožní jednoduchšiu prácu s aplikáciou a rýchlejšie nájdenie potrebných informácií.
+
+\subsubsection{Správa používatelov a rolí}\label{sprava-pouzivatelov-a-roli}
+Pre administrátorov aplikácie je nutné spravovať jednotlivých používateľov aplikácie, priradiť im príslušné role, alebo im ich naopak odoberať. Na základe tejto skutočnosti je žiaduce vytvoriť pohľad so zoznamom používateľov a ich rolami s následnou možnosťou im danú rolu zmeniť, prípadne daných používateľov odobrať.
+
+\subsubsection{Lokalizácia aplikácie}
+Nakoľko budú aplikáciu používať nie len českí ale aj zahraniční používatelia, je nutné, aby aplikácia poskytovala lokalizovaný obsah aj v anglickom jazyku. Jazyk bude možné jednoducho zmeniť v menu v paneli webovej aplikácie.
+
+\subsection{Nefunkčné požiadavky}
+Na rozdiel od funkčných požiadaviek, nefunkčné požiadavky umožňujú určiť obmedzenia kladené na aplikáciu. V druhom rade majú zásadný dopad na návrh architektúry webovej aplikácie.\cite{nefunkcne-poziadavky}
+
+\subsubsection{Webová aplikácia}
+Nakoľko je požadovaný systém navrhnutý ako webová aplikácia, bude potrebné, aby bola prístupná z internetu pomocou moderných webových prehliadačov.
+
+\subsubsection{Používateľské rozhranie}
+Webová aplikácia bude taktiež musieť obsahovať používateľské rozhranie, s ktorým budú môcť používatelia interagovať.
+Prostredie bude naviac responzívne, čo uľahčí prípadný prístup do systému z mobilného prehliadača.
+
+\subsubsection{Technológie}
+Po konzultácii s vedúcim práce boli vymedzené nasledovné technológie, ktoré budú použité na strane servera.
+
+Ako programovací jazyk bude použítý jazyk PHP vo verzii 7.3, hoci momentálne je najnovšia verzia jazyku 7.4\cite{verzie-php}.
+Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu\footnote{Endora -- www.endora.cz}, na ktorom bude aplikácia nasadená.
+
+Pre ukladanie dát nám bude slúžiť databázový systém MySQL vo verzii 5.6. Táto verzia MySQL taktiež nie je najnovšia (v skutočnosti bola prvýkrát vydaná v roku 2013, avšak je stále oficiálne podporovaná\cite{verzie-mysql}), opäť z dôvodu neexistujúcej podpory novšieho databázového systému webhostingom.
+
+\section{Používateľské role}
+Novovznikajúca webová aplikácia bude prístupná iba zaregistrovaným a prihláseným používateľom. Navyše, niektoré akcie budú obmedzené iba pre určitý okruh používateľov.
+
+K tomu, aby sme umožnili vybraným používateľom umožniť alebo zakázať vybrané akcie, bude potrebné do aplikácie implementovať používateľské role a práva. Následne bude aplikácia riadiť prístup používateľa k jednotlivým akciám na základe príslušnosti k vybranej roli.
+
+V nasledujúcich podsekciách budú priblížené jednotlivé role a k nim príslušné práva, ktoré sa budú vyskytovať v aplikácii.
+
+\subsection{Bežný používateľ}
+Túto rolu má každý používateľ automaticky po registrácii do webovej aplikácie. Bežný používateľ môže v aplikácii: 
+
+\begin{itemize}
+	\item Vytvoriť a zobraziť svoje zvieratá
+	\item Upraviť svoje zvieratá v prípade, že nie sú zaregistrované pod klubom ČKP
+	\item Vytvoriť a upraviť registrácie popísané v \ref{evidencia-registracii-zvierata} svojich vlastných zvierat, ktoré nespadajú pod klub ČKP
+	\item Zobraziť zoznam všetkých cudzích zvierat spolu s ich detailmi
+	\item Vytvoriť a zobraziť vrhy, u ktorých je používateľ ich majiteľom
+	\item Upraviť vrhy, ktorých je majitelom, pokiaľ neboli tieto vrhy schválené žiadosťou popísanou v \ref{sprava-ziadosti-o-schvalenie-vrhu}
+	\item Zobraziť všetky vrhy typu VP alebo schválené vrhy typu PP a NV spolu s ich detailmi
+	\item Pridať poznámku k zvieratám a vrhom, ktoré vlastní
+\end{itemize}
+
+\subsection{Registrátor zvierat}
+Registrátor zvierat je v hierarchii rolí postavený nad bežným používateľom. Tým pádom má všetky práva bežného používateľa a navyše nasledujúce práva:
+
+\begin{itemize}
+	\item Možnosť pridať poznámku k akýmkoľvek zvieratám
+	\item Možnosť pridať, editovať a vymazať akúkoľvek registráciu u každého zvieraťa
+\end{itemize} 
+
+\subsection{Schvalovateľ vrhov}
+Schvalovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným používateľom podobne ako registrátor zvierat, s tým rozdielom, že schvalovateľ vrhu môže v aplikácii:
+
+\begin{itemize}
+	\item Vidieť a odpovedať na žiadosti o schválenie vrhov definované v \ref{sprava-ziadosti-o-schvalenie-vrhu}
+	\item Editovať akékoľvek zviera a vrh
+	\item Pridať poznámky k akémukoľvek vrhu
+	\item Vygenerovať preukaz zvieraťa popísaný v \ref{generovanie-preukazov}
+\end{itemize}
+
+\subsection{Administrátor}
+Ako obvykle, pre administrátora neplatia žiadne reštrikcie, čo znamená, že bude mať prístup ku všetkej funkcionalite definovanej vo funkčných požiadavkách v sekcii \ref{funkcne-poziadavky}.
