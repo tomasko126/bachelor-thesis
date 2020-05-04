@@ -5,7 +5,7 @@ Táto kapitola sa venuje analýze súčasnej webovej aplikácie, spolu s jej arc
 == TO BE ADDED ==
 
 \section{Analýza požiadaviek}
-V tejto podkapitole sa nachádza popis všetkých požiadaviek kladených na vznikajúcu webovú aplikáciu.
+V tejto sekcii sa nachádza popis všetkých požiadaviek kladených na vznikajúcu webovú aplikáciu.
 Tieto požiadavky delíme na funkčné a nefunkčné.
 
 \subsection{Funkčné požiadavky}\label{funkcne-poziadavky}
@@ -136,7 +136,7 @@ Pre pridávanie, spracovanie a získavanie dát nám bude slúžiť open-source 
 
 Táto verzia MySQL taktiež nie je najnovšia (v skutočnosti bola prvýkrát vydaná v roku 2013, avšak je stále oficiálne podporovaná\cite{verzie-mysql}), opäť z dôvodu neexistujúcej podpory novšieho databázového systému webhostingom.
 
-\section{Používateľské role}
+\section{Používateľské role}\label{pouzivatelske-role}
 Novovznikajúca webová aplikácia bude prístupná iba zaregistrovaným a prihláseným používateľom. Navyše, niektoré akcie budú obmedzené iba pre určitý okruh používateľov.
 
 K tomu, aby sme umožnili vybraným používateľom umožniť alebo zakázať vybrané akcie, bude potrebné do aplikácie implementovať používateľské role a práva. Následne bude aplikácia riadiť prístup používateľa k jednotlivým akciám na základe príslušnosti k vybranej roli.
@@ -177,3 +177,112 @@ Schvalovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným použ
 
 \subsection{Administrátor}
 Ako obvykle, pre administrátora neplatia žiadne reštrikcie, čo znamená, že bude mať prístup ku všetkej funkcionalite definovanej vo funkčných požiadavkách v sekcii \ref{funkcne-poziadavky}.
+
+\section{Prípady použitia}
+Táto sekcia sa venuje opisom prípadov použití -- čo sú špecifikácie rôznych činností, ktoré môžu používatelia s aplikáciou vykonávať.\cite{co-su-pripady-pouzitia} Tieto prípady použitia budú zachytené vo forme scenáru a budú vychádzať nielen zo známych funkčných požiadavok popísaných v sekcii \ref{funkcne-poziadavky}, ale aj z jednotlivých používateľských rolí, ktoré boli definované v sekcii \ref{pouzivatelske-role}. V tejto práci som sa rozhodol venovať iba takým prípadom použitia, ktoré sú z môjho pohľadu pre čitateľa prínosnejšie. Tie som následne rozdelil podľa príslušnosti k jednotlivým prvkom aplikácie. Taktiež všetky nasledujúce prípady použitia predpokladajú, že používateľ bol do systému úspešne prihlásený.
+
+\subsection{Prípady použitia týkajúce sa zvierat}
+
+\subsubsection*{UC1 -- Vyhľadanie zvieraťa}\label{uc1}
+
+Vyhľadanie zvieraťa je jeden zo základných prípadov použitia, kedy používateľ chce vyhladať dané zviera.
+
+\subsubsection*{Scenár}
+
+\begin{enumerate}
+	\item Používateľ zvolí možnosť \uv{Zvieratá} z navigačného menu aplikácie.
+	\item Následne aplikácia zobrazí tabuľku so zvieratami a filtrom, na základe ktorého si používateľ môže nastaviť dodatočné kritéria filtrovania zvierat.
+	\item Používateľ nastaví filter podľa kritérií hľadaného zvieraťa a klikne na tlačidlo \uv{Filtrovať}.
+	\item Aplikácia zobrazí všetky zvieratá vyhovujúce zadaným kritériám.
+\end{enumerate}
+
+\subsubsection*{Alternatívny scenár}
+
+\begin{enumerate}
+    \item [4.] Aplikácia zobrazí hľadané zviera už po načítaní tabuľky so zvieratami. V tomto prípade scenár vyhľadávania zvieraťa končí.
+\end{enumerate}
+
+Tento prípad použitia realizuje funkčné požiadavky na aplikáciu, konkrétne \hyperref[evidencia-zvierat]{Evidenciu zvierat}.
+
+\subsubsection*{UC2 -- Zobrazenie detailu zvieraťa}\label{uc2}
+
+Tento prípad použitia popisuje zobrazenie detailu zvieraťa a zahŕňa prípad \nameref{uc1}.
+
+\subsubsection*{Scenár}
+
+\begin{enumerate}
+	\item UC1 Vyhľadanie zvieraťa
+	\item Používateľ klikne na meno zvieraťa, ktorého detail si želá vidieť
+	\item Aplikácia zobrazí detail zvieraťa
+\end{enumerate}
+
+Popísaný prípad taktiež realizuje funkčnú požiadavku na aplikáciu, a to \hyperref[evidencia-zvierat]{Evidenciu zvierat}.
+
+\subsection*{UC3 -- Vytvorenie zvieraťa}
+
+Medzi ďalší základný prípad použitia patrí pridanie zvieraťa používatelom do systému.
+
+\subsubsection*{Scenár}
+
+\begin{enumerate}
+	\item Používateľ navštívi domovskú stránku aplikácie.
+	\item Následne zvolí možnosť \uv{Zvieratá} z navigačného menu aplikácie.
+	\item Po načítaní stránky používateľ klikne na tlačidlo \uv{Pridať zviera}.
+	\item Aplikácia načíta novú stránku s formulárom pre vytvorenie nového zvieraťa.
+	\item Používateľ vyplní formulár.
+	\item Po vyplnení všetkých potrebných údajov pre vytvorenie zvieraťa aplikácia umožní odoslať formulár kliknutím na tlačidlo \uv{Uložiť}
+	\item Používateľ odošle vyplnený formulár kliknutím na tlačidlo \uv{Uložiť}.
+	\item Po úspešnom vytvorení zvieraťa na základe vložených údajov systém presmeruje používateľa na stránku so zoznamom uložených zvierat.
+\end{enumerate}
+
+Tento prípad použitia realizuje tú istú funkčnú požiadavku na aplikáciu a predošlé prípady použitia -- konkrétne \hyperref[evidencia-zvierat]{Evidenciu zvierat}.
+
+\subsection*{UC4 -- Editácia zvieraťa}
+
+V tomto prípade sa používateľ aplikácie snaží upraviť existujúce zviera v systéme. Tento prípad použitia taktiež zahŕňa prípady 
+\nameref{uc1} alebo \nameref{uc2}, v závislosti od spôsobu editácie zvieraťa, ktorý si používateľ zvolí.
+
+\subsubsection*{Scenár}
+
+\begin{enumerate}
+	\item UC1 Vyhľadanie zvieraťa
+	\item Používateľ klikne na rozbalovacie menu u zvieraťa, ktoré chce editovať.
+	\item Po kliknutí na rozbalovacie menu, aplikácia ponúkne možnosť editácie alebo zmazanie zvieraťa.
+	\item Používateľ zvolí možnosť editácie.
+	\item Aplikácia následne presmeruje používatela na stránku s editáciou zvieraťa s predvyplnenými údajmi.
+	\item Používateľ upraví údaje zvieraťa.
+	\item Kliknutím na tlačidlo \uv{Odoslať} sa odošle vyplnený formulár na server.
+	\item Po úspešnom spracovaní formuláru je používateľ presmerovaný na stránku s detailmi upravovaného zvieraťa.
+\end{enumerate}
+
+\subsubsection*{Alternatívny scenár}
+
+\begin{enumerate}
+	\item UC2 Zobrazenie detailu zvieraťa
+	\item Používateľ klikne na tlačidlo \uv{Upraviť} na pravom postrannom paneli.
+	\item Následne aplikácia presmeruje používateľa na stránku s editáciou zvieraťa s predvyplneným formulárom obsahujúcim údaje o editovanom zvierati.
+	\item Používateľ upraví požadované údaje zvieraťa.
+	\item Kliknutím na tlačidlo \uv{Odoslať} sa odošle vyplnený formulár na server.
+	\item Po úspešnom spracovaní formuláru je používateľ presmerovaný na stránku s detailmi upravovaného zvieraťa.
+\end{enumerate}
+
+Popísaný prípad použitia realizuje funkčnú požiadavku \hyperref[evidencia-zvierat]{Evidencie zvieraťa}.
+
+\subsection*{UC5 -- Vytvorenie registrácie zvieraťa}
+
+\subsection{Prípady použitia týkajúce sa vrhov}
+
+\subsection*{UC6 -- Vytvorenie žiadosti o schválenie vrhu}
+
+\subsection*{UC7 -- Odpoveď na žiadosť o schválenie vrhu}
+
+
+
+
+
+
+
+
+
+
+
