@@ -9,10 +9,13 @@ V tejto sekcii sa nachádza popis všetkých požiadaviek kladených na vznikaj�
 Tieto požiadavky delíme na funkčné a nefunkčné.
 
 \subsection{Funkčné požiadavky}\label{funkcne-poziadavky}
-Funkčné požiadavky vo všeobecnosti vymedzujú hranice aplikácie v kontexte jej funkcionality, ktorú používateľ aplikácie od systému očakáva. Ich úlohou je taktiež spresniť odhad pracnosti na vznikajúcej aplikácii.\cite{funkcne-poziadavky}
+Funkčné požiadavky vo všeobecnosti vymedzujú hranice aplikácie v kontexte jej funkcionality, ktorú používateľ od aplikácie očakáva. Ich úlohou je taktiež spresniť odhad pracnosti na vznikajúcej aplikácii.\cite{funkcne-poziadavky}
 
 \subsubsection{Evidencia zvierat}\label{evidencia-zvierat}
-Aplikácia musí umožňovať jednoduchú správu zvierat, od vytvorenia nového zvieraťa, cez jeho zobrazenia a editáciu, až po jeho prípadné zmazanie. V evidencii zvierat je pre každé zviera potrebné ukladať nasledujúce údaje:
+Aplikácia musí umožniť jednoduchú správu zvierat, od vytvorenia nového zvieraťa, cez zobrazenie jeho detailov, až po následnú editáciu, prípadné jeho zmazanie.
+
+\hfill \break
+V evidencii zvierat je pre každé zviera potrebné ukladať nasledujúce údaje:
 
 \begin{itemize}
 	\item meno a prezývku
@@ -21,16 +24,16 @@ Aplikácia musí umožňovať jednoduchú správu zvierat, od vytvorenia nového
 	\item vrh, v ktorom sa zviera narodilo
 	\item matku a otca zvieraťa
 	\item pohlavie
-	\item farba očí
+	\item farbu očí
 	\item typ uší
-	\item farba a typ srsti
+	\item farbu a typ srsti
 	\item znaky
 	\item dátum a dôvod úmrtia
 \end{itemize}
 
 Pre uľahčenie vytvorenia a editovania zvieraťa budú textové polia v maximálnej možnej miere interaktívne.
 
-To znamená, že polia majiteľa a chovatela zvieraťa vrátia na základe vstupu zoznam majitelov, resp. chovatelov, ktorí už sú evidovaní v aplikácii. Následne si z tohto zoznamu používateľ zvolí požadovaného človeka.
+To znamená, že polia majiteľa a chovateľa zvieraťa vrátia na základe vstupu zoznam majitelov, resp. chovatelov, ktorí už sú evidovaní v aplikácii. Následne si z tohto zoznamu používateľ zvolí požadovaného človeka.
 V prípade, že aplikácia požadovaného človeka nevráti, používateľovi bude ponúknutá možnosť ho dodatočne vytvoriť.
 
 Na podobnom princípe bude fungovať aj textové pole pre vrh, s tým rozdielom, že podľa zvoleného vrhu aplikácia predvyplní matku a otca zvieraťa.
@@ -44,14 +47,15 @@ Pri takejto registrácií sa budú zbierať nasledovné údaje:
 	\item typ registrácie\footnote{Vyžadované iba v prípade registrácie zvieraťa pod klubom ČKP}
 	\item registračné číslo
 	\item dátum registrácie
-	\item informáciu, či je nasledovný chov povolený
-	\item informáciu o obmedzení chovu
+	\item informácia, či je nasledovný chov povolený
+	\item informácia o obmedzení chovu
 \end{itemize}
 
 \subsubsection{Evidencia vrhov}
 Medzi nevyhnutnú funkcionalitu aplikácie sa radí aj evidencia vrhov. Tak ako pri evidencii zvierat, tak aj v tomto prípade používatelské rozhranie umožní vytvoriť nový vrh, zobraziť ho, respektíve ho editovať alebo vymazať. 
 
-Pre účel evidencie vrhov sa budú v aplikácii ukladať nasledovné údaje:
+\hfill \break
+Pre účel evidencie vrhov sa budú v aplikácii ukladať nasledujúce údaje:
 
 \begin{itemize}
 	\item typ a označenie vrhu
@@ -73,55 +77,60 @@ Pre organizáciu je žiaduce, aby aplikácia obsahovala správu žiadostí o sch
 
 V rámci žiadosti o schválenie vrhu rozlišujeme dva typy osôb -- žiadateľa o schválenie vrhu\footnote{Zväčša majiteľ daného vrhu}, a registrátora vrhu.
 
-Aplikácia žiadatelovi umožní poslať žiadosť o schválenie vrhu s možnosťou zanechania poznámky pre registrátora priamo z prostredia konkrétneho vrhu.
-Po odoslaní a úspešnom spracovaní tejto žiadosti serverom sa odošle e-mail všetkým registrátorom s informáciou o vytvorení novej žiadosti o schválení vrhu. Na tento e-mail bude môcť zareagovať akýkoľvek registrátor, a na základe dostupných informácií o vrhu sa rozhodne, či danú žiadosť schváli alebo zamietne.
+Aplikácia žiadatelovi umožní poslať žiadosť o schválenie vrhu s možnosťou zanechania poznámky pre registrátora.
+Po odoslaní a úspešnom spracovaní tejto žiadosti serverom sa odošle e-mail všetkým registrátorom s informáciou o vytvorení novej žiadosti o schválenie vrhu. Na tento e-mail bude môcť zareagovať akýkoľvek registrátor, ktorý sa na základe dostupných informácií o vrhu rozhodne, či danú žiadosť schváli alebo zamietne.
 O zmene stavu žiadosti bude žiadateľ informovaný e-mailom.
 
 \subsubsection{Zobrazenie rodokmeňu zvieraťa a vrhu}\label{rodokmene}
-Pre jednoduchšiu vizualizáciu predkov konkrétneho zvieraťa aplikácia ponúkne zobrazenie rodokmeňu zvieraťa vo forme jednoduchej tabuľky. V tejto tabuľke budú okrem mien zvierat zobrazené aj dodatočné informácie, definované v sekcii \ref{evidencia-zvierat}. Rodokmeň bude zobrazený v rámci jednotlivých zvierat a vrhov.
+Pre jednoduchšiu vizualizáciu predkov konkrétneho zvieraťa aplikácia ponúkne zobrazenie rodokmeňu zvieraťa vo forme jednoduchej tabuľky.
+
+V tejto tabuľke budú okrem mien zvierat zobrazené aj dodatočné informácie o zvierati, definované v sekcii \ref{evidencia-zvierat}. Rodokmeň bude zobrazený v rámci jednotlivých zvierat a vrhov.
+
+V prípade vrhu bude rodokmeň zobrazovať predkov matky a otca daného vrhu.
 
 \subsubsection{Tvorba poznámok pre zviera a vrh}
 V rámci aplikácie bude potrebné implementovať poznámky, ktoré budú môcť byť priradené jednotlivým zvieratám a vrhom.
 Takáto poznámka by mala mať nastaviteľnú viditelnosť\footnote{Poznámka môže byť buď verejná alebo súkromná} a typ\footnote{Typ poznámky je jeden z nasledujúcich: všeobecná, upozornenie alebo výstraha}.
-Taktiež poznámka musí poskytnúť informáciu, kedy bola vytvorená, respektíve editovaná.
+Taktiež musí poskytnúť informáciu, kedy bola vytvorená, respektíve editovaná.
+
+
 Nakoľko sa jedná o poznámky pre zviera a vrh, budú zobrazené u príslušných zvieratách, resp. vrhoch, ku ktorým sa vzťahujú.
 
 \subsubsection{Zobrazenie histórie zmien zvierat a vrhov}
-Medzi želanú funkcionalitu novej webovej aplikácie patrí sledovanie a následné zobrazenie histórie zmien u všetkých zvierat a vrhoch.
+Medzi želanú funkcionalitu novej webovej aplikácie patrí sledovanie a následné zobrazenie histórie zmien pre všetky zvieratá a vrhy
 
 Aplikácia bude zaznamenávať nasledujúce zmeny v systéme:
 \begin{itemize}
 	\item vytvorenie zvieraťa/vrhu
-	\item úprava údajov u zvieraťa/vrhu
+	\item úprava údajov zvieraťa/vrhu
 	\item zmazanie zvieraťa/vrhu
-	\item obnova\footnote{Obnoviť zviera/vrh bude možné iba administrátor aplikácie} zmazaného zvieraťa/vrhu
+	\item obnova\footnote{Obnoviť zviera/vrh bude môcť iba administrátor aplikácie} zmazaného zvieraťa/vrhu
 \end{itemize}
 
 Pri každej zmene popísanej vyššie je taktiež nutné ukladať, kto a kedy danú zmenu vykonal. V prípade úpravy údajov budú navyše zaznamenané tie údaje, ktoré boli zmenené používatelom. Túto históriu zmien bude možné vidieť vo forme tabuľky u každého zvieraťa, resp. vrhu.
 
-
 \subsubsection{Generovanie preukazov}\label{generovanie-preukazov}
-Pre potreby organizácie je nevyhnutné implementovať generovanie preukazov (osvedčení) vo forme PDF súboru. V tomto súbore bude prvá strana vyplnená informáciami o danom zvierati zo sekcie \ref{evidencia-zvierat}, vrátane jeho registrácie zo sekcie \ref{evidencia-registracii-zvierata}. V niektorých prípadoch bude taktiež zobrazená registrácia vrhu, ktorej obsah je definovaný v \ref{sprava-ziadosti-o-schvalenie-vrhu}, v ktorom sa zviera narodilo. Druhá strana súboru bude vyplnená rodokmeňom zvieraťa (\ref{rodokmene}).
+Pre potreby organizácie je nevyhnutné implementovať generovanie preukazov (osvedčení) vo forme PDF súboru. V tomto súbore bude prvá strana vyplnená informáciami o danom zvierati \ref{evidencia-zvierat}, vrátane jeho registrácie zo sekcie \ref{evidencia-registracii-zvierata}. V niektorých prípadoch bude taktiež zobrazená registrácia vrhu v ktorom sa zviera narodilo, ktorej obsah je definovaný v \ref{sprava-ziadosti-o-schvalenie-vrhu}. Druhá strana súboru bude vyplnená rodokmeňom zvieraťa (\ref{rodokmene}).
 
 Preukaz bude možné vygenerovať tlačidlom na stránke konkrétneho zvieraťa.
 
-\subsubsection{Filtrovanie a radenie}
-Pre vylepšenie používateľskej skúseností bude potrebné implementovať filtrovanie a radenie zvierat a ako aj vrhov na príslušných stránkach. To umožní jednoduchšiu prácu s aplikáciou a rýchlejšie nájdenie potrebných informácií.
+\subsubsection{Filtrovanie a radenie}\label{filtrovanie-a-radenie}
+Pre vylepšenie používateľskej skúsenosti s aplikáciou bude potrebné implementovať filtrovanie a radenie zvierat a ako aj vrhov na príslušných stránkach so zoznamom zvierat, resp. verhov. Implementácia tejto funkcionality umožní jednoduchšiu prácu s aplikáciou a rýchlejšie nájdenie potrebných informácií.
 
 \subsubsection{Správa používatelov a rolí}\label{sprava-pouzivatelov-a-roli}
-Pre administrátorov aplikácie je nutné spravovať jednotlivých používateľov aplikácie, priradiť im príslušné role, alebo im ich naopak odoberať. Na základe tejto skutočnosti je žiaduce vytvoriť pohľad so zoznamom používateľov a ich rolami s následnou možnosťou im danú rolu zmeniť, prípadne daných používateľov odobrať.
+Pre administrátorov aplikácie je nutné spravovať jednotlivých používateľov aplikácie, priradovať im príslušné role, alebo im ich naopak odoberať. Na základe tejto skutočnosti je žiaduce vytvoriť pohľad so zoznamom používateľov a ich rolami, s následnou možnosťou im danú rolu zmeniť, prípadne daných používateľov odobrať.
 
 \subsubsection{Lokalizácia aplikácie}
-Nakoľko budú aplikáciu používať nie len českí ale aj zahraniční používatelia, je nutné, aby aplikácia poskytovala lokalizovaný obsah aj v anglickom jazyku. Jazyk bude možné jednoducho zmeniť v menu v paneli webovej aplikácie.
+Nakoľko budú aplikáciu používať nie len českí ale aj zahraniční používatelia, je nutné, aby aplikácia poskytovala obsah lokalizovaný do anglického jazyka. Jazyk bude možné jednoducho zmeniť v menu na paneli webovej aplikácie.
 
 \subsection{Nefunkčné požiadavky}
-Na rozdiel od funkčných požiadaviek, nefunkčné požiadavky umožňujú určiť obmedzenia kladené na aplikáciu. V druhom rade majú zásadný dopad na návrh architektúry webovej aplikácie.\cite{nefunkcne-poziadavky}
+Na rozdiel od funkčných požiadaviek, nefunkčné požiadavky umožňujú určiť obmedzenia kladené na aplikáciu. V neposlednom rade majú taktiež zásadný dopad na návrh architektúry webovej aplikácie.\cite{nefunkcne-poziadavky}
 
 \subsubsection{Webová aplikácia}
 Nakoľko je požadovaný systém navrhnutý ako webová aplikácia, bude potrebné, aby bola prístupná z internetu pomocou moderných webových prehliadačov.
 
 \subsubsection{Používateľské rozhranie}
-Webová aplikácia bude taktiež musieť obsahovať používateľské rozhranie, s ktorým budú môcť používatelia interagovať.
+Webová aplikácia bude musieť obsahovať používateľské rozhranie, s ktorým budú môcť používatelia interagovať.
 Prostredie bude naviac responzívne, čo uľahčí prípadný prístup do systému z mobilného prehliadača.
 
 \subsubsection{Technológie}
@@ -130,7 +139,7 @@ Po konzultácii s vedúcim práce boli vymedzené nasledovné technológie, ktor
 Ako programovací jazyk bude použítý jazyk PHP, ktorý bol navrhnutý v roku 1994 Rasmusom Lerdorfom. Tento jazyk je univerzálny programovací jazyk na strane servera a je primárne určený na vývoj webových stránok.\cite{co-je-php}
 
 Použitý jazyk bude vo verzii 7.3, hoci momentálne je najnovšia verzia jazyku 7.4\cite{verzie-php}.
-Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu\footnote{Endora -- www.endora.cz}, na ktorom bude aplikácia nasadená.
+Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu\footnote{Server poskytujúci webovú aplikáciu používateľom na internete, v tomto prípade sa jedná o webhosting Endora -- www.endora.cz}, na ktorom bude aplikácia nasadená.
 
 Pre pridávanie, spracovanie a získavanie dát nám bude slúžiť open-source SQL databázový systém nazývaný MySQL, ktorý je vyvíjaný, distribuovaný a podporovaný spoločnosťou Oracle Corporation\cite{co-je-mysql}. Tento databázový systém budeme používať vo verzii 5.6.
 
@@ -139,25 +148,25 @@ Táto verzia MySQL taktiež nie je najnovšia (v skutočnosti bola prvýkrát vy
 \section{Používateľské role}\label{pouzivatelske-role}
 Novovznikajúca webová aplikácia bude prístupná iba zaregistrovaným a prihláseným používateľom. Navyše, niektoré akcie budú obmedzené iba pre určitý okruh používateľov.
 
-K tomu, aby sme umožnili vybraným používateľom umožniť alebo zakázať vybrané akcie, bude potrebné do aplikácie implementovať používateľské role a práva. Následne bude aplikácia riadiť prístup používateľa k jednotlivým akciám na základe príslušnosti k vybranej roli.
+K tomu, aby sme umožnili prístup k vybraným akciám iba vybraným používateľom, bude potrebné do aplikácie implementovať používateľské role a práva. Následne bude aplikácia riadiť prístup používateľa k jednotlivým akciám na základe príslušnosti k vybranej roli.
 
 V nasledujúcich podsekciách budú priblížené jednotlivé role a k nim príslušné práva, ktoré sa budú vyskytovať v aplikácii.
 
-\subsection{Bežný používateľ}
-Túto rolu má každý používateľ automaticky po registrácii do webovej aplikácie. Bežný používateľ môže v aplikácii: 
+\subsection{Bežný používateľ}\label{bezny-pouzivatel}
+Túto rolu bude mať každý používateľ automaticky po registrácii do webovej aplikácie. Bežný používateľ bude môcť v aplikácii: 
 
 \begin{itemize}
 	\item Vytvoriť a zobraziť svoje zvieratá
 	\item Upraviť svoje zvieratá v prípade, že nie sú zaregistrované pod klubom ČKP
-	\item Vytvoriť a upraviť registrácie popísané v \ref{evidencia-registracii-zvierata} svojich vlastných zvierat, ktoré nespadajú pod klub ČKP
+	\item Vytvoriť a upraviť registrácie svojich vlastných zvierat, ktoré nespadajú pod klub ČKP
 	\item Zobraziť zoznam všetkých cudzích zvierat spolu s ich detailmi
 	\item Vytvoriť a zobraziť vrhy, u ktorých je používateľ ich majiteľom
-	\item Upraviť vrhy, ktorých je majitelom, pokiaľ neboli tieto vrhy schválené žiadosťou popísanou v \ref{sprava-ziadosti-o-schvalenie-vrhu}
+	\item Upraviť vrhy, ktorých je majitelom, pokiaľ neboli tieto vrhy schválené žiadosťou
 	\item Zobraziť všetky vrhy typu VP alebo schválené vrhy typu PP a NV spolu s ich detailmi
 	\item Pridať poznámku k zvieratám a vrhom, ktoré vlastní
 \end{itemize}
 
-\subsection{Registrátor zvierat}
+\subsection{Registrátor zvierat}\label{registrator-zvierat}
 Registrátor zvierat je v hierarchii rolí postavený nad bežným používateľom. Tým pádom má všetky práva bežného používateľa a navyše nasledujúce práva:
 
 \begin{itemize}
@@ -165,119 +174,177 @@ Registrátor zvierat je v hierarchii rolí postavený nad bežným používateľ
 	\item Možnosť pridať, editovať a vymazať akúkoľvek registráciu u každého zvieraťa
 \end{itemize} 
 
-\subsection{Schvalovateľ vrhov}
+\subsection{Schvalovateľ vrhov}\label{schvalovatel-vrhov}
 Schvalovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným používateľom podobne ako registrátor zvierat, s tým rozdielom, že schvalovateľ vrhu môže v aplikácii:
 
 \begin{itemize}
-	\item Vidieť a odpovedať na žiadosti o schválenie vrhov definované v \ref{sprava-ziadosti-o-schvalenie-vrhu}
+	\item Vidieť a odpovedať na žiadosti o schválenie vrhov
 	\item Editovať akékoľvek zviera a vrh
 	\item Pridať poznámky k akémukoľvek vrhu
-	\item Vygenerovať preukaz zvieraťa popísaný v \ref{generovanie-preukazov}
+	\item Vygenerovať preukaz zvieraťa
 \end{itemize}
 
-\subsection{Administrátor}
+\subsection{Administrátor}\label{administrator}
 Ako obvykle, pre administrátora neplatia žiadne reštrikcie, čo znamená, že bude mať prístup ku všetkej funkcionalite definovanej vo funkčných požiadavkách v sekcii \ref{funkcne-poziadavky}.
 
-\section{Prípady použitia}
-Táto sekcia sa venuje opisom prípadov použití -- čo sú špecifikácie rôznych činností, ktoré môžu používatelia s aplikáciou vykonávať.\cite{co-su-pripady-pouzitia} Tieto prípady použitia budú zachytené vo forme scenáru a budú vychádzať nielen zo známych funkčných požiadavok popísaných v sekcii \ref{funkcne-poziadavky}, ale aj z jednotlivých používateľských rolí, ktoré boli definované v sekcii \ref{pouzivatelske-role}. V tejto práci som sa rozhodol venovať iba takým prípadom použitia, ktoré sú z môjho pohľadu pre čitateľa prínosnejšie. Tie som následne rozdelil podľa príslušnosti k jednotlivým prvkom aplikácie. Taktiež všetky nasledujúce prípady použitia predpokladajú, že používateľ bol do systému úspešne prihlásený.
+\section{Prípady použitia}\label{pripady-pouzitia}
+Prípady použitia sú špecifikácie rôznych činností, ktoré môžu používatelia s aplikáciou vykonávať\cite{co-su-pripady-pouzitia}. Tieto prípady použitia budú zachytené vo forme scenáru a budú vychádzať nielen zo známych funkčných požiadaviek popísaných v sekcii \ref{funkcne-poziadavky}, ale aj z jednotlivých používateľských rolí, ktoré boli definované v sekcii \ref{pouzivatelske-role}.
+
+V tejto práci som sa rozhodol venovať iba takým prípadom použitia, ktoré sú z môjho pohľadu pre čitateľa prínosnejšie. Tie som následne rozdelil podľa príslušnosti k jednotlivým prvkom aplikácie. Všetky nasledujúce prípady použitia predpokladajú, že používateľ bude v systéme prihlásený.
+
+\hfill \break
+Poznámka: Prvé štyri scenáre použitia sú aplikovateľné aj na vrhy, avšak z dôvodu neuvádzania duplicitných informácií nebudú ďalej rozvinuté v príslušnej podsekcii. Zároveň pri následnej aplikácii prvých štyroch scenárov na vrhy, sa výskyt slova \uv{zviera} automaticky nahrádza slovom \uv{vrh} v príslušnej podobe.
 
 \subsection{Prípady použitia týkajúce sa zvierat}
+V tejto podsekcii budú popísané jednotlivé prípady použitia, ktoré sa týkajú zvierat.
 
 \subsubsection*{UC1 -- Vyhľadanie zvieraťa}\label{uc1}
 
-Vyhľadanie zvieraťa je jeden zo základných prípadov použitia, kedy používateľ chce vyhladať dané zviera.
+Vyhľadanie zvieraťa je jeden zo základných prípadov použitia, kedy používateľ chce vyhľadať dané zviera.
 
-\subsubsection*{Scenár}
+\subsubsection*{Scenár:}
 
 \begin{enumerate}
 	\item Používateľ zvolí možnosť \uv{Zvieratá} z navigačného menu aplikácie.
-	\item Následne aplikácia zobrazí tabuľku so zvieratami a filtrom, na základe ktorého si používateľ môže nastaviť dodatočné kritéria filtrovania zvierat.
+	\item Aplikácia následne zobrazí tabuľku so zvieratami a filtrom, na základe ktorého si používateľ môže nastaviť dodatočné kritéria filtrovania zvierat.
 	\item Používateľ nastaví filter podľa kritérií hľadaného zvieraťa a klikne na tlačidlo \uv{Filtrovať}.
 	\item Aplikácia zobrazí všetky zvieratá vyhovujúce zadaným kritériám.
 \end{enumerate}
 
-\subsubsection*{Alternatívny scenár}
+\subsubsection*{Alternatívny scenár:}
 
 \begin{enumerate}
-    \item [4.] Aplikácia zobrazí hľadané zviera už po načítaní tabuľky so zvieratami. V tomto prípade scenár vyhľadávania zvieraťa končí.
+    \item [3.] Aplikácia zobrazí hľadané zviera už po načítaní tabuľky so zvieratami. V tomto prípade scenár vyhľadávania zvieraťa končí.
 \end{enumerate}
 
-Tento prípad použitia realizuje funkčné požiadavky na aplikáciu, konkrétne \hyperref[evidencia-zvierat]{Evidenciu zvierat}.
+Tento prípad použitia realizuje viaceré funkčné požiadavky na aplikáciu, konkrétne \hyperref[evidencia-zvierat]{evidenciu} a \hyperref[filtrovanie-a-radenie]{filtrovanie a radenie} zvierat.
 
 \subsubsection*{UC2 -- Zobrazenie detailu zvieraťa}\label{uc2}
 
 Tento prípad použitia popisuje zobrazenie detailu zvieraťa a zahŕňa prípad \nameref{uc1}.
 
-\subsubsection*{Scenár}
+\subsubsection*{Scenár:}
 
 \begin{enumerate}
-	\item UC1 Vyhľadanie zvieraťa
-	\item Používateľ klikne na meno zvieraťa, ktorého detail si želá vidieť
-	\item Aplikácia zobrazí detail zvieraťa
+	\item \nameref{uc1}
+	\item Používateľ klikne na meno zvieraťa, ktorého detail si želá vidieť.
+	\item Aplikácia zobrazí detail zvieraťa.
 \end{enumerate}
 
-Popísaný prípad taktiež realizuje funkčnú požiadavku na aplikáciu, a to \hyperref[evidencia-zvierat]{Evidenciu zvierat}.
+Popísaný prípad taktiež realizuje funkčnú požiadavku na aplikáciu, a to \hyperref[evidencia-zvierat]{evidenciu zvierat}.
 
 \subsection*{UC3 -- Vytvorenie zvieraťa}
 
 Medzi ďalší základný prípad použitia patrí pridanie zvieraťa používatelom do systému.
+Pri vytváraní zvieraťa sa aplikuje dodatočné obmedzenie pre bežného používateľa, ktoré spočíva v nemožnosti zvolenia majiteľa iného ako je sám používateľ (\ref{bezny-pouzivatel}).
 
-\subsubsection*{Scenár}
+\subsubsection*{Scenár:}
 
 \begin{enumerate}
-	\item Používateľ navštívi domovskú stránku aplikácie.
-	\item Následne zvolí možnosť \uv{Zvieratá} z navigačného menu aplikácie.
-	\item Po načítaní stránky používateľ klikne na tlačidlo \uv{Pridať zviera}.
+	\item Používateľ zvolí možnosť \uv{Zvieratá} z navigačného menu aplikácie, ktorá následne načíta stránku so zoznamom uložených zvierat.
+	\item Následne používateľ klikne na tlačidlo \uv{Pridať zviera}.
 	\item Aplikácia načíta novú stránku s formulárom pre vytvorenie nového zvieraťa.
 	\item Používateľ vyplní formulár.
-	\item Po vyplnení všetkých potrebných údajov pre vytvorenie zvieraťa aplikácia umožní odoslať formulár kliknutím na tlačidlo \uv{Uložiť}
-	\item Používateľ odošle vyplnený formulár kliknutím na tlačidlo \uv{Uložiť}.
+	\item Po vyplnení všetkých potrebných údajov pre vytvorenie zvieraťa aplikácia umožní odoslať formulár kliknutím na tlačidlo \uv{Uložiť}.
+	\item Používateľ klikne na tlačidlo \uv{Uložiť}.
 	\item Po úspešnom vytvorení zvieraťa na základe vložených údajov systém presmeruje používateľa na stránku so zoznamom uložených zvierat.
 \end{enumerate}
 
-Tento prípad použitia realizuje tú istú funkčnú požiadavku na aplikáciu a predošlé prípady použitia -- konkrétne \hyperref[evidencia-zvierat]{Evidenciu zvierat}.
+Tento prípad použitia realizuje funkčnú požiadavku \hyperref[evidencia-zvierat]{evidencie zvierat}.
 
-\subsection*{UC4 -- Editácia zvieraťa}
+\subsection*{UC4 -- Úprava zvieraťa}
 
 V tomto prípade sa používateľ aplikácie snaží upraviť existujúce zviera v systéme. Tento prípad použitia taktiež zahŕňa prípady 
-\nameref{uc1} alebo \nameref{uc2}, v závislosti od spôsobu editácie zvieraťa, ktorý si používateľ zvolí.
+\nameref{uc1} alebo \nameref{uc2}, v závislosti od spôsobu úpravy zvieraťa, ktorý si používateľ zvolí.
 
-\subsubsection*{Scenár}
+\subsubsection*{Scenár:}
 
 \begin{enumerate}
-	\item UC1 Vyhľadanie zvieraťa
+	\item \nameref{uc1}
 	\item Používateľ klikne na rozbalovacie menu u zvieraťa, ktoré chce editovať.
-	\item Po kliknutí na rozbalovacie menu, aplikácia ponúkne možnosť editácie alebo zmazanie zvieraťa.
+	\item Po tomto kroku aplikácia ponúkne možnosť editácie alebo zmazania zvieraťa.
 	\item Používateľ zvolí možnosť editácie.
-	\item Aplikácia následne presmeruje používatela na stránku s editáciou zvieraťa s predvyplnenými údajmi.
+	\item Aplikácia následne presmeruje používateľa na stránku s editáciou zvieraťa, ktorá bude obsahovať formulár s predvyplnenými údajmi zvieraťa.
 	\item Používateľ upraví údaje zvieraťa.
 	\item Kliknutím na tlačidlo \uv{Odoslať} sa odošle vyplnený formulár na server.
 	\item Po úspešnom spracovaní formuláru je používateľ presmerovaný na stránku s detailmi upravovaného zvieraťa.
 \end{enumerate}
 
-\subsubsection*{Alternatívny scenár}
+\subsubsection*{Alternatívny scenár:}
 
 \begin{enumerate}
-	\item UC2 Zobrazenie detailu zvieraťa
+	\item \nameref{uc2}
 	\item Používateľ klikne na tlačidlo \uv{Upraviť} na pravom postrannom paneli.
-	\item Následne aplikácia presmeruje používateľa na stránku s editáciou zvieraťa s predvyplneným formulárom obsahujúcim údaje o editovanom zvierati.
-	\item Používateľ upraví požadované údaje zvieraťa.
-	\item Kliknutím na tlačidlo \uv{Odoslať} sa odošle vyplnený formulár na server.
-	\item Po úspešnom spracovaní formuláru je používateľ presmerovaný na stránku s detailmi upravovaného zvieraťa.
+	\item Následne scenár pokračuje bodom 5 v pôvodnom scenári.
 \end{enumerate}
 
-Popísaný prípad použitia realizuje funkčnú požiadavku \hyperref[evidencia-zvierat]{Evidencie zvieraťa}.
+Popísaný prípad použitia realizuje funkčnú požiadavku \hyperref[evidencia-zvierat]{evidencie zvieraťa}.
 
 \subsection*{UC5 -- Vytvorenie registrácie zvieraťa}
 
+Tento prípad použitia popisuje vytvorenie registrácie zvieraťa. Pri samotnom vytváraní novej registrácie sa aplikujú dodatočné obmedzenia pre bežného používateľa, tak ako je popísane v \ref{bezny-pouzivatel}.
+
+Tento prípad použitia zahŕňa prípad \hyperref[uc2]{zobrazenia detailov zvieraťa}.
+
+\subsubsection*{Scenár:}
+
+\begin{enumerate}
+	\item \nameref{uc2}
+	\item Kliknutím na tlačidlo \uv{Pridať novú registráciu} aplikácia zobrazí registračný formulár v modálnom okne\footnote{Menšie okno aplikácie prekrývajúce jej hlavný obsah}.
+	\item Používateľ vyplní potrebné polia.
+	\item Po stlačení tlačidla \uv{Uložiť} sa vyplnený formulár odošle na server.
+	\item Po úspešnom spracovaní formuláru serverom sa modálne okno zavrie.
+\end{enumerate}
+
+Tento prípad použitia realizuje funkčnú požiadavku kladenú na aplikáciu, konkrétne \hyperref[evidencia-registracii-zvierata]{evidenciu registrácií zvieraťa}.
+
 \subsection{Prípady použitia týkajúce sa vrhov}
+Táto podsekcia popisuje jednotlivé prípady použitie, ktoré sa týkajú vrhov.
 
 \subsection*{UC6 -- Vytvorenie žiadosti o schválenie vrhu}
 
+Tento prípad použitia reálne zahŕňa prípad použitia \uv{zobrazenia detailov vrhu}, avšak pre neuvádzanie duplicitných informácii môže čitateľ vychádzať z prípadu použitia \hyperref[uc2]{zobrazenia detailov zvieraťa}. Scenáre sa v oboch prípadoch obsahovo nelíšia, tak ako bolo uvedené poznámke v sekcii \ref{pripady-pouzitia}.
+
+Na tento prípad sa taktiež vzťahujú dodatočné obmedzenia pre bežného používateľa vyplývajúce z \ref{bezny-pouzivatel}.
+
+\subsection*{Scenár:}
+
+\begin{enumerate}
+	\item \nameref{uc2}
+	\item Používateľ klikne na tlačidlo \uv{Vytvoriť žiadosť}.
+	\item Aplikácia následne zobrazí modálne okno s formulárom obsahujúcim textové pole slúžiace pre poznámku registrátorovi.
+	\item Po stlačení tlačidla \uv{Uložiť} sa formulár odošle na server.
+	\item Po úspešnom spracovaní formuláru serverom sa vytvorí nová žiadosť o schválenie vrhu.
+	\item Modálne okno sa automaticky zavrie.
+\end{enumerate}
+
+Popísaný prípad použitia realizuje funkčnú požiadavku \hyperref[sprava-ziadosti-o-schvalenie-vrhu]{správy žiadostí o schválenie vrhu}.
+
 \subsection*{UC7 -- Odpoveď na žiadosť o schválenie vrhu}
 
+Tak ako v predchádzajúcom prípade, tento prípad použitia bude zahŕňať \uv{zobrazenie detailov vrhu}.
 
+Pre tento prípad použitia sa vzťahujú dodatočné obmedzenia -- na žiadosť o schválenie vrhu bude môcť odpovedať používateľ majúci rolu \hyperref[schvalovatel-vrhov]{schvalovateľa žiadostí vrhov} alebo \hyperref[administrator]{administrátora}.
 
+\subsection*{Scenár:}
+
+\begin{enumerate}
+	\item \nameref{uc2}
+	\item Používateľ stlačí tlačidlo \uv{Odpovedať} pri príslušnej žiadosti o schválenie vrhu.
+	\item Aplikácia zobrazí modálne okno s formulárom pre schválenie vrhu.
+	\item Používateľ vyplní formulár a kliknutím na tlačidlo \uv{Uložiť} sa odošle na server.
+	\item Server spracuje odoslaný formulár a ihneď odošle e-mail žiadatelovi o stave jeho žiadosti.
+\end{enumerate}
+
+\subsection*{Alternatívny scenár:}
+
+\begin{enumerate}
+	\item Používateľ klikne na link v e-maili, ktorý mu prišiel po odoslaní novej žiadosti os chválenie vrhu žiadateľom.
+	\item Ako reakcia na kliknutie na link, operačný systém otvorí predvolený webový prehliadač s adresou vedúcou na detail vrhu.
+	\item Následne scenár pokračuje bodom 2 v pôvodnom scenári.
+\end{enumerate}
+
+Tak ako v predchádzajúcom prípade použitia, aj v tomto prípade použitia je realizujovaná funkčná požiadavka \hyperref[sprava-ziadosti-o-schvalenie-vrhu]{správy žiadostí o schválenie vrhu}.
 
 
 
