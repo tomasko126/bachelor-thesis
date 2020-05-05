@@ -9,7 +9,7 @@ V tejto sekcii sa nachádza popis všetkých požiadaviek kladených na vznikaj�
 Tieto požiadavky delíme na funkčné a nefunkčné.
 
 \subsection{Funkčné požiadavky}\label{funkcne-poziadavky}
-Funkčné požiadavky vo všeobecnosti vymedzujú hranice aplikácie v kontexte jej funkcionality, ktorú používateľ od aplikácie očakáva. Ich úlohou je taktiež spresniť odhad pracnosti na vznikajúcej aplikácii.\cite{funkcne-poziadavky}
+Funkčné požiadavky vo všeobecnosti vymedzujú hranice aplikácie v kontexte jej funkcionality, ktorú používateľ od aplikácie očakáva. Ich úlohou je taktiež spresniť odhad pracnosti na vznikajúcej aplikácii \cite{funkcne-a-nefunkcne-poziadavky}.
 
 \subsubsection{Evidencia zvierat}\label{evidencia-zvierat}
 Aplikácia musí umožniť jednoduchú správu zvierat, od vytvorenia nového zvieraťa, cez zobrazenie jeho detailov, až po následnú editáciu, prípadné jeho zmazanie.
@@ -124,7 +124,7 @@ Pre administrátorov aplikácie je nutné spravovať jednotlivých používateľ
 Nakoľko budú aplikáciu používať nie len českí ale aj zahraniční používatelia, je nutné, aby aplikácia poskytovala obsah lokalizovaný do anglického jazyka. Jazyk bude možné jednoducho zmeniť v menu na paneli webovej aplikácie.
 
 \subsection{Nefunkčné požiadavky}
-Na rozdiel od funkčných požiadaviek, nefunkčné požiadavky umožňujú určiť obmedzenia kladené na aplikáciu. V neposlednom rade majú taktiež zásadný dopad na návrh architektúry webovej aplikácie.\cite{nefunkcne-poziadavky}
+Na rozdiel od funkčných požiadaviek, nefunkčné požiadavky umožňujú určiť obmedzenia kladené na aplikáciu. V neposlednom rade majú taktiež zásadný dopad na návrh architektúry webovej aplikácie \cite{funkcne-a-nefunkcne-poziadavky}.
 
 \subsubsection{Webová aplikácia}
 Nakoľko je požadovaný systém navrhnutý ako webová aplikácia, bude potrebné, aby bola prístupná z internetu pomocou moderných webových prehliadačov.
@@ -136,14 +136,14 @@ Prostredie bude naviac responzívne, čo uľahčí prípadný prístup do systé
 \subsubsection{Technológie}
 Po konzultácii s vedúcim práce boli vymedzené nasledovné technológie, ktoré budú použité na strane servera.
 
-Ako programovací jazyk bude použítý jazyk PHP, ktorý bol navrhnutý v roku 1994 Rasmusom Lerdorfom. Tento jazyk je univerzálny programovací jazyk na strane servera a je primárne určený na vývoj webových stránok.\cite{co-je-php}
+Ako programovací jazyk bude použítý jazyk PHP, ktorý bol navrhnutý v roku 1994 Rasmusom Lerdorfom. Tento jazyk je univerzálny programovací jazyk na strane servera a je primárne určený na vývoj webových stránok \cite{co-je-php}.
 
-Použitý jazyk bude vo verzii 7.3, hoci momentálne je najnovšia verzia jazyku 7.4\cite{verzie-php}.
+Použitý jazyk bude vo verzii 7.3, hoci momentálne je najnovšia verzia jazyku 7.4 \cite{verzie-php}.
 Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu\footnote{Server poskytujúci webovú aplikáciu používateľom na internete, v tomto prípade sa jedná o webhosting Endora -- www.endora.cz}, na ktorom bude aplikácia nasadená.
 
-Pre pridávanie, spracovanie a získavanie dát nám bude slúžiť open-source SQL databázový systém nazývaný MySQL, ktorý je vyvíjaný, distribuovaný a podporovaný spoločnosťou Oracle Corporation\cite{co-je-mysql}. Tento databázový systém budeme používať vo verzii 5.6.
+Pre pridávanie, spracovanie a získavanie dát nám bude slúžiť open-source SQL databázový systém nazývaný MySQL, ktorý je vyvíjaný, distribuovaný a podporovaný spoločnosťou Oracle Corporation \cite{co-je-mysql}. Tento databázový systém budeme používať vo verzii 5.6.
 
-Táto verzia MySQL taktiež nie je najnovšia (v skutočnosti bola prvýkrát vydaná v roku 2013, avšak je stále oficiálne podporovaná\cite{verzie-mysql}), opäť z dôvodu neexistujúcej podpory novšieho databázového systému webhostingom.
+Táto verzia MySQL taktiež nie je najnovšia (v skutočnosti bola prvýkrát vydaná v roku 2013, avšak je stále oficiálne podporovaná \cite{verzie-mysql}), opäť z dôvodu neexistujúcej podpory novšieho databázového systému webhostingom.
 
 \section{Používateľské role}\label{pouzivatelske-role}
 Novovznikajúca webová aplikácia bude prístupná iba zaregistrovaným a prihláseným používateľom. Navyše, niektoré akcie budú obmedzené iba pre určitý okruh používateľov.
@@ -188,7 +188,7 @@ Schvalovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným použ
 Ako obvykle, pre administrátora neplatia žiadne reštrikcie, čo znamená, že bude mať prístup ku všetkej funkcionalite definovanej vo funkčných požiadavkách v sekcii \ref{funkcne-poziadavky}.
 
 \section{Prípady použitia}\label{pripady-pouzitia}
-Prípady použitia sú špecifikácie rôznych činností, ktoré môžu používatelia s aplikáciou vykonávať\cite{co-su-pripady-pouzitia}. Tieto prípady použitia budú zachytené vo forme scenáru a budú vychádzať nielen zo známych funkčných požiadaviek popísaných v sekcii \ref{funkcne-poziadavky}, ale aj z jednotlivých používateľských rolí, ktoré boli definované v sekcii \ref{pouzivatelske-role}.
+Prípady použitia sú špecifikácie rôznych činností, ktoré môžu používatelia s aplikáciou vykonávať \cite{co-su-pripady-pouzitia}. Tieto prípady použitia budú zachytené vo forme scenáru a budú vychádzať nielen zo známych funkčných požiadaviek popísaných v sekcii \ref{funkcne-poziadavky}, ale aj z jednotlivých používateľských rolí, ktoré boli definované v sekcii \ref{pouzivatelske-role}.
 
 V tejto práci som sa rozhodol venovať iba takým prípadom použitia, ktoré sú z môjho pohľadu pre čitateľa prínosnejšie. Tie som následne rozdelil podľa príslušnosti k jednotlivým prvkom aplikácie. Všetky nasledujúce prípady použitia predpokladajú, že používateľ bude v systéme prihlásený.
 
