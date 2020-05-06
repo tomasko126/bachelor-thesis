@@ -49,7 +49,7 @@ Technológia AJAX čiastočne rieši problém znovunačítavania celej stránky 
 
 
 \subsection{Architektúra SPA aplikácie}
-SPA je skratka pre single-page aplikáciu. Single-page aplikácia je aplikácia, ktorá nepotrebuje znovunačítanie stránky počas jej používania. Na tomto type architektúry sú postavené aplikácie ako Gmail\footnote{https://gmail.com}, Google Mapy\footnote{https://maps.google.com}, Facebook\footnote{https://facebook.com} či GitHub\footnote{https://github.com}. V tomto prípade sa o aktualizáciu obsahu na stránke nestará server, ale klient, zväčša pomocou frameworku\footnote{Sada podporných programov uľahčujúci vývoj aplikácie} bežiacom v prostredí webového prehliadača \cite{spa-vs-mpa-3}.
+SPA je skratka pre single-page aplikáciu. Single-page aplikácia je aplikácia, ktorá nepotrebuje znovunačítanie stránky počas jej používania. Na tomto type architektúry sú postavené aplikácie ako Gmail\footnote{https://gmail.com}, Google Mapy\footnote{https://maps.google.com}, Facebook\footnote{https://facebook.com} či GitHub\footnote{https://github.com}. V tomto prípade sa o aktualizáciu obsahu na stránke nestará server, ale klient, zväčša pomocou frameworku\footnote{Sada podporných programov uľahčujúca vývoj aplikácie} bežiacom v prostredí webového prehliadača \cite{spa-vs-mpa-3}.
 
 \subsubsection*{Priebeh komunikácie medzi serverom a klientom}
 Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci diagram s jeho popisom.
@@ -83,29 +83,45 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 
 \begin{itemize}
 	\item Ťažká optimalizácia aplikácie pre webové vyhľadávače, nakoľko o vykreslenie obsahu sa stará Javascript\footnote{Programovací jazyk bežiaci vo webovom prehliadači}, ktorý webové vyhľadávače neinterpretujú \cite{spa-vs-mpa-1}
-	\item Prvné načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože pri prvom navštívení aplikácie sa musí všetok obsah aplikácie stiahnuť do zariadenia
+	\item Prvé načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože pri prvom navštívení aplikácie sa musí všetok obsah aplikácie stiahnuť do zariadenia
 	\item Nemožnosť zobrazenia aplikácie pri vypnutom Javascripte vo webovom prehliadači \cite{spa-vs-mpa-2}
 	\item Pri komplexnejšej aplikácii bude aplikácia zaberať viac pamäte zariadenia, z ktorého je zobrazovaná, nakoľko všetok obsah aplikácie je stiahnutý v zariadení \cite{spa-vs-mpa-3}
 \end{itemize}
 
 
+\subsection{Voľba architektúry}
 
-\subsection{Porovnanie a voľba architektúry}
+Pre budúcu aplikáciu som sa rozhodol vybrať SPA architektúru, nie len z dôvodu rýchlejšieho a jednoduchšieho procesu vývoja, ale aj vďaka vlastným skúsenostiam z oblasti vývoja SPA aplikácií. Nakoľko aplikácia bude dostupná iba vopred vybraním používateľom, nebude potrebné ju optimalizovať pre webové vyhľadávače.
 
+\section{Voľba technológií}
+V tejto sekcii sa presunieme od voľby architektúry, na ktorej bude aplikácia postavená, ku voľbe technológií, ktoré budu použité vo výslednej aplikácii.
 
+\subsection{PHP}
+Medzi zvolené technológie bude jednoznačne patriť programovací jazyk PHP, nakoľko jeho voľba je jedným z nefunkčných požiadaviek kladených na budúcu aplikáciu. 
 
+\subsubsection*{Framework}
+Vývoj softvéru je komplexný proces, ktorý zahŕňa nie len výslednú implementáciu konkrétneho softvéru, ale aj analýzu, návrh, a v neposlednom rade aj testovanie softvéru. Softvérové frameworky uľahčujú prácu vývojárom tým, že im umožňujú prevziať kontrolu nad celým procesom vývoja softvéru alebo jeho väčšiny \cite{co-je-framework}.
 
+Medzi niektoré výhody použitia frameworku patrí:
 
-\section{Návrh technológií}
+\begin{itemize}
+	\item Pomoc pri zavádzaní lepších programovacích postupov a vhodnom využívaní návrhových vzorov
+	\item Väčšia bezpečnosť výsledného kódu
+	\item Možnosť vyhnúť sa duplicite kódu
+	\item Skrátenie času vývoju výslednej aplikácie
+\end{itemize}
 
+Pre vývoj webových aplikácií v PHP existujú viaceré frameworky, ako napríklad CakePHP\footnote{https://cakephp.org}, Nette\footnote{https://nette.org}, Symfony\footnote{https://symfony.com}, Laravel\footnote{https://laravel.com} a iné.
+Spomedzi menovaných bol vybraný práve posledný z nich, na základe skúseností autora.
 
-\subsection{Back-end technológie}
+\subsection{HTML 5}
+HTML -- HyperText Markup Language -- je značkovací jazyk používaný pre definovanie významu a štruktúry dokumentov. Ako už z názvu vyplýva, HTML používa značky pre definovanie elementov v dokumente s rozdielnymi vlastnosťami, ako napríklad nadpis, odstavec, tabulky a iné.
+Tieto značky sú interpretované webovým prehliadačom, ktorý ich následne vykreslí na stránku \cite{co-je-html}.
 
+\subsection{CSS 3}
+Cascading Style Sheets (CSS) je jazyk, ktorý sa používa na ilustráciu vzhľadu, štýlu a formátu dokumentu a jeho elementov napísaného v akomkoľvek značkovacom jazyku. Využíva sa najmä v spojitosti s webovými stránkami. CSS je tvorený pravidlami aplikovanými na jednotlivé elementy dokumentu. Tieto pravidlá sú definované selektorom elementu, ktorý určuje polohu elementu v dokumente, a CSS pravidlami rôzneho typu, ktoré definujú konkrétny štýl daného elementu \cite{co-je-css}. 
 
-\subsection{Front-end technológie}
-
-
-
+CSS3 je momentálne najnovšia verzia staršej jazyka CSS.
 
 \section{Návrh modelových tried}
 
