@@ -10,6 +10,19 @@
 \usepackage{xevlna}
 \usepackage{float}
 
+\usepackage{minted}
+\setminted{autogobble=true,tabsize=4}
+
+% empty lines between paragraphs
+\setlength{\parindent}{0pt}
+\abnormalparskip{\baselineskip}
+
+\usepackage{enumitem}
+\newlength\docparskip
+\setlength{\docparskip}{\parskip}
+\setlist[1]{before={\parskip=0pt},after={\vspace{-\docparskip}}}
+
+
 \input{tex/metadata.tex}
 
 \begin{document}
