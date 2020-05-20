@@ -118,14 +118,83 @@ Spomedzi menovaných bol vybraný práve posledný z nich, na základe skúsenos
 HTML -- HyperText Markup Language -- je značkovací jazyk používaný pre definovanie významu a štruktúry dokumentov. Ako už z názvu vyplýva, HTML používa značky pre definovanie elementov v dokumente s rozdielnymi vlastnosťami, ako napríklad nadpis, odstavec, tabulky a iné.
 Tieto značky sú interpretované webovým prehliadačom, ktorý ich následne vykreslí na stránku \cite{co-je-html}.
 
+Najnovšou verziou tohto jezyka je verzia HTML 5.
+
 \subsection{CSS 3}
 Cascading Style Sheets (CSS) je jazyk, ktorý sa používa na ilustráciu vzhľadu, štýlu a formátu dokumentu a jeho elementov napísaného v akomkoľvek značkovacom jazyku. Využíva sa najmä v spojitosti s webovými stránkami. CSS je tvorený pravidlami aplikovanými na jednotlivé elementy dokumentu. Tieto pravidlá sú definované selektorom elementu, ktorý určuje polohu elementu v dokumente, a CSS pravidlami rôzneho typu, ktoré definujú konkrétny štýl daného elementu \cite{co-je-css}. 
 
-CSS3 je momentálne najnovšia verzia staršej jazyka CSS.
+CSS3 je momentálne najnovšia verzia jazyka CSS.
 
-\section{Návrh modelových tried}
+\subsection{JavaScript}
+JavaScript je jednoduchý programovací jazyk, pomocou ktorého môžu vývojári webových stránok vytvárať interaktívne a dynamické webové stránky. Bol vyvinutý spoločnosťou Netscape, ale v súčasnosti ho používa väčšina webových prehliadačov. Je to programovací jazyk s otvoreným zdrojovým kódom, ktorý môže používať ktokoľvek bez toho, aby si na to musel kúpiť licenciu.\cite{co-je-js}
 
+\subsubsection*{Framework}
+Nakoľko novnovznikajúca aplikácia bude postavená na SPA architektúre, bude potrebné, aby sa stránky vykresľovali na strane klienta. To sa dá samozrejme dosiahnuť bez použitia frameworku, ktorý by sa postaral o aktualizáciu komponentov na stránke, avšak z dôvodu rýchlejšieho procesu vývoja som sa rozhodol pre framework Vue.js\footnote{https://vuejs.org}.
 
+Vue.js je progresívny framework pre vytváranie používateľských rozhraní. Tento framework bol navrhnutý od základov tak, aby bol postupne prispôsobiteľný. Nakoľko je zameraný iba na vrstvu zobrazenia, je ľahké ho integrovať s inými knižnicami a existujúcimi projektmi.\cite{co-je-vue}
+
+Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React\footnote{https://reactjs.org} a Angular\footnote{https://angular.io}, avšak z dôvodu doterajších skúseností autora bol zvolený Vue.js framework.
+
+\section{Návrh databázy}
+V predchádzajúcej kapitole v podsekcii \ref{sucasny-model-db} bol zanalyzovaný databázový model súčasnej aplikácie.
+
+Táto sekcia zhrnie fakty o súčasnom databázovom modeli na základe vykonanej analýzy a poskytne východiská, ktoré budú dôležité pre neskorší návrh databázového modelu pre vznikajúcu aplikáciu.
+
+\subsection{Normalizácia databázy}
+Normalizácia databázy je proces efektívneho usporiadania údajov v databáze. Tento proces má dva ciele: odstránenie nadbytočných údajov (napríklad neukladanie tých istých údajov vo viac ako jednej tabuľke) a zabezpečenie ukladania iba  súvisiacich údajov do tabuľky. Normalizovaná databáza znižuje množstvo miesta potrebného na ukladanie dát a navyše zabezpečí, že dáta sú logicky usporiadané \cite{co-je-normalizacia}.
+
+Pri návrhu databázy je žiaduce dosiahnuť tretiu normálovú formu (3NF) pre každú tabuľku v databáze, pretože až takáto databáza sa považuje za normalizovanú \cite{normalizovana-tabulka}.
+
+Proces normalizácie tabuľky zahŕňa jej konverziu do prvej normálovej formy (ak v nej nie je), následne do druhej normálovej formy (ak ju nespĺňa) a na koniec do tretej normálovej formy.
+
+Tabuľka je v prvej normálovej forme (1NF), ak spĺňa nasledujúce vlastnosti \cite{typy-normalizacie}:
+\begin{itemize}
+	\item obsahuje iba atomické hodnoty v každom stĺpci
+	\item hodnoty uložené v stĺpci sa viažu iba na daný stĺpec
+	\item všetky stĺpce v tabuľke majú unikátny názov
+	\item nezáleží na poradí ukladania dát do stĺpcov 
+\end{itemize}
+
+Tabuľka je v druhej normálovej forme (2NF), ak má nasledujúce vlastnosti \cite{typy-normalizacie}:
+\begin{itemize}
+	\item tabuľka spĺňa 1NF
+	\item nemôže obsahovať čiastočnú závislosť
+\end{itemize}
+
+Čiastočná závislosť v tabuľke existuje pokiaľ atribút v tabuľke závisí od časti primárneho kľúča a nie od celého kľúča \cite{ciastocna-zavislost}. 
+
+Na to aby tabuľka bola v tretej normálovej forme (3NF) ,musí navyše mať nasledujúce vlastnosti \cite{typy-normalizacie}:
+\begin{itemize}
+	\item tabuľka spĺňa 2NF
+	\item nemôže obsahovať tranzitívnu závislosť
+\end{itemize}
+
+Tranzitívna závislosť predstavuje tri alebo viac atribútov, ktoré majú funkčnú závislosť medzi sebou, čo znamená, že stĺpec A závisí na stĺpci B cez stĺpec C \cite{tranzitivna-zavislost}.
+
+\subsubsection*{Tabuľka czkp\_vrh}
+Na základe analýzy a splnenia požiadavky 3NF bude potrebné, aby údaje o chovateľovi sa nenachádzali priamo v tabuľke vrhov, ale cez cudzí kľúč smerujúci do tabuľky určenej pre chovateľov/majiteľov.
+Taktiež bude potrebné presunúť údaje o registrácii vrhu a poznámok do tabuliek pre ne určených.
+
+\subsubsection*{Tabuľka czkp\_zvire}
+Z vykonanej analýzy tejto tabuľky vyplýva, že tabuľka okrem údajov o samotnom zvierati obsahuje navyše informácie o entitách ako majiteľ/chovateľ, registrácia zvieraťa, prípadne poznámky viažuce sa k danému zvieraťu. Pretože výsledná tabuľka má byť normalizovaná, nemala by obsahovať tieto údaje priamo, ale cez cudzí kľúč.
+
+Pre každú horeuvedenú entitu by mala vzniknúť jedna tabuľka --- zvlášť pre chovateľov a majiteľov, registrácie zvierat a poznámky. Z pohľadu databázy netreba rozoznávať ľudí, či sú daní ľudia chovateľmi alebo majiteľmi, preto môžu byť uložení v jednej tabuľke.
+
+\subsubsection*{Tabuľka czkp\_mimi}
+Analýza tejto tabuľky ukázala, že by tabuľka spĺňala 3NF v prípade, ak by stĺpec chovateľa obsahoval cudzí kľúč namiesto textu.
+Pri porovnaní tejto tabuľky a tabuľky \mintinline{php}{czkp_zvire} je možné vidieť, že stĺpce definované v tejto tabuľke sa štruktúrou rovnajú stĺpcom v tabuľke \mintinline{php}{czkp_zvire}, z čoho vyplýva, že táto tabuľka môže byť spojená s tabuľkou \mintinline{php}{czkp_zvire}.
+
+\subsubsection*{Tabuľka pp\_informace}
+Táto tabuľka je obdobou tabuľky \mintinline{php}{czkp_vrh}, čo znamená, že tieto dve tabuľky môžu byť zlúčené do jednej, po oddelení údajov o registácii vrhu a presunutí údajov o chovateľovi vrhu do samostatnej tabuľky.
+
+\subsubsection*{Tabuľka pp\_miminka}
+Tak ako tabuľka \mintinline{php}{czkp_mimi}, tak aj táto obsahuje mláďatá narodené vo vrhu (ktorý je uložený v \mintinline{php}{pp_informace}). Pozitívum oproti tabuľke \mintinline{php}{czkp_mimi} je jej kompaktnosť (obsahuje menej informácií, ktoré sa viažu nepriamo k tejto tabuľke), avšak stále nespĺňa 3NF vďaka ukladaniu informácií o majiteľovi priamo v tejto tabuľke. Po presunutí dát o majiteľoch do samostatnej tabuľky, môže byť táto tabuľka zlúčená s tabuľkou \mintinline{php}{czkp_mimi} (ktorá bude zlúčená s tabuľkou \mintinline{php}{czkp_zvire}).
+
+\subsubsection*{Tabuľka pp\_zadosti}
+Štruktúra tejto tabuľky porušuje 3NF tým, že si ukladá typ vrhu, ku ktorému sa daná žiadosť viaže, pretože typ vrhu je uložený 
+už pri samotnom vrhu a nie je potrebné ho ukladať aj pri žiadosti o schválenie vrhu.
+
+\subsection{Návrh databázového modelu}
 
 
 \section{Návrh REST API}

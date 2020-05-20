@@ -61,16 +61,16 @@ if (!is_user_logged_in()) {
 \label{current-code-example}
 \end{figure}
 
-Obrázok \ref{current-code-example} obsahuje ukážku súboru súčasnej aplikácie, na ktorom je možné vidieť skôr spomenuté miešanie logiky zodpovednej za funkcionalitu aplikácie (riadok 1--6), kód zodpovedný za prístup do databázy (riadok 10--19) a v neposlednom rade logiku zobrazovania aplikácie (riadok 21--41).
+Obrázok \ref{current-code-example} obsahuje ukážku súboru súčasnej aplikácie, ktorý je zodpovedný za zobrazenie detailov zvieraťa v danom vrhu. Z ukážky je možné postrehnúť vyššie spomenuté miešanie logiky zodpovednej za funkcionalitu aplikácie (riadok 1--6), kód zodpovedný za prístup do databázy (riadok 10--19) a v neposlednom rade logiku zobrazovania aplikácie (riadok 21--41).
 
 Ako programovací jazyk súčasnej aplikácie bol použítý jazyk PHP, ktorý bol navrhnutý v roku 1994 Rasmusom Lerdorfom. Tento jazyk je univerzálny programovací jazyk na strane servera a je primárne určený na vývoj webových stránok \cite{co-je-php}.
 
 Pre pridávanie, spracovanie a získavanie dát v aplikácii slúži open-source SQL databázový systém nazývaný MySQL, ktorý je vyvíjaný, distribuovaný a podporovaný spoločnosťou Oracle Corporation \cite{co-je-mysql}. 
 
-\subsection{Databázový model aplikácie}
-Neoddeliteľnou časťou tejto práce je analýza databázového modelu súčasnej aplikácie. Na základe tejto analýzy bude v navrhnutá lepšia štruktúra databázy tak, aby dáta aplikácie boli jednoznačné a štruktúra databázy nespôsobovala nekonzistentnosť dát v aplikácii.
+\subsection{Databázový model aplikácie}\label{sucasny-model-db}
+Neoddeliteľnou časťou tejto práce je analýza databázového modelu súčasnej aplikácie. Na základe tejto analýzy bude navrhnutá taká štruktúra databázy, aby dáta aplikácie boli jednoznačné a štruktúra databázy nespôsobovala nekonzistentnosť dát v aplikácii.
 
-Databáza súčasnej aplikácie sa skladá zo 6tich tabuliek: \mintinline{php}{czkp_mimi}, \mintinline{php}{czkp_vrh},\\ \mintinline{php}{czkp_zvire}, \mintinline{php}{pp_informace}, \mintinline{php}{pp_miminka} a \mintinline{php}{pp_zadosti}.
+Databáza súčasnej aplikácie sa skladá z nasledujúcich tabuliek: \mintinline{php}{czkp_mimi}, \mintinline{php}{czkp_vrh},\\ \mintinline{php}{czkp_zvire}, \mintinline{php}{pp_informace}, \mintinline{php}{pp_miminka} a \mintinline{php}{pp_zadosti}.
 
 \subsubsection{Popis tabuliek}
 V tejto podsekcii sú popísané jednotlivé tabuľky, ich štruktúra a najmä význam stĺpcov, do ktorých sa jednotlivé dáta ukladajú.
@@ -125,7 +125,7 @@ Tabuľka obsahuje stĺpec \mintinline{php}{id_vrhu}, v ktorom je uložený ident
 
 Do nasledujúcej tabuľky --- \mintinline{php}{pp_informace} --- sa ukladajú informácie spojené s jednotlivými vrhmi. Táto tabuľka nemá žiadnu spojitosť s tabuľkou \mintinline{php}{czkp_vrh}. Dôvod vzniku tejto tabuľky bol vývoj nadstavby nad pôvodnou aplikáciou.
 
-Táto tabuľka obsahuje stĺpec \mintinline{php}{uzivatel}, ktorý obsahuje identifikátor majiteľa vrhum ktorý ukazuje do tabuľky \mintinline{php}{wp_users}. Následne sa do tabuľky ukladajú údaje o samotnom vrhu, ako napríklad typ vrhu (\mintinline{php}{typ_vrhu}), jeho označenie (\mintinline{php}{vrh_oznaceni}), dátum narodenia (\mintinline{php}{vrh_narozeni}), varietnosť (\mintinline{php}{vrh_varietnost}), počet narodených a odchovaných mláďať (\mintinline{php}{vrh_nar_mladat} a \mintinline{php}{vrh_odch_mladat}) a počet odchovaných samcov a samíc (\mintinline{php}{vrh_odch_kluci} a \mintinline{php}{vrh_odch_holky}).
+Táto tabuľka obsahuje stĺpec \mintinline{php}{uzivatel}, ktorý obsahuje identifikátor majiteľa vrhum ktorý ukazuje do tabuľky \mintinline{php}{wp_users}. Následne sa do tabuľky ukladajú údaje o samotnom vrhu, ako napríklad typ vrhu (\mintinline{php}{typ_vrhu}), jeho označenie (\mintinline{php}{vrh_oznaceni}), dátum narodenia (\mintinline{php}{vrh_narozeni}), varietnosť \\(\mintinline{php}{vrh_varietnost}), počet narodených a odchovaných mláďať (\mintinline{php}{vrh_nar_mladat} a \mintinline{php}{vrh_odch_mladat}) a počet odchovaných samcov a samíc (\mintinline{php}{vrh_odch_kluci} a \mintinline{php}{vrh_odch_holky}).
 
 Každý vrh má matku a otca vrhu --- tieto údaje sú ukladané do stĺpcov \mintinline{php}{vrh_id_matka} a \mintinline{php}{vrh_id_otec}. Ich obsahom sú identifikátory rodičov daného vrhu. Títo rodičia pochádzajú z tabuľky \mintinline{php}{czkp_zvire}.
 
@@ -297,6 +297,8 @@ Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu\footnote
 Pre ukladanie dát potrebných pre funkčnosť aplikácie a ich následné spracovávanie bude použitý rovnaký databázový systém, ako v súčasnej aplikácii -- MySQL. Tento databázový systém budeme používať vo verzii 5.6.
 
 Táto verzia MySQL taktiež nie je najnovšou verziou (v skutočnosti bola prvýkrát vydaná v roku 2013, avšak je stále oficiálne podporovaná \cite{verzie-mysql}), opäť z dôvodu neexistujúcej podpory novšieho databázového systému webhostingom.
+
+\pagebreak
 
 \section{Používateľské role}\label{pouzivatelske-role}
 Novovznikajúca webová aplikácia bude prístupná iba zaregistrovaným a prihláseným používateľom. Navyše, niektoré akcie budú obmedzené iba pre určitý okruh používateľov.
