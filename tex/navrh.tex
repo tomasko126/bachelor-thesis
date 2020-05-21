@@ -138,7 +138,7 @@ Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako 
 \section{Návrh databázy}
 V predchádzajúcej kapitole v podsekcii \ref{sucasny-model-db} bol zanalyzovaný databázový model súčasnej aplikácie.
 
-Táto sekcia zhrnie fakty o súčasnom databázovom modeli na základe vykonanej analýzy a poskytne východiská, ktoré budú dôležité pre neskorší návrh databázového modelu pre vznikajúcu aplikáciu.
+Táto sekcia popíše normalizáciu súčasnej databázy a na základe poznatkov vyplývajúcich z analýzy o súčasnom databázovom modeli bude navrhnutý databázový model pre vznikajúcu aplikáciu, ktorý bude brať do úvahy funkčné požiadavky kladené na aplikáciu.
 
 \subsection{Normalizácia databázy}
 Normalizácia databázy je proces efektívneho usporiadania údajov v databáze. Tento proces má dva ciele: odstránenie nadbytočných údajov (napríklad neukladanie tých istých údajov vo viac ako jednej tabuľke) a zabezpečenie ukladania iba  súvisiacich údajov do tabuľky. Normalizovaná databáza znižuje množstvo miesta potrebného na ukladanie dát a navyše zabezpečí, že dáta sú logicky usporiadané \cite{co-je-normalizacia}.
@@ -195,14 +195,14 @@ Tak ako tabuľka \mintinline{php}{czkp_mimi}, tak aj táto obsahuje mláďatá n
 už pri samotnom vrhu a nie je potrebné ho ukladať aj pri žiadosti o schválenie vrhu.
 
 \subsection{Návrh databázového modelu}
-Na základe informácií o štruktúre databázy a funkčných požiadaviek sa táto podsekcia zaoberá výsledným návrhom databázového modelu, ktorý zahŕňa popis navrhnutých tabuliek a zjednodušenú schému logického modelu v grafickej podobe, ktorého základom tvoria navrhnuté tabuľky
+Na základe informácií o štruktúre databázy a funkčných požiadaviek sa táto podsekcia zaoberá výsledným návrhom databázového modelu, ktorý zahŕňa popis navrhnutých tabuliek a zjednodušenú schému logického modelu v grafickej podobe, ktorého základom tvoria navrhnuté tabuľky.
 
 \subsubsection{Popis tabuliek}
 Všetky navrhnuté tabuľky používaju stĺpec \mintinline{php}{id} ako jednoznačný identifikátor daného záznamu.
 Tento identifikátor je unikátny a pri každom vložení nového záznamu do databázy sa tento identifikátor inkrementuje o 1.
 Prvý záznam v danej tabuľke má \mintinline{php}{id} nastavený na hodnotu 1.
 
-\subsubsection*{animals}
+\subsubsection*{animals}\label{tabulka-animals}
 Táto tabuľka bude zoskupovať všetky zvieratá, ktoré organizácia sleduje bez ohľadu na to, či sa jedná o mláďa z vrhu alebo o dospelé zviera. 
 
 Jej štruktúra sa skladá zo stĺpcov \mintinline{php}{creator_id}, čo je identifikátor používateľa, ktorý dané zviera vytvoril. Následne štruktúra tabuľky obsahuje identifikátory \mintinline{php}{breeder_id} a \mintinline{php}{owner_id}. V prvom prípade sa jedná o identifikátor človeka, ktorý je chovateľom zvieraťa, kdežto v druhom sa jedná identifkátor majiteľa zvieraťa. Pre identifikáciu matky a otca zvieraťa sa používajú stĺpce \mintinline{php}{mother_id} a \mintinline{php}{father_id}. Obsahom stĺpcu \mintinline{php}{litter_id} je identifikátor vrhu, z ktorého zviera pochádza.
@@ -213,7 +213,7 @@ Meno zvieraťa, jeho prezývka, pohlavie, dátum narodenia, farba očí, typ uš
 
 Informácia, či je povolený chov, alebo je nejakým spôsobom limitovaný, je možné nájsť v stĺpcoch \mintinline{php}{breeding_available} a \mintinline{php}{breeding_limitation}.
 
-Aplikácia bude obsahovať podporu pre generovanie PDF preukazov. V danom preukaze sa budú nachádzať údaje z tejto tabuľky. Jedným z týchto údajov je aj meno majiteľa zvieraťa, jeho kontakt a číslo členského preukazu, ktorý vydáva organizácia. Tieto údaje by normálne mohli byť uložené v tabuľke určenej pre chovateľov a majiteľov. Avšak v prípade, že by sa tieto údaje zmenili priamo v tabuľke, v ktorej sa nachádza daný majiteľ zvieraťa, nastala by situácia, že by sa pri následnom generovaní rovnakého preukazu líšili údaje o majitelovi zvieraťa medzi týmto preukazom a preukazom vygenerovaným pred zmenou údajov.
+Aplikácia bude obsahovať podporu pre generovanie PDF preukazov. V danom preukaze sa budú nachádzať údaje z tejto tabuľky a z tabuľky \mintinline{php}{litters}. Jedným z týchto údajov je aj meno majiteľa zvieraťa, jeho kontakt a číslo členského preukazu, ktorý vydáva organizácia. Tieto údaje by normálne mohli byť uložené v tabuľke určenej pre chovateľov a majiteľov. Avšak v prípade, že by sa tieto údaje zmenili priamo v tabuľke, v ktorej sa nachádza daný majiteľ zvieraťa, nastala by situácia, že by sa pri následnom generovaní rovnakého preukazu líšili údaje o majitelovi zvieraťa medzi týmto preukazom a preukazom vygenerovaným pred zmenou údajov.
 Preto sa tieto údaje budú taktiež ukladať v tabuľke zvierat -- konkrétne v stĺpcoch \mintinline{php}{owner_name}, \mintinline{php}{owner_contact} a \mintinline{php}{owner_member_card_number}.
 
 \subsubsection*{animal\_registrations}
@@ -225,19 +225,49 @@ Každý klub má možnosť obmedziť následný chov zvieraťa a špecifikovať 
 \subsubsection*{litters}
 Táto tabuľka bude zhromažďovať všetky vrhy sledované organizáciou.
 
-Medzi údaje, ktoré je potrebné ukladať o každom vrhu, je identifikátor oboch rodičov vrhu -- v prípade matky sa jedná o stĺpec \mintinline{php}{mother_id} a v prípade otca o stĺpec \mintinline{php}{father_id}. Okrem iného sa bude ukladať aj identifikátor majiteľa vrhu do stĺpca \mintinline{php}{owner_id} a identifkátor používateľa, ktorý daný záznam vytvoril (\mintinline{php}{creator_id}).
+Medzi údaje, ktoré je potrebné ukladať o každom vrhu, patria identifikátory oboch rodičov vrhu -- v prípade matky sa jedná o stĺpec \mintinline{php}{mother_id} a v prípade otca o stĺpec \mintinline{php}{father_id}. Okrem iného sa bude ukladať aj identifikátor majiteľa vrhu do stĺpca \mintinline{php}{owner_id} a identifkátor používateľa, ktorý daný záznam vytvoril (\mintinline{php}{creator_id}).
 
-Následne sa do tabuľky budú ukladať údaje ako línia vrhu (\mintinline{php}{line}), genetické informácie (\mintinline{php}{genetic_information}), dátum narodenia vrhu (\mintinline{php}{birthdate}), označenie vrhu (\mintinline{php}{label}) a typ vrhu (\mintinline{php}{type}).
+Následne sa do tabuľky budú ukladať údaje ako typ vrhu (\mintinline{php}{type}), jeho označenie (\mintinline{php}{label}), dátum narodenia vrhu (\mintinline{php}{birthdate}), línia vrhu (\mintinline{php}{line}) a genetické informácie (\mintinline{php}{genetic_information}).
+
+Vo vrhu je nutné sledovať počet narodených a odchovaných mláďat (v stĺpcoch \mintinline{php}{babies_born} a \mintinline{php}{babies_reared}), odchovaných samcov a samíc (\mintinline{php}{reared_boys} a \mintinline{php}{reared_girls}) a počet mláďat určených pre chov a pre maznanie --- tieto údaje budú uložené v stĺpcoch \mintinline{php}{for_breeding} a \mintinline{php}{for_petting}.
+
+Nakoľko aplikácia bude podporovať generovanie preukazov vo formáte PDF, budú v tejto tabuľke uložené údaje o mene chovateľa a jeho kontaktných údajov z rovnakých dôvodov, ktoré boli uvedené v \ref{tabulka-animals}. Meno chovateľa
+a jeho kontaktné údaje budú uložené v stĺpcoch \mintinline{php}{breeder_name}, resp. \mintinline{php}{breeder_contact}.
 
 \subsubsection*{litter\_approval\_requests}
+Účelom tejto tabuľky je spracovávať žiadosti o schválenie vrhov. Úlohou schvalovateľa je posúdiť jednotlivé žiadosti a na základe poskytnutých údajov o vrhu rozhodnúť, či daný vrh schváli alebo nie.
 
-\subsubsection*{people}
+Pre tie účely bude potrebné, aby tabuľka obsahovala identifikátor vrhu, ku ktorému sa daná žiadosť viaže. Tento identifikátor bude uložený v stĺpci \mintinline{php}{litter_id}. Okrem tohto identifikátora sa bude taktiež ukladať identifikátor žiadateľa, ktorý danú žiadosť vytvoril --- tento údaj sa automaticky uloží pri vytvorení žiadosti do stĺpca \mintinline{php}{creator_id}. Po posúdení žiadosti a rozhodnutí, či bude daný vrh schválený alebo nie, sa bude ukladať identifikátor schvalovateľa, ktorý danú žiadosť schválil alebo zamietol, a to do stĺpca \mintinline{php}{registrator_id}.
 
-\subsubsection*{users}
+Žiadosti môžu mať tri stavy, a to stav \uv{poslaná}, \uv{schválená} a \uv{zamietnutá}. Stav jednotlivých žiadostí sa bude ukladať do stĺpca \mintinline{php}{state}.
+
+Žiadateľ o schválenie vrhu bude mať možnosť pridať poznámku schvalovateľovi -- táto poznámka sa bude ukladať do stĺpca \mintinline{php}{creator_note}.
+
+Pre schválenú žiadosť je potrebné ukladať jej registračné číslo, dátum registrácie, prípadne poznámku schvalovateľa pre žiadateľa (tá môže byť uložená i v prípade odmietnutia schválenia vrhu). Tieto údaje sa budú ukladať do stĺpcov \mintinline{php}{registration_number}, \mintinline{php}{registration_date}, resp. \mintinline{php}{registrator_note}.
 
 \subsubsection*{stations}
+Chovné stanice, ktorých súčasťou môže byť majiteľ resp. chovateľ zvieraťa/vrhu, budú uložené v tejto tabuľke.
+Štruktúra tabuľky je jednoduchá --- obsahuje stĺpec \mintinline{php}{name}, v ktorom je uložené meno chovnej stanice, a stĺpec \mintinline{php}{creator_id}, ktorý obsahuje identifikátor osoby, ktorý danú stanicu vytvoril.
+
+\subsubsection*{people}
+Táto tabuľka je určená pre zhromažďovanie údajov o chovateľoch a majiteľoch zvierat a vrhov.
+
+O týchto ľuďoch je potrebné evidovať osobné údaje ako ich meno, email, telefónne číslo a číslo členského preukazu.
+Tieto informácie sa budú ukladať do stĺpcov \mintinline{php}{name}, \mintinline{php}{email}, príp. do stĺpcu \mintinline{php}{telephone_number} a \mintinline{php}{member_card_number}.
+
+Okrem týchto základných dát sa budú ukladať dodatočné informácie, ako identifikátor chovateľskej stanice, ktorej je daný človek súčasťou (\mintinline{php}{station_id}), identifikátor používateľa, ktorý daný záznam vytvoril (\mintinline{php}{creator_id}) a identifikátor používateľa (\mintinline{php}{user_id}), ak sa používateľ nachádza v systémovej tabuľke \mintinline{php}{users}. Ak je identifikátor \mintinline{php}{user_id} vyplnený, znamená to, že daný človek je systémovým používteľom aplikácie, ale aj zároveň chovateľom, resp. majiteľom nejakého zveiraťa/vrhu.
+
+\subsubsection*{users}
+Systémová tabuľka \mintinline{php}{users} bude obsahovať dáta o používateľoch systému. O týchto používateľoch je potrebné ukladať ich meno (\mintinline{php}{name}) a email (\mintinline{php}{email}), podľa ktorého sa budú daní používatelia identifikovať pri prihlásení do aplikácie. Taktiež bude potrebné ukladať ich heslo v zahešovanej podobe do stĺpca \mintinline{php}{password}.
+
+Pre účely budúceho rozšírenia aplikácie --- konkrétne prihlasovania sa pomocou systému WordPress do novej aplikácie --- sa bude ukladať do stĺpca \mintinline{php}{wordpress_id} identifikátor používateľa vo WordPress systéme.
 
 \subsubsection*{notes}
+Nakoľko je žiaduce ukladať poznámky k jednotlivým zvieratám a vrhom, bude vytvorená tabuľka \mintinline{php}{notes}, do ktorej sa jednotlivé poznámky budú ukladať.
+
+Táto tabuľka bude obsahovať stĺpec \mintinline{php}{creator_id}, do ktorého sa bude ukladať identifikát používateľa, ktorý daný záznam vytvoril. Ak sa bude jednať o poznámku ku zvierati, jeho identifikátor sa uloží do stĺpca \mintinline{php}{animal_id}. V opačnom prípade -- pri ukladaní poznámky viažucej sa k vrhu -- sa identifikátor daného vrhu uloží do stĺpca \mintinline{php}{litter_id}.
+
+Ďalej pre účel poznámok bude potrebné ukladať ich kategóriu, viditeľnosť a obsah. Tieto informácie sa budú ukladať do stĺpcov \mintinline{php}{category}, \mintinline{php}{public} a \mintinline{php}{note}.
 
 \subsubsection{Databázová schéma}
 
