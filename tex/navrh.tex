@@ -270,7 +270,9 @@ Táto tabuľka bude obsahovať stĺpec \mintinline{php}{creator_id}, do ktorého
 Ďalej pre účel poznámok bude potrebné ukladať ich kategóriu, viditeľnosť a obsah. Tieto informácie sa budú ukladať do stĺpcov \mintinline{php}{category}, \mintinline{php}{public} a \mintinline{php}{note}.
 
 \subsubsection{Databázová schéma}
+Pre lepšiu vizuálizáciu navrhnutých tabuliek a ich vzťahov medzi nimi sa v tejto podsekcii nachádza zjednodušený logický model databázy v grafickej podobe.
 
-\section{Návrh REST API}
-Komunikácia medzi klientom a serverom bude prebiehať cez volania 
-
+\begin{figure}[H]
+	\includegraphics[width=1.0\textwidth]{media/navrh/diagram.png}
+	\caption{Logický model databázy}
+\end{figure}

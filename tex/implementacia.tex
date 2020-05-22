@@ -1,0 +1,152 @@
+\chapter{Implementácia}
+Cieľom tejto kapitoly je na základe predošlej analýzy súčasnej aplikácie a návrhu databázy priblížiť implementačnú časť novej aplikácie. Najprv sa kapitola venuje implementácii aplikácie na serverovej časti s priblížením architektonického vzoru MVC, ktorý sa využíva pri tvorbe webových aplikácií. Následujúca sekcia je vymedzená implementácii klientskej časti aplikácie. Záver je venovaný migrácii dát z pôvodnej do novej aplikácie.
+
+\section{Serverová časť}
+Implementácia serverovej časti webovej aplikácie sprevádzala využitie zvoleného PHP frameworku, ktorým bol Laravel.
+Samotný framework je implementovaný na základe architektonického vzoru MVC.
+
+\subsection{MVC architektúra}
+MVC je je akronym pre Model-View-Controller. Použitie tohto vzoru rozdeľuje aplikáciu do troch hlavných skupín --- na modely, views a controllery. Nasledujúce podsekcie vysvetlia význam jednotlivých skupín.
+
+\subsubsection*{Model}
+Model (modelová trieda) obsahuje logiku aplikácie a všetko, čo do tejto logiky spadá. Môžu to byť rôzne výpočty, databázové dotazy, validácia prichádzajúcich dát a podobne. Funkcia modelu spočíva v prijatí parametrov, ktoré spracuje s možným využítím dát z databázy. Následne takto spracované dáta vráti späť metóde, ktorá danú funkciu modelu volala.\cite{} TODO
+
+Platí, že pre každú tabuľku v databáze by mala byť vytvorená priíslušná modelová trieda. Takáto modelová trieda je následne úzko spätá s danou tabuľkou, nakoľko poskytuje rôzne metódy pre prácu s dátami uloženými v tejto tabuľke.
+  
+Laravel pristupuje k týmto dátam pomocou frameworku Eloquent, ktorý je určený pre objektovo-relačné mapovanie.
+Objektovo-relačné mapovanie (ORM) je technika prístupu k dátam uloženým v databáze. Táto technika spočíva v mapovaní riadkov príslušnej tabuľky v relačnej databáze do objektov, ktoré sú instancie jednotlivých modelov. Táto technika funguje aj opačným smerom.\cite{} TODO
+
+\begin{figure}[H]
+\begin{minipage}[]{\linewidth}
+\begin{minted}[linenos]{php}
+/**
+ * Create new animal
+ *
+ * @param $data
+ * @return Animal
+ * @throws Throwable
+ */
+public static function createAnimal($data) {
+    $animal = new Animal($data);
+    $animal->creator_id = Auth::id();
+
+    $animal->saveOrFail();
+
+    return $animal->refresh();
+}
+\end{minted}
+\end{minipage}
+\caption[Ukážka modelovej triedy Animal.php]
+{Ukážka modelovej triedy Animal.php}
+\label{animal-code-example}
+\end{figure}
+
+Na obrázku \ref{animal-code-example} je možné vidieť metódu \mintinline{php}{createAnimal}, ktorá je zodpovedná za vytvorenie nového zvieraťa. Táto metóda sa nachádza v modelovej triede \mintinline{php}{Animal}, ktorá je modelovou triedou tabuľky \mintinline{php}{animals}. Na 9. riadku prebieha vytvorenie novej instancie modelu, ktorá je naplnená dátami nachádzajúcimi sa v parametri \mintinline{php}{$data}. Následne je parameter \mintinline{php}{creator_id} objektu \mintinline{php}{Animal} nastavený na identifikátora používateľa, od ktorého požiadavka na vytvorenie nového zvieraťa prišla. Nie je náhoda, že názov tohto parametru je možné nájsť ako stĺpec v tabuľke \mintinline{php}{animals}. Zavolaním Eloquent metódy \mintinline{php}{saveOrFail} sa daný objekt pretransformuje do SQL príkazu určeného pre pridanie dát do tabuľky. Následnej sa tento príkaz na pozadí vykoná. V prípade, že uloženie objektu do databázy z rozličných dôvodov zlyhá, táto metóda vráti výnimku. Nakoniec sa na riadku 14 zavolaním metódy \mintinline{php}{refresh} aktualizuje daná instancia modelu aktuálnymi dátami prislúchajúcimi k danej instancii z databázy (o identifikátor zvieraťa a systémové stĺpce) a vráti.
+
+\subsubsection*{View}
+View je časť aplikácie, ktorá zodpovedá za vykreslenie obsahu používateľom. Jej obsahom je šablóna, obsahujúca HTML stránku a tagy nejakého značkovacieho jazyka, ktorý umožňuje do šablóny vkladať premenné, prípadne vykonávať iterácie a podmienky. View nie je len šablóna, ale zobrazovač výstupu obsahujúca minimálne množstvo logiky potrebnej pre výpis dát.
+Podobne ako model, view nevie, odkiaľ mu dáta prišli, iba sa stará o ich finálne zobrazenie používateľovi.
+
+V prípade Laravelu sa používa v šablónach značkovací jazyk Blade. Blade umožňuje nie len vytvárať jednotlivé šablóny, ale aj komponenty, ktoré môžu byť použité viackrát v rôznych šablónach.
+
+\begin{figure}[H]
+\begin{minipage}[]{\linewidth}
+\begin{minted}[linenos]{php}
+<section id="breeding-info" class="bold">
+    <span class="breeding_available">
+        @isset($isAnimalAvailableForBreeding)
+            {{ $isAnimalAvailableForBreeding ?
+               'Chov povolen' : 'Chov není povolen' 
+            }}
+        @endisset
+    </span>
+    <p class="breeding_limitation">
+        @isset($animalBreedingLimitation)
+        {{ !empty($animalBreedingLimitation()) ?
+           ('Poznámka: ' . $animalBreedingLimitation) : '' 
+        }}
+        @endisset
+    </p>
+</section>
+\end{minted}
+\end{minipage}
+\caption[Ukážka šablóny animal\_overview.blade.php]
+{Ukážka šablóny animal\_overview.blade.php}
+\label{animal-overview-view-code}
+\end{figure}
+
+Na obrázku \ref{animal-overview-view-code} sa nachádza ukážka časti šablóny, ktorá je zodpovedná za vygenerovanie preukazu obsahujúci detaily zvieraťa. Ako si je možné všimnúť, obsah tejto šablóny sa skladá z použitia HTML jazyka pre definovanie štruktúry preukazu, zo špeciálnych Blade príkazov ako \mintinline{php}{isset} a \mintinline{php}{endisset}, a z funkcie s premennými v syntaxe jazyka PHP.\pagebreak
+
+\subsubsection*{Controller}
+Controller je poslednou časťou tejto skladačky, ktorá ozrejmí funkčnosť celého MVC vzoru. Jedná se o prostredníka, s ktorým komunikuje používateľ, model i view. Tieto komponenty drží pohromade a zabezpečuje komunikáciu medzi nimi.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{php}
+/**
+ * Show view with animal's template for .pdf export
+ *
+ * @param int $id
+ * @return Factory|View
+ * @throws AuthorizationException
+ */
+public function export(int $id) {
+    $animal = Animal::getAnimalForPdf($id);
+
+    // Check, whether user is authorized to view this page
+    $this->authorize('canExportAnimal', $animal);
+
+    $litter = $genealogy = null;
+
+    // Is animal part of some litter?
+    if (isset($animal->litter_id)) {
+        $litter = Litter::getLitter($animal->litter_id);
+        $genealogy = Animal::getGenealogy($litter, 0);
+    }
+    
+    (...)
+        
+    return view('generated_docs.pdf', [
+        'animal' => $animal,
+        'litter' => $litter,
+        'genealogy' => $genealogy,
+        'orientation' => $orientation
+    ]);
+}
+\end{minted}
+\caption[Ukážka controlleru AnimalController.php]
+{Ukážka controlleru AnimalController.php}
+\label{animal-controller-view-code}
+\end{figure}
+
+Na obrázku \ref{animal-controller-view-code} sa nachádza ukážka metódy \mintinline{php}{export}. Z obrázku je možné vidieť volanie metód modelov \mintinline{php}{Animal} a \mintinline{php}{Litter}. Po tom čo controller dostane dáta z jednotlivých metód modelov, sú tieto dáta predané view, ktorý následne ich doplní do šablóny \mintinline{php}{pdf}. Nakoniec controller šablónu s dátami vráti, a framework sa postará o jej odoslanie do klientského prehliadača, ktorý danú šablónu zobrazí používateľovi.
+
+Avšak, na akom základe sa spustí táto metóda? Odpoveďou na túto otázku je časť aplikácie zvaná \uv{Router}.
+Router je zodpovedný za spustenie metód controllerov na základe prijatého HTTP požiadavku (buď iniciovaného používateľom navštívením danej adresy alebo skriptom, ktorý pošle požiadavku na danú adresu). Na základe URL adresy požiadavku router rozhodne, ktorú metódu daného controlleru spustí.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{php}
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get(
+    '/animals/{id}/export',
+    'AnimalsController@export'
+    )->name('animals.id.export.get');
+    
+    (...)
+});
+\end{minted}
+\caption[Ukážka routeru web.php]
+{Ukážka routeru web.php}
+\label{router-code}
+\end{figure}
+
+Na obrázku \ref{router-code} je zobrazená ukážka routeru. V prípade, ak HTTP požiadavka prichádzajúca na server bude mať adresu v tvare\\ \uv{https://domena.sk/animals/<id>/export}\footnote{<id> sa nahradí ľubovoľným číslom}, router spustí metódu \mintinline{php}{export} v controlleri \mintinline{php}{AnimalsController}.
+
+\subsection{Štruktúra projektu}
+
+
+
+\section{Klientská časť}
+
+\subsection{Vzhľad}
+
+\section{Migrácia dát}
