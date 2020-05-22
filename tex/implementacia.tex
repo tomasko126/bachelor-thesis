@@ -141,10 +141,6 @@ Route::middleware('auth:sanctum')->group(function() {
 
 Na obrázku \ref{router-code} je zobrazená ukážka routeru. V prípade, ak HTTP požiadavka prichádzajúca na server bude mať adresu v tvare\\ \uv{https://domena.sk/animals/<id>/export}\footnote{<id> sa nahradí ľubovoľným číslom}, router spustí metódu \mintinline{php}{export} v controlleri \mintinline{php}{AnimalsController}.
 
-\subsection{Štruktúra projektu}
-
-TBA
-
 \section{Klientská časť}
 Klientská časť aplikácie sa skladá prevažne z implementácie jednotlivých stránok, ktoré sa skladajú z viacerých nezávislých komponent, ktoré spolu komunikujú. Tieto stránky sú zobrazované klientskym frameworkom Vue.js, ktorý sa stará o správne zobrazenie jednotlivých stránok na základe adresy, na ktorej sa používateľ nachádza.
 
@@ -259,6 +255,45 @@ Zjednodušený životný cyklus tejto komponenty bude nasledovný\footnote{Infor
 	\item Ak daná komponenta závisí pri jej zobrazení od obsahu premennej \mintinline{php}{animal}, bude znovu vykreslená
 \end{enumerate}
 
-\subsection{Vzhľad}
+\section{Štruktúra projektu}
 
 \section{Migrácia dát}
+Po implementácii novej aplikácie bolo potrebné zmigrovať existujúce dáta do novej aplikácie. Proces migrácie spočíval vo vytvorení starých tabuliek s dátami v databáze novej aplikácie. Následne boli pre tieto tabuľky vytvorené modelové triedy, ktoré obsahujú logiku pre transformáciu dát zo starých do nových tabuliek. Tieto modelové triedy je možné nájsť v priečinku \mintinline{php}{app/ImportModels}.
+
+Každá modelová trieda obsahuje metódu \mintinline{php}{import}. Tieto metódy sú volané v jednotlivých metódach controllera \mintinline{php}{ImportController}, ktoré sú zaregistrované v routri \mintinline{php}{web.php} \ref{router-import-code}.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{html}
+Route::get(
+    '/import/contacts',
+    'ImportController@importContacts'
+)->name('import.contacts.get');
+Route::get(
+    '/import/czkp_animals',
+    'ImportController@importCZKPAnimals'
+)->name('import.czkp_animals.get');
+Route::get(
+    '/import/czkp_litters',
+    'ImportController@importCZKPLitters'
+)->name('import.czkp_litters.get');
+Route::get(
+    '/import/czkp_animals/litters',
+    'ImportController@connectAnimalWithLitter'
+)->name('import.czkp_animals.litters.get');
+Route::get(
+    '/import/czkp_babies',
+    'ImportController@importCZKPBabies'
+)->name('import.czkp_babies.get');
+Route::get(
+    '/import/pp_information',
+    'ImportController@importPPInformation'
+)->name('import.pp_information.get');
+\end{minted}
+\caption[Ukážka volania import metód v routri web.php]
+{Ukážka volania import metód v routri web.php}
+\label{router-import-code}
+\end{figure}
+
+Pred importom dát muselo byť veľké množstvo záznamov manuálne očistených, z dôvodu nekonzistentnosti mien majiteľov/chovateľov, ich kontaktných údajov a príslušnosti k jednotlivým chovným staniciam medzi súčasnými tabuľkami. Táto nekonzistentnosť dát bola spôsobená ich ukladaním do nenormalizovaných tabuliek. Čistenie dát zahŕňalo manuálnu kontrolu a dodatočnú úpravu vyše 3500 záznamov v súčasnej databáze.
+
+Ak by sa záznamy neočistili, nebolo by možné nie len napárovať jednotlivé zvieratá a vrhy k ich majiteľom a chovateľom, ale ani importovať týchto ľudí do tabuľky \mintinline{php}{people} a napárovať ich s jednotlivými chovnými stanicami z tabuľky \mintinline{php}{stations}.
