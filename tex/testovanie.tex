@@ -1,0 +1,53 @@
+\chapter{Testovanie}
+Táto kapitola sa zaoberá métodou testovania Po implementácii aplikácie je nevyhnutné aplikáciu otestovať, najmä ak sa jedná o komplexnejšiu aplikáciu.Testovanie aplikácie je nevyhnutnou súčasťou pre potvrdenie, že implementovaná funkcionalita funguje podľa špecifikácie
+
+\section{Jednotkové testy}
+Jednotkové testy sú testy, ktoré testujú jednotlivé komponenty softvéru. Účelom týchto testov je overiť, či každá komponenta softvéru funguje tak, ako je navrhnutá. Jednotka je najmenšia testovateľná súčasť akéhokoľvek softvéru. Zvyčajne má jeden alebo niekoľko vstupov a zvyčajne jeden výstup \cite{co-je-unit-testing}.
+
+Nakoľko biznis logika tejto aplikácie nie je rozsiahla, boli namiesto jednotkových testov vytvorené integračné testy.
+
+\section{Integračné testy}
+Integračné testovanie je úroveň testovania aplikácie, pri ktorej sa jednotlivé komponenty kombinujú a testujú ako skupina. Účelom tejto úrovne testovania je odhaliť poruchy v interakcii medzi integrovanými komponentami \cite{co-su-integracne-testy}.
+
+Samotné integračné testy sa zameriavajú na testovanie komunikácie medzi klientom a serverom, pri ktorých sa overuje aktuálna a očakávaná odpoveď servera. Počas behu jednotlivých testov dochádza k overeniu autentifikácie používateľa, prístupu do databázy, respektíve overeniu práv používateľa k danej akcii.
+
+Tieto testy je možné spustiť príkazom \mintinline{php}{php artisan test} z hlavného adresára webovej aplikácie.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{php}
+public function testUserDelete() {
+    // Create new user
+    $user = factory(User::class)->create();
+
+    // Deleting unauthenticated should result in 401
+    $this->deleteJson(route('users.destroy', ['user' => $user->id]))
+        ->assertStatus(401);
+
+    // Login as user
+    $this->loginAsUser();
+
+    // Deleting as user should result in 403
+    $this->deleteJson(route('users.destroy', ['user' => $user->id]))
+        ->assertStatus(403);
+
+    // Login as admin
+    $this->loginAsAdmin();
+
+    // Now the deletion should be alright
+    $this->deleteJson(route('users.destroy', ['user' => $user->id]))
+        ->assertStatus(204);
+}
+\end{minted}
+\caption[Ukážka testu zmazania používateľa]
+{Ukážka testu zmazania používateľa}
+\label{user-delete-test-code}
+\end{figure}
+
+Na ukážke testu \ref{user-delete-test-code} je zobrazený priebeh testu zmazania používateľa. V tomto teste je využitá kontrola prihlásenia a následná kontrola práv. Ak je používateľ odhlásený, respektíve nemá dostatočné práva pre zmazanie používateľa, server by mal vrátiť odpoveď s HTTP status kódom 401, resp. 403. Po prihlásení sa ako administrátor by malo byť možné zmazať vytvoreného používateľa poslaním DELETE požiadavky na server.
+
+Na podobnom princípe sú postavené ostatné integračné testy. Integračné testy boli vytvorené pre všetky entity, ktoré sú dostupné cez API servera.
+
+
+
+
+

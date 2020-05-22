@@ -1,12 +1,26 @@
-% arara: xelatex
+% arara: xelatex: { synctex: true, shell: true }
 % arara: bibtex
-% arara: xelatex
+% arara: xelatex: { synctex: true, shell: true }
+% arara: xelatex: { synctex: true, shell: true }
 \documentclass[thesis=B,slovak]{FITthesis}[2019/03/21]
 
 \usepackage[utf8]{inputenc} 
 \usepackage{dirtree}
 \usepackage{amsmath}
 \usepackage{xevlna}
+\usepackage{float}
+
+\usepackage{minted}
+\setminted{autogobble=true,tabsize=4}
+
+% empty lines between paragraphs
+\setlength{\parindent}{0pt}
+\abnormalparskip{\baselineskip}
+
+\usepackage{enumitem}
+\newlength\docparskip
+\setlength{\docparskip}{\parskip}
+\setlist[1]{before={\parskip=0pt}}
 
 \input{tex/metadata.tex}
 

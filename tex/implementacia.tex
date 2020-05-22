@@ -1,0 +1,299 @@
+\chapter{Implementácia}
+Cieľom tejto kapitoly je na základe predošlej analýzy súčasnej aplikácie a návrhu databázy priblížiť implementačnú časť novej aplikácie. Najprv sa kapitola venuje implementácii aplikácie na serverovej časti s priblížením architektonického vzoru MVC, ktorý sa využíva pri tvorbe webových aplikácií. Následujúca sekcia je vymedzená implementácii klientskej časti aplikácie. Záver je venovaný migrácii dát z pôvodnej do novej aplikácie.
+
+\section{Serverová časť}
+Implementácia serverovej časti webovej aplikácie sprevádzala využitie zvoleného PHP frameworku, ktorým bol Laravel.
+Samotný framework je implementovaný na základe architektonického vzoru MVC.
+
+\subsection{MVC architektúra}
+MVC je je akronym pre Model-View-Controller. Použitie tohto vzoru rozdeľuje aplikáciu do troch hlavných skupín --- na modely, views a controllery. Nasledujúce podsekcie vysvetlia význam jednotlivých skupín.
+
+\subsubsection*{Model}
+Model (modelová trieda) obsahuje logiku aplikácie a všetko, čo do tejto logiky spadá. Môžu to byť rôzne výpočty, databázové dotazy, validácia prichádzajúcich dát a podobne. Funkcia modelu spočíva v prijatí parametrov, ktoré spracuje s možným využítím dát z databázy. Následne takto spracované dáta vráti späť metóde, ktorá danú funkciu modelu volala \cite{mvc-architektura}.
+
+Platí, že pre každú tabuľku v databáze by mala byť vytvorená priíslušná modelová trieda. Takáto modelová trieda je následne úzko spätá s danou tabuľkou, nakoľko poskytuje rôzne metódy pre prácu s dátami uloženými v tejto tabuľke \cite{co-je-eloquent}.
+  
+Laravel pristupuje k týmto dátam pomocou frameworku Eloquent, ktorý je určený pre objektovo-relačné mapovanie.
+Objektovo-relačné mapovanie (ORM) je technika prístupu k dátam uloženým v databáze. Táto technika spočíva v mapovaní riadkov príslušnej tabuľky v relačnej databáze do objektov, ktoré sú instancie jednotlivých modelov. Táto technika funguje aj opačným smerom.
+
+\begin{figure}[H]
+\begin{minipage}[]{\linewidth}
+\begin{minted}[linenos]{php}
+/**
+ * Create new animal
+ *
+ * @param $data
+ * @return Animal
+ * @throws Throwable
+ */
+public static function createAnimal($data) {
+    $animal = new Animal($data);
+    $animal->creator_id = Auth::id();
+
+    $animal->saveOrFail();
+
+    return $animal->refresh();
+}
+\end{minted}
+\end{minipage}
+\caption[Ukážka modelovej triedy Animal.php]
+{Ukážka modelovej triedy Animal.php}
+\label{animal-code-example}
+\end{figure}
+
+Na obrázku \ref{animal-code-example} je možné vidieť metódu \mintinline{php}{createAnimal}, ktorá je zodpovedná za vytvorenie nového zvieraťa. Táto metóda sa nachádza v modelovej triede \mintinline{php}{Animal}, ktorá je modelovou triedou tabuľky \mintinline{php}{animals}. Na 9. riadku prebieha vytvorenie novej instancie modelu, ktorá je naplnená dátami nachádzajúcimi sa v parametri \mintinline{php}{$data}. Následne je parameter \mintinline{php}{creator_id} objektu \mintinline{php}{Animal} nastavený na identifikátora používateľa, od ktorého požiadavka na vytvorenie nového zvieraťa prišla. Nie je náhoda, že názov tohto parametru je možné nájsť ako stĺpec v tabuľke \mintinline{php}{animals}. Zavolaním Eloquent metódy \mintinline{php}{saveOrFail} sa daný objekt pretransformuje do SQL príkazu určeného pre pridanie dát do tabuľky. Následnej sa tento príkaz na pozadí vykoná. V prípade, že uloženie objektu do databázy z rozličných dôvodov zlyhá, táto metóda vráti výnimku. Nakoniec sa na riadku 14 zavolaním metódy \mintinline{php}{refresh} aktualizuje daná instancia modelu aktuálnymi dátami prislúchajúcimi k danej instancii z databázy (o identifikátor zvieraťa a systémové stĺpce) a vráti.
+
+\subsubsection*{View}
+View je časť aplikácie, ktorá zodpovedá za vykreslenie obsahu používateľom. Jej obsahom je šablóna, obsahujúca HTML stránku a tagy nejakého značkovacieho jazyka, ktorý umožňuje do šablóny vkladať premenné, prípadne vykonávať iterácie a podmienky. View nie je len šablóna, ale zobrazovač výstupu obsahujúca minimálne množstvo logiky potrebnej pre výpis dát.
+Podobne ako model, view nevie, odkiaľ mu dáta prišli, iba sa stará o ich finálne zobrazenie používateľovi \cite{mvc-architektura}.
+
+V prípade Laravelu sa používa v šablónach značkovací jazyk Blade. Blade umožňuje nie len vytvárať jednotlivé šablóny, ale aj komponenty, ktoré môžu byť použité viackrát v rôznych šablónach.
+
+\begin{figure}[H]
+\begin{minipage}[]{\linewidth}
+\begin{minted}[linenos]{php}
+<section id="breeding-info" class="bold">
+    <span class="breeding_available">
+        @isset($isAnimalAvailableForBreeding)
+            {{ $isAnimalAvailableForBreeding ?
+               'Chov povolen' : 'Chov není povolen' 
+            }}
+        @endisset
+    </span>
+    <p class="breeding_limitation">
+        @isset($animalBreedingLimitation)
+        {{ !empty($animalBreedingLimitation()) ?
+           ('Poznámka: ' . $animalBreedingLimitation) : '' 
+        }}
+        @endisset
+    </p>
+</section>
+\end{minted}
+\end{minipage}
+\caption[Ukážka šablóny animal\_overview.blade.php]
+{Ukážka šablóny animal\_overview.blade.php}
+\label{animal-overview-view-code}
+\end{figure}
+
+Na obrázku \ref{animal-overview-view-code} sa nachádza ukážka časti šablóny, ktorá je zodpovedná za vygenerovanie preukazu obsahujúci detaily zvieraťa. Ako si je možné všimnúť, obsah tejto šablóny sa skladá z použitia HTML jazyka pre definovanie štruktúry preukazu, zo špeciálnych Blade príkazov ako \mintinline{php}{isset} a \mintinline{php}{endisset}, a z funkcie s premennými v syntaxe jazyka PHP.\pagebreak
+
+\subsubsection*{Controller}
+Controller je poslednou časťou tejto skladačky, ktorá ozrejmí funkčnosť celého MVC vzoru. Jedná se o prostredníka, s ktorým komunikuje používateľ, model i view. Tieto komponenty drží pohromade a zabezpečuje komunikáciu medzi nimi \cite{mvc-architektura}.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{php}
+/**
+ * Show view with animal's template for .pdf export
+ *
+ * @param int $id
+ * @return Factory|View
+ * @throws AuthorizationException
+ */
+public function export(int $id) {
+    $animal = Animal::getAnimalForPdf($id);
+
+    // Check, whether user is authorized to view this page
+    $this->authorize('canExportAnimal', $animal);
+
+    $litter = $genealogy = null;
+
+    // Is animal part of some litter?
+    if (isset($animal->litter_id)) {
+        $litter = Litter::getLitter($animal->litter_id);
+        $genealogy = Animal::getGenealogy($litter, 0);
+    }
+    
+    (...)
+        
+    return view('generated_docs.pdf', [
+        'animal' => $animal,
+        'litter' => $litter,
+        'genealogy' => $genealogy,
+        'orientation' => $orientation
+    ]);
+}
+\end{minted}
+\caption[Ukážka controlleru AnimalController.php]
+{Ukážka controlleru AnimalController.php}
+\label{animal-controller-view-code}
+\end{figure}
+
+Na obrázku \ref{animal-controller-view-code} sa nachádza ukážka metódy \mintinline{php}{export}. Z obrázku je možné vidieť volanie metód modelov \mintinline{php}{Animal} a \mintinline{php}{Litter}. Po tom čo controller dostane dáta z jednotlivých metód modelov, sú tieto dáta predané view, ktorý následne ich doplní do šablóny \mintinline{php}{pdf}. Nakoniec controller šablónu s dátami vráti, a framework sa postará o jej odoslanie do klientského prehliadača, ktorý danú šablónu zobrazí používateľovi.
+
+Avšak, na akom základe sa spustí táto metóda? Odpoveďou na túto otázku je časť aplikácie zvaná \uv{Router}.
+Router je zodpovedný za spustenie metód controllerov na základe prijatého HTTP požiadavku (buď iniciovaného používateľom navštívením danej adresy alebo skriptom, ktorý pošle požiadavku na danú adresu). Na základe URL adresy požiadavku router rozhodne, ktorú metódu daného controlleru spustí.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{php}
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get(
+    '/animals/{id}/export',
+    'AnimalsController@export'
+    )->name('animals.id.export.get');
+    
+    (...)
+});
+\end{minted}
+\caption[Ukážka routeru web.php]
+{Ukážka routeru web.php}
+\label{router-code}
+\end{figure}
+
+Na obrázku \ref{router-code} je zobrazená ukážka routeru. V prípade, ak HTTP požiadavka prichádzajúca na server bude mať adresu v tvare\\ \uv{https://domena.sk/animals/<id>/export}\footnote{<id> sa nahradí ľubovoľným číslom}, router spustí metódu \mintinline{php}{export} v controlleri \mintinline{php}{AnimalsController}.
+
+\section{Klientská časť}
+Klientská časť aplikácie sa skladá prevažne z implementácie jednotlivých stránok, ktoré sa skladajú z viacerých nezávislých komponent, ktoré spolu komunikujú. Tieto stránky sú zobrazované klientskym frameworkom Vue.js, ktorý sa stará o správne zobrazenie jednotlivých stránok na základe adresy, na ktorej sa používateľ nachádza.
+
+Deklarácia komponenty, ktorá zobrazí stránku zvieraťa, vyzerá nasledovne:
+
+\begin{figure}[H]
+\begin{minted}[linenos]{html}
+<template>
+    <div id="animal-page" class="columns section">
+        <left-panel
+            :animal="animal"
+            :user="user">
+        </left-panel>
+        <animal-information
+            :animal-id="animalId"
+            :animal="animal"
+            :is-loading="isLoading"
+            :user="user">
+        </animal-information>
+        <right-panel
+            :animal-id="animalId"
+            :is-loading="isLoading"
+            :animal="animal"
+            :user="user"
+            :key="animalId">
+        </right-panel>
+    </div>
+</template>
+\end{minted}
+\caption[Ukážka komponentu AnimalPage.vue]
+{Ukážka komponentu AnimalPage.vue}
+\label{animal-page-vue-code}
+\end{figure}
+
+Komponenty vo Vue.js sa definujú pomocou štandardných HTML značiek. Okrem iného jednotlivým komponentám môžu byť predané premenné rôzneho typu. Vue.js taktiež podporuje vkladanie existujúcich komponent do výslednej komponenty. Týmto spôosobom sa dá dosiahnuť znovupoužiteľnosť jednotlivých komponent naprieč veľkým množstvom stránok.
+
+V horeuvedenom prípade komponent \mintinline{php}{AnimalPage} obsahuje tri komponenty:
+\begin{itemize}
+	\item LeftPanel
+	\item AnimalInformation
+	\item RightPanel
+\end{itemize}
+
+Samotná komponenta obsahuje nie len jej deklaráciu v rámci HTML jazyka, ale aj biznis logiku v jazyku JavaScript. Väčšinou sa jedná o metódy, ktoré buď načítavajú dáta zo servera, alebo reagujú na používateľský vstup.
+
+V prípade \mintinline{php}{AnimalPage} komponenty sa jedná o nasledujúcu logiku:
+
+\begin{figure}[H]
+\begin{minted}[linenos]{js}
+<script>
+   (...)
+    export default {
+        name: "AnimalPage",
+        components: {RightPanel, LeftPanel, AnimalInformation},
+        (...)
+        data() {
+            return {
+                animal: null,
+                isLoading: false,
+            }
+        },
+        computed: {
+            animalId() {
+                return Number(this.$route.params.animal);
+            }
+        },
+        methods: {
+            async loadData() {
+                this.isLoading = true;
+                const url = `/api/animals/${this.animalId}`;
+
+                try {
+                    const request = await axios.get(url);
+                    this.animal = request.data;
+                } catch (e) {
+                    this.$buefy.toast.open({
+                        message:
+                        this.$t('animal.index.page_load_fail'),
+                        type: 'is-danger' 
+                     });
+                    throw e;
+                } finally {
+                    this.isLoading = false;
+                }
+            }
+        },
+       (...)
+        async created() {
+            await this.loadData();
+        }
+    }
+</script>
+\end{minted}
+\caption[Ukážka biznis logiky AnimalPage komponenty]
+{Ukážka biznis logiky AnimalPage komponenty}
+\label{animal-page-business-code}
+\end{figure}
+
+Hodnota atribútu \mintinline{php}{name} určuje meno danej komponenty naprieč celou klientskou aplikáciou.
+Obsah objektu \mintinline{php}{components} deklaruje použité komponenty v rámci \mintinline{php}{AnimalPage}.
+Metóda \mintinline{php}{data} vracia objekt s reaktívnymi atribútami --- pri zmene jednotlivých atribútov Vue.js notifikuje komponentu o zmene atribútu. V prípade, že sa daný atribút používa v komponente, Vue.js zaistí jeho znovuvykreslenie.
+Dané atribúty sa taktiež používajú na ukladanie stavu jednotlivých komponent.
+Objekt \mintinline{php}{methods} obsahuje biznis metódy, ktoré môžu byť voláne inými metódami. V tomto prípade sa používateľská metóda \mintinline{php}{loadData} spustí po tom, čo sa spustí exekúcia metódy \mintinline{php}{created}. Metóda \mintinline{php}{created} je ale systémová -- konkrétne sa exekuuje po vytvorení danej komponenty na stránke.
+
+Zjednodušený životný cyklus tejto komponenty bude nasledovný\footnote{Informácie o kompletnom životnom cykle komponentov je možné nájsť na https://vuejs.org/v2/guide/instance.html}:
+\begin{enumerate}
+	\item Vue.js vytvorí a zobrazí komponentu \mintinline{php}{AnimalPage}
+	\item Po vytvorení tejto komponenty bude automaticky spustená metóda \mintinline{php}{created}, ktorá vzápätí zavolá metódu \mintinline{php}{loadData}
+	\item Daná metóda sa postará o načítanie informácii o zvierati s identifikátorom \mintinline{php}{animalId}
+	\item V prípade zlyhania načítavania dát sa zobrazí chybová hláška, v opačnom prípade sa informácie o zvierati uložia do premennej \mintinline{php}{animal}
+	\item Obsah premennej \mintinline{php}{animal} sa spropaguje do komponentov, ktoré prijímajú objekt \mintinline{php}{animal}
+	\item Ak daná komponenta závisí pri jej zobrazení od obsahu premennej \mintinline{php}{animal}, bude znovu vykreslená
+\end{enumerate}
+
+\section{Štruktúra projektu}
+
+\section{Migrácia dát}
+Po implementácii novej aplikácie bolo potrebné zmigrovať existujúce dáta do novej aplikácie. Proces migrácie spočíval vo vytvorení starých tabuliek s dátami v databáze novej aplikácie. Následne boli pre tieto tabuľky vytvorené modelové triedy, ktoré obsahujú logiku pre transformáciu dát zo starých do nových tabuliek. Tieto modelové triedy je možné nájsť v priečinku \mintinline{php}{app/ImportModels}.
+
+Každá modelová trieda obsahuje metódu \mintinline{php}{import}. Tieto metódy sú volané v jednotlivých metódach controllera \mintinline{php}{ImportController}, ktoré sú zaregistrované v routri \mintinline{php}{web.php} \ref{router-import-code}.
+
+\begin{figure}[H]
+\begin{minted}[linenos]{html}
+Route::get(
+    '/import/contacts',
+    'ImportController@importContacts'
+)->name('import.contacts.get');
+Route::get(
+    '/import/czkp_animals',
+    'ImportController@importCZKPAnimals'
+)->name('import.czkp_animals.get');
+Route::get(
+    '/import/czkp_litters',
+    'ImportController@importCZKPLitters'
+)->name('import.czkp_litters.get');
+Route::get(
+    '/import/czkp_animals/litters',
+    'ImportController@connectAnimalWithLitter'
+)->name('import.czkp_animals.litters.get');
+Route::get(
+    '/import/czkp_babies',
+    'ImportController@importCZKPBabies'
+)->name('import.czkp_babies.get');
+Route::get(
+    '/import/pp_information',
+    'ImportController@importPPInformation'
+)->name('import.pp_information.get');
+\end{minted}
+\caption[Ukážka volania import metód v routri web.php]
+{Ukážka volania import metód v routri web.php}
+\label{router-import-code}
+\end{figure}
+
+Pred importom dát muselo byť veľké množstvo záznamov manuálne očistených, z dôvodu nekonzistentnosti mien majiteľov/chovateľov, ich kontaktných údajov a príslušnosti k jednotlivým chovným staniciam medzi súčasnými tabuľkami. Táto nekonzistentnosť dát bola spôsobená ich ukladaním do nenormalizovaných tabuliek. Čistenie dát zahŕňalo manuálnu kontrolu a dodatočnú úpravu vyše 3500 záznamov v súčasnej databáze.
+
+Ak by sa záznamy neočistili, nebolo by možné nie len napárovať jednotlivé zvieratá a vrhy k ich majiteľom a chovateľom, ale ani importovať týchto ľudí do tabuľky \mintinline{php}{people} a napárovať ich s jednotlivými chovnými stanicami z tabuľky \mintinline{php}{stations}.
