@@ -13,7 +13,6 @@ Samotný kód aplikácie nie je členený -- skladá sa z jednej vrstvy -- čo z
 \begin{minted}[xleftmargin=1.8em,linenos]{php}
 
 <?php
-...
 get_header();
 if (!is_user_logged_in()) { 
   echo ("<h1>Neautorizováno</h1>\n");
@@ -130,7 +129,7 @@ Tabuľka obsahuje stĺpec \mintinline{php}{id_vrhu}, v ktorom je uložený ident
 
 Do nasledujúcej tabuľky --- \mintinline{php}{pp_informace} --- sa ukladajú informácie spojené s jednotlivými vrhmi. Táto tabuľka nemá žiadnu spojitosť s tabuľkou \mintinline{php}{czkp_vrh}. Dôvod vzniku tejto tabuľky bol vývoj nadstavby nad pôvodnou aplikáciou.
 
-Táto tabuľka obsahuje stĺpec \mintinline{php}{uzivatel}, ktorý obsahuje identifikátor majiteľa vrhu ukazujúci do tabuľky \mintinline{php}{wp_users}. Následne sa do tabuľky ukladajú údaje o samotnom vrhu, ako napríklad typ vrhu (\mintinline{php}{typ_vrhu}), jeho označenie (\mintinline{php}{vrh_oznaceni}), dátum narodenia (\mintinline{php}{vrh_narozeni}), varietnosť \\(\mintinline{php}{vrh_varietnost}), počet narodených a odchovaných mláďat (\mintinline{php}{vrh_nar_mladat}/\mintinline{php}{vrh_odch_mladat}) a počet odchovaných samcov a samíc (\mintinline{php}{vrh_odch_kluci}/\mintinline{php}{vrh_odch_holky}).
+Táto tabuľka obsahuje stĺpec \mintinline{php}{uzivatel}, ktorý obsahuje identifikátor majiteľa vrhu ukazujúci do tabuľky \mintinline{php}{wp_users}. Následne sa do tabuľky ukladajú údaje o samotnom vrhu, ako napríklad typ vrhu (\mintinline{php}{typ_vrhu}), jeho označenie (\mintinline{php}{vrh_oznaceni}), dátum narodenia (\mintinline{php}{vrh_narozeni}), varietnosť \\(\mintinline{php}{vrh_varietnost}), počet narodených a odchovaných mláďat \\ (\mintinline{php}{vrh_nar_mladat}/\mintinline{php}{vrh_odch_mladat}) a počet odchovaných samcov a samíc (\mintinline{php}{vrh_odch_kluci}/\mintinline{php}{vrh_odch_holky}).
 
 Každý vrh má matku a otca vrhu --- tieto údaje sú ukladané do stĺpcov \mintinline{php}{vrh_id_matka} a \mintinline{php}{vrh_id_otec}. Ich obsahom sú identifikátory rodičov daného vrhu. Títo rodičia pochádzajú z tabuľky \mintinline{php}{czkp_zvire}.
 
@@ -161,7 +160,7 @@ V tejto podsekcii je možné nájsť logický model databázy v grafickej podobe
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{media/analyza/diagram.png}
-	\caption{Logický model databázy}
+	\caption{Logický model súčasnej databázy}
 \end{figure}
 
 \section{Analýza požiadaviek}

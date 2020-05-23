@@ -3,25 +3,43 @@ Cieľom tejto kapitoly je na základe predošlej analýzy súčasnej aplikácie 
 
 \section{Serverová časť}
 Implementácia serverovej časti webovej aplikácie sprevádzala využitie zvoleného PHP frameworku, ktorým bol Laravel.
-Samotný framework je implementovaný na základe architektonického vzoru MVC.
+
+\subsection{Štruktúra projektu}
+Pre inicializáciu nového Laravel projektu som použil príkaz\\ \mintinline{php}{laravel new pedigree-book}. Tento príkaz vytvoril nasledujúcu adresárovú štruktúru.
+
+\begin{figure}[H]
+	\dirtree{%
+		.1 app \DTcomment{Adresár určený pre implementáciu aplikácie}.
+		.1 bootstrap \DTcomment{Adresár určený pre aplikačnú cache}.
+		.1 config \DTcomment{Adresár obsahujúci konfiguračné súbory aplikácie}.
+		.1 database \DTcomment{Adresár určený pre databázové migrácie, továrne a seeds}.
+		.1 public \DTcomment{Adresár určený pre všetky verejne dostupné súbory}.
+		.1 resources \DTcomment{Adresár určený pre klientské skripty a Vue.js elementy}.
+		.1 routes \DTcomment{Adresár obsahujúci router}.
+		.1 storage \DTcomment{Adresár určený pre súbory generované frameworkom}.
+		.1 tests \DTcomment{Adresár určený pre aplikačné testy}.
+		.1 vendor \DTcomment{Adresár obsahujúci nainštalované serverové balíčky}.
+	}
+\end{figure}
+
+Po spustení príkazu \mintinline{php}{php artisan serve} sa spustil server \\ na adrese \mintinline{php}{localhost:8000}. Po navštívení tejto adresy vo webovom prehliadači bolo možné vidieť predvolenú úvodnú stránku Laravelu.
 
 \subsection{MVC architektúra}
-MVC je je akronym pre Model-View-Controller. Použitie tohto vzoru rozdeľuje aplikáciu do troch hlavných skupín --- na modely, views a controllery. Nasledujúce podsekcie vysvetlia význam jednotlivých skupín.
+Laravel je implementovaný na základe architektonického vzoru MVC, ktorý je akronymom pre Model-View-Controller. Použitie tohto vzoru rozdeľuje aplikáciu do troch hlavných skupín --- na modely, views a controllery. Nasledujúce podsekcie vysvetlia význam jednotlivých skupín.
 
 \subsubsection*{Model}
 Model (modelová trieda) obsahuje logiku aplikácie a všetko, čo do tejto logiky spadá. Môžu to byť rôzne výpočty, databázové dotazy, validácia prichádzajúcich dát a podobne. Funkcia modelu spočíva v prijatí parametrov, ktoré spracuje s možným využítím dát z databázy. Následne takto spracované dáta vráti späť metóde, ktorá danú funkciu modelu volala \cite{mvc-architektura}.
 
 Platí, že pre každú tabuľku v databáze by mala byť vytvorená priíslušná modelová trieda. Takáto modelová trieda je následne úzko spätá s danou tabuľkou, nakoľko poskytuje rôzne metódy pre prácu s dátami uloženými v tejto tabuľke \cite{co-je-eloquent}.
-  
+
 Laravel pristupuje k týmto dátam pomocou frameworku Eloquent, ktorý je určený pre objektovo-relačné mapovanie.
 Objektovo-relačné mapovanie (ORM) je technika prístupu k dátam uloženým v databáze. Táto technika spočíva v mapovaní riadkov príslušnej tabuľky v relačnej databáze do objektov, ktoré sú instancie jednotlivých modelov. Táto technika funguje aj opačným smerom.
 
 \begin{figure}[H]
 \begin{minipage}[]{\linewidth}
-\begin{minted}[linenos]{php}
+\begin{minted}[xleftmargin=1.8em,linenos]{php}
 /**
  * Create new animal
- *
  * @param $data
  * @return Animal
  * @throws Throwable
@@ -29,9 +47,7 @@ Objektovo-relačné mapovanie (ORM) je technika prístupu k dátam uloženým v 
 public static function createAnimal($data) {
     $animal = new Animal($data);
     $animal->creator_id = Auth::id();
-
     $animal->saveOrFail();
-
     return $animal->refresh();
 }
 \end{minted}
@@ -40,18 +56,19 @@ public static function createAnimal($data) {
 {Ukážka modelovej triedy Animal.php}
 \label{animal-code-example}
 \end{figure}
+Na obrázku \ref{animal-code-example} je možné vidieť metódu \mintinline{php}{createAnimal}, ktorá je zodpovedná za vytvorenie nového zvieraťa. Táto metóda sa nachádza v modelovej triede \mintinline{php}{Animal}, ktorá je modelovou triedou tabuľky \mintinline{php}{animals}. V prvom riadku tela metódy prebieha vytvorenie novej instancie modelu, ktorá je naplnená dátami nachádzajúcimi sa v parametri \mintinline{php}{$data}. Následne je parameter \mintinline{php}{creator_id} objektu \mintinline{php}{Animal} nastavený na identifikátora používateľa, od ktorého požiadavka na vytvorenie nového zvieraťa prišla. Nie je náhoda, že názov tohto parametru je možné nájsť ako stĺpec v tabuľke \mintinline{php}{animals}. Zavolaním Eloquent metódy \mintinline{php}{saveOrFail} sa daný objekt pretransformuje do SQL príkazu určeného pre pridanie dát do tabuľky. Následnej sa tento príkaz na pozadí vykoná. V prípade, že uloženie objektu do databázy z rozličných dôvodov zlyhá, táto metóda vráti výnimku. Nakoniec sa zavolaním metódy \mintinline{php}{refresh} aktualizuje daná instancia modelu aktuálnymi dátami prislúchajúcimi k danej instancii z databázy (o identifikátor zvieraťa a systémové stĺpce) a vráti.
 
-Na obrázku \ref{animal-code-example} je možné vidieť metódu \mintinline{php}{createAnimal}, ktorá je zodpovedná za vytvorenie nového zvieraťa. Táto metóda sa nachádza v modelovej triede \mintinline{php}{Animal}, ktorá je modelovou triedou tabuľky \mintinline{php}{animals}. Na 9. riadku prebieha vytvorenie novej instancie modelu, ktorá je naplnená dátami nachádzajúcimi sa v parametri \mintinline{php}{$data}. Následne je parameter \mintinline{php}{creator_id} objektu \mintinline{php}{Animal} nastavený na identifikátora používateľa, od ktorého požiadavka na vytvorenie nového zvieraťa prišla. Nie je náhoda, že názov tohto parametru je možné nájsť ako stĺpec v tabuľke \mintinline{php}{animals}. Zavolaním Eloquent metódy \mintinline{php}{saveOrFail} sa daný objekt pretransformuje do SQL príkazu určeného pre pridanie dát do tabuľky. Následnej sa tento príkaz na pozadí vykoná. V prípade, že uloženie objektu do databázy z rozličných dôvodov zlyhá, táto metóda vráti výnimku. Nakoniec sa na riadku 14 zavolaním metódy \mintinline{php}{refresh} aktualizuje daná instancia modelu aktuálnymi dátami prislúchajúcimi k danej instancii z databázy (o identifikátor zvieraťa a systémové stĺpce) a vráti.
+\pagebreak
 
 \subsubsection*{View}
 View je časť aplikácie, ktorá zodpovedá za vykreslenie obsahu používateľom. Jej obsahom je šablóna, obsahujúca HTML stránku a tagy nejakého značkovacieho jazyka, ktorý umožňuje do šablóny vkladať premenné, prípadne vykonávať iterácie a podmienky. View nie je len šablóna, ale zobrazovač výstupu obsahujúca minimálne množstvo logiky potrebnej pre výpis dát.
 Podobne ako model, view nevie, odkiaľ mu dáta prišli, iba sa stará o ich finálne zobrazenie používateľovi \cite{mvc-architektura}.
 
-V prípade Laravelu sa používa v šablónach značkovací jazyk Blade. Blade umožňuje nie len vytvárať jednotlivé šablóny, ale aj komponenty, ktoré môžu byť použité viackrát v rôznych šablónach.
+V prípade Laravelu sa používa v šablónach značkovací jazyk Blade. Blade umožňuje nie len vytvárať jednotlivé šablóny, ale aj komponenty, ktoré môžu byť použité viackrát v rôznych šablónach. Tieto šablóny sa nachádzajú v adresári \mintinline{php}{resources/views.}
 
 \begin{figure}[H]
 \begin{minipage}[]{\linewidth}
-\begin{minted}[linenos]{php}
+\begin{minted}[xleftmargin=1.8em,linenos]{php}
 <section id="breeding-info" class="bold">
     <span class="breeding_available">
         @isset($isAnimalAvailableForBreeding)
@@ -78,10 +95,10 @@ V prípade Laravelu sa používa v šablónach značkovací jazyk Blade. Blade u
 Na obrázku \ref{animal-overview-view-code} sa nachádza ukážka časti šablóny, ktorá je zodpovedná za vygenerovanie preukazu obsahujúci detaily zvieraťa. Ako si je možné všimnúť, obsah tejto šablóny sa skladá z použitia HTML jazyka pre definovanie štruktúry preukazu, zo špeciálnych Blade príkazov ako \mintinline{php}{isset} a \mintinline{php}{endisset}, a z funkcie s premennými v syntaxe jazyka PHP.\pagebreak
 
 \subsubsection*{Controller}
-Controller je poslednou časťou tejto skladačky, ktorá ozrejmí funkčnosť celého MVC vzoru. Jedná se o prostredníka, s ktorým komunikuje používateľ, model i view. Tieto komponenty drží pohromade a zabezpečuje komunikáciu medzi nimi \cite{mvc-architektura}.
+Controller je poslednou časťou tejto skladačky, ktorá ozrejmí funkčnosť celého MVC vzoru. Jedná se o prostredníka, s ktorým komunikuje používateľ, model i view. Tieto komponenty drží pohromade a zabezpečuje komunikáciu medzi nimi \cite{mvc-architektura}. Samotné controllery aplikácie sa nachádzajú v adresári \mintinline{php}{app/Http/Controllers}.
 
 \begin{figure}[H]
-\begin{minted}[linenos]{php}
+\begin{minted}[xleftmargin=1.8em,linenos]{php}
 /**
  * Show view with animal's template for .pdf export
  *
@@ -123,8 +140,10 @@ Na obrázku \ref{animal-controller-view-code} sa nachádza ukážka metódy \min
 Avšak, na akom základe sa spustí táto metóda? Odpoveďou na túto otázku je časť aplikácie zvaná \uv{Router}.
 Router je zodpovedný za spustenie metód controllerov na základe prijatého HTTP požiadavku (buď iniciovaného používateľom navštívením danej adresy alebo skriptom, ktorý pošle požiadavku na danú adresu). Na základe URL adresy požiadavku router rozhodne, ktorú metódu daného controlleru spustí.
 
+Router aplikácie sa nachádza v priečinku \mintinline{php}{routes}.
+
 \begin{figure}[H]
-\begin{minted}[linenos]{php}
+\begin{minted}[xleftmargin=1.8em,linenos]{php}
 Route::middleware('auth:sanctum')->group(function() {
     Route::get(
     '/animals/{id}/export',
@@ -144,10 +163,12 @@ Na obrázku \ref{router-code} je zobrazená ukážka routeru. V prípade, ak HTT
 \section{Klientská časť}
 Klientská časť aplikácie sa skladá prevažne z implementácie jednotlivých stránok, ktoré sa skladajú z viacerých nezávislých komponent, ktoré spolu komunikujú. Tieto stránky sú zobrazované klientskym frameworkom Vue.js, ktorý sa stará o správne zobrazenie jednotlivých stránok na základe adresy, na ktorej sa používateľ nachádza.
 
-Deklarácia komponenty, ktorá zobrazí stránku zvieraťa, vyzerá nasledovne:
+Spustením príkazu \mintinline{php}{npm install vue} sa nainštaloval framework Vue.js spolu s jej závislosťami do adresára \mintinline{php}{node_modules}, ktoré sú potrebné pre beh samotného frameworku.
+
+Komponenta, ktorá zobrazí stránku zvieraťa, vyzerá nasledovne:
 
 \begin{figure}[H]
-\begin{minted}[linenos]{html}
+\begin{minted}[xleftmargin=1.8em,linenos]{html}
 <template>
     <div id="animal-page" class="columns section">
         <left-panel
@@ -170,8 +191,8 @@ Deklarácia komponenty, ktorá zobrazí stránku zvieraťa, vyzerá nasledovne:
     </div>
 </template>
 \end{minted}
-\caption[Ukážka komponentu AnimalPage.vue]
-{Ukážka komponentu AnimalPage.vue}
+\caption[Ukážka šablóny komponentu AnimalPage.vue]
+{Ukážka šablóny komponentu AnimalPage.vue}
 \label{animal-page-vue-code}
 \end{figure}
 
@@ -187,15 +208,14 @@ V horeuvedenom prípade komponent \mintinline{php}{AnimalPage} obsahuje tri komp
 Samotná komponenta obsahuje nie len jej deklaráciu v rámci HTML jazyka, ale aj biznis logiku v jazyku JavaScript. Väčšinou sa jedná o metódy, ktoré buď načítavajú dáta zo servera, alebo reagujú na používateľský vstup.
 
 V prípade \mintinline{php}{AnimalPage} komponenty sa jedná o nasledujúcu logiku:
+\raggedbottom
 
 \begin{figure}[H]
-\begin{minted}[linenos]{js}
+\begin{minted}[xleftmargin=1.8em,linenos]{js}
 <script>
-   (...)
     export default {
         name: "AnimalPage",
         components: {RightPanel, LeftPanel, AnimalInformation},
-        (...)
         data() {
             return {
                 animal: null,
@@ -211,7 +231,6 @@ V prípade \mintinline{php}{AnimalPage} komponenty sa jedná o nasledujúcu logi
             async loadData() {
                 this.isLoading = true;
                 const url = `/api/animals/${this.animalId}`;
-
                 try {
                     const request = await axios.get(url);
                     this.animal = request.data;
@@ -227,15 +246,14 @@ V prípade \mintinline{php}{AnimalPage} komponenty sa jedná o nasledujúcu logi
                 }
             }
         },
-       (...)
         async created() {
             await this.loadData();
         }
     }
 </script>
 \end{minted}
-\caption[Ukážka biznis logiky AnimalPage komponenty]
-{Ukážka biznis logiky AnimalPage komponenty}
+\caption[Ukážka biznis logiky AnimalPage.vue komponentu]
+{Ukážka biznis logiky AnimalPage.vue komponentu}
 \label{animal-page-business-code}
 \end{figure}
 
@@ -255,7 +273,7 @@ Zjednodušený životný cyklus tejto komponenty bude nasledovný\footnote{Infor
 	\item Ak daná komponenta závisí pri jej zobrazení od obsahu premennej \mintinline{php}{animal}, bude znovu vykreslená
 \end{enumerate}
 
-\section{Štruktúra projektu}
+Po zmene jednotlivých komponentov je potrebné spustiť príkaz \mintinline{php}{npm run prod}, ktorý jednotlivé komponenty skompiluje do formy zrozumiteľnej prehliadaču. Pri vývoji aplikácie je však komfortnejšie použiť príkaz \mintinline{php}{npm run watch}, ktorý na pozadí zaistí automatickú kompiláciu komponentov po každej ich zmene. Po následnom znovunačítaní stránky prehliadača (\mintinline{php}{localhost:8000}) sa zobrazia najnovšie zmeny aplikácie.
 
 \section{Migrácia dát}
 Po implementácii novej aplikácie bolo potrebné zmigrovať existujúce dáta do novej aplikácie. Proces migrácie spočíval vo vytvorení starých tabuliek s dátami v databáze novej aplikácie. Následne boli pre tieto tabuľky vytvorené modelové triedy, ktoré obsahujú logiku pre transformáciu dát zo starých do nových tabuliek. Tieto modelové triedy je možné nájsť v priečinku \mintinline{php}{app/ImportModels}.
@@ -263,7 +281,7 @@ Po implementácii novej aplikácie bolo potrebné zmigrovať existujúce dáta d
 Každá modelová trieda obsahuje metódu \mintinline{php}{import}. Tieto metódy sú volané v jednotlivých metódach controllera \mintinline{php}{ImportController}, ktoré sú zaregistrované v routri \mintinline{php}{web.php} \ref{router-import-code}.
 
 \begin{figure}[H]
-\begin{minted}[linenos]{html}
+\begin{minted}[xleftmargin=1.8em,linenos]{html}
 Route::get(
     '/import/contacts',
     'ImportController@importContacts'

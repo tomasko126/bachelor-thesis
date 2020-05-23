@@ -1,5 +1,5 @@
 \chapter{Testovanie}
-Táto kapitola sa zaoberá métodou testovania Po implementácii aplikácie je nevyhnutné aplikáciu otestovať, najmä ak sa jedná o komplexnejšiu aplikáciu.Testovanie aplikácie je nevyhnutnou súčasťou pre potvrdenie, že implementovaná funkcionalita funguje podľa špecifikácie
+Po implementácii aplikácie je nevyhnutné aplikáciu otestovať, najmä ak sa jedná o komplexnejšiu aplikáciu.Testovanie aplikácie je nevyhnutnou súčasťou pre potvrdenie, že implementovaná funkcionalita funguje podľa špecifikácie
 
 \section{Jednotkové testy}
 Jednotkové testy sú testy, ktoré testujú jednotlivé komponenty softvéru. Účelom týchto testov je overiť, či každá komponenta softvéru funguje tak, ako je navrhnutá. Jednotka je najmenšia testovateľná súčasť akéhokoľvek softvéru. Zvyčajne má jeden alebo niekoľko vstupov a zvyčajne jeden výstup \cite{co-je-unit-testing}.
@@ -11,10 +11,12 @@ Integračné testovanie je úroveň testovania aplikácie, pri ktorej sa jednotl
 
 Samotné integračné testy sa zameriavajú na testovanie komunikácie medzi klientom a serverom, pri ktorých sa overuje aktuálna a očakávaná odpoveď servera. Počas behu jednotlivých testov dochádza k overeniu autentifikácie používateľa, prístupu do databázy, respektíve overeniu práv používateľa k danej akcii.
 
-Tieto testy je možné spustiť príkazom \mintinline{php}{php artisan test} z hlavného adresára webovej aplikácie.
+\pagebreak
+
+Príkazom \mintinline{php}{php artisan test} sa spustia všetky implementované testy. Tento príkaz je potrebné spustiť z hlavného adresára webovej aplikácie.
 
 \begin{figure}[H]
-\begin{minted}[linenos]{php}
+\begin{minted}[xleftmargin=1.8em,linenos]{php}
 public function testUserDelete() {
     // Create new user
     $user = factory(User::class)->create();
@@ -38,16 +40,17 @@ public function testUserDelete() {
         ->assertStatus(204);
 }
 \end{minted}
-\caption[Ukážka testu zmazania používateľa]
-{Ukážka testu zmazania používateľa}
+\caption[Ukážka integračného testu zmazania používateľa]
+{Ukážka integračného testu zmazania používateľa}
 \label{user-delete-test-code}
 \end{figure}
 
 Na ukážke testu \ref{user-delete-test-code} je zobrazený priebeh testu zmazania používateľa. V tomto teste je využitá kontrola prihlásenia a následná kontrola práv. Ak je používateľ odhlásený, respektíve nemá dostatočné práva pre zmazanie používateľa, server by mal vrátiť odpoveď s HTTP status kódom 401, resp. 403. Po prihlásení sa ako administrátor by malo byť možné zmazať vytvoreného používateľa poslaním DELETE požiadavky na server.
 
-Na podobnom princípe sú postavené ostatné integračné testy. Integračné testy boli vytvorené pre všetky entity, ktoré sú dostupné cez API servera.
+Na podobnom princípe sú postavené ostatné integračné testy. Integračné testy boli vytvorené pre všetky entity, ktoré sú dostupné cez API servera. Tieto testy sa nachádzajú v adresári \mintinline{php}{tests/Feature}.
 
-
+\pagebreak 
+Pri jednotlivých testoch sa nevyužíva MySQL databáza ako v prípade samotnej webovej aplikácie, ale databáza SQLite, ktorá je nakonfigurovaná tak, aby fungovala v pamäti počítača. Jej podrobnú konfiguráciu spolu s konfiguráciou testov je možné nájsť v súbore \mintinline{php}{phpunit.xml} nachádzajúci sa v hlavnom adresári webovej aplikácie.
 
 
 

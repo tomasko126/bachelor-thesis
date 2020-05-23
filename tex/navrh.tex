@@ -74,8 +74,8 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 
 \begin{itemize}
 	\item Rýchlosť a responzívnosť aplikácie založenej na aktualizovaní iba tej časti aplikácie, ktorá sa zmenila \cite{spa-vs-mpa-1}
-	\item Minimálna previazanosť kódu aplikácie na strane servera a klienta, čo umožňuje jednoduchú správu používaných knižníc bez ovplyvnenia ďalších častí aplikácie \cite{spa-vs-mpa-2}
 	\item Zjednodušení proces vývoja, nakoľko sa o vykreslenie obsahu nestará server ale klientský framework \cite{spa-vs-mpa-3}
+	\item Minimálna previazanosť kódu aplikácie na strane servera a klienta, čo umožňuje jednoduchú správu používaných knižníc bez ovplyvnenia ďalších častí aplikácie \cite{spa-vs-mpa-2}
 \end{itemize}
 
 
@@ -83,7 +83,7 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 
 \begin{itemize}
 	\item Ťažká optimalizácia aplikácie pre webové vyhľadávače, nakoľko sa o vykreslenie obsahu stará Javascript\footnote{Programovací jazyk bežiaci vo webovom prehliadači}, ktorý webové vyhľadávače neinterpretujú \cite{spa-vs-mpa-1}
-	\item Prvé načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože sa musí všetok obsah aplikácie stiahnuť do zariadenia
+	\item Prvé načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože sa musí všetok obsah aplikácie stiahnuť do zariadenia \cite{spa-vs-mpa-1}
 	\item Nemožnosť zobrazenia aplikácie pri vypnutom Javascripte vo webovom prehliadači \cite{spa-vs-mpa-2}
 \end{itemize}
 
@@ -111,7 +111,7 @@ Medzi niektoré výhody použitia frameworku patrí:
 \end{itemize}
 
 Pre vývoj webových aplikácií v PHP existujú viaceré frameworky, ako napríklad CakePHP\footnote{https://cakephp.org}, Nette\footnote{https://nette.org}, Symfony\footnote{https://symfony.com}, Laravel\footnote{https://laravel.com} a iné.
-Spomedzi menovaných bol vybraný na základe skúseností posledný z nich -- Laravel.
+Spomedzi menovaných bol vybraný na základe doterajších skúseností posledný z nich -- Laravel.
 
 \subsection{HTML 5}
 HTML -- HyperText Markup Language -- je značkovací jazyk používaný pre definovanie významu a štruktúry dokumentov. Ako už z názvu vyplýva, HTML používa značky pre definovanie elementov v dokumente s rozdielnymi vlastnosťami, ako napríklad nadpis, odstavec, tabuľky a iné.
@@ -132,7 +132,7 @@ Nakoľko novnovznikajúca aplikácia bude postavená na SPA architektúre, bude 
 
 Vue.js je progresívny framework pre vytváranie používateľských rozhraní. Tento framework bol navrhnutý od základov tak, aby bol postupne prispôsobiteľný. Nakoľko je zameraný iba na vrstvu zobrazenia, je ľahké ho integrovať s inými knižnicami a existujúcimi projektmi \cite{co-je-vue}.
 
-Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React\footnote{https://reactjs.org} a Angular\footnote{https://angular.io}, avšak z dôvodu doterajších skúseností autora bol zvolený Vue.js framework.
+Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React\footnote{https://reactjs.org} a Angular\footnote{https://angular.io}, avšak z dôvodu doterajších skúseností bol zvolený Vue.js framework.
 
 \section{Návrh databázy}
 V predchádzajúcej kapitole v podsekcii \ref{sucasny-model-db} bol zanalyzovaný databázový model súčasnej aplikácie.
@@ -263,17 +263,19 @@ Pre účely budúceho rozšírenia aplikácie --- konkrétne prihlasovania sa po
 
 \subsubsection*{Tabuľka notes}
 Nakoľko je žiaduce ukladať poznámky k jednotlivým zvieratám a vrhom, bude vytvorená tabuľka \mintinline{php}{notes}, do ktorej sa jednotlivé poznámky budú ukladať.
-
 Táto tabuľka bude obsahovať stĺpec \mintinline{php}{creator_id}, do ktorého sa bude ukladať identifikát používateľa, ktorý daný záznam vytvoril. Ak sa bude jednať o poznámku ku zvierati, jeho identifikátor sa uloží do stĺpca \mintinline{php}{animal_id}. V opačnom prípade -- pri ukladaní poznámky viažucej sa k vrhu -- sa identifikátor daného vrhu uloží do stĺpca \mintinline{php}{litter_id}.
-
 Ďalej pre účel poznámok bude potrebné ukladať ich kategóriu, viditeľnosť a obsah. Tieto informácie sa budú ukladať do stĺpcov \mintinline{php}{category}, \mintinline{php}{public} a \mintinline{php}{note}.
+
+\raggedbottom
 
 \pagebreak
 
 \subsubsection{Databázová schéma}
 Pre lepšiu vizuálizáciu navrhnutých tabuliek a ich vzťahov medzi nimi sa v tejto podsekcii nachádza zjednodušený logický model databázy v grafickej podobe.
 
+\raggedbottom
+
 \begin{figure}[H]
-	\includegraphics[width=1.0\textwidth]{media/navrh/diagram.png}
-	\caption{Logický model databázy}
+	\includegraphics[height=178mm]{media/navrh/diagram.png}
+	\caption{Logický model navrhnutej databázy}
 \end{figure}
