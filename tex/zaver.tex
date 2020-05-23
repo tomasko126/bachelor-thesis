@@ -1,0 +1,12 @@
+\begin{conclusion}
+V analytickej časti tejto práce som sa zameral na analýzu súčasnej aplikácie, prevažne z pohľadu jej architektúry a štruktúry používanej databázy. Následne som zozbieral funkčné a nefunkčné požiadavky na základe funkcionality doterajšej aplikácie. Nakoľko aplikáciu budú používať ľudia s rôznymi právami k rôznym častiam aplikácie, bolo potrebné implementovať správu rolí a práv. Nadväzujúce prípady použitia definovali presnejšiu podobu implementovanej aplikácie.
+
+V časti návrhu aplikácie som porovnal MPA a SPA architektúru, ktoré sa používajú pri implementácii webových aplikácií. Na základe ich porovnania a doterajších skúseností bola vybraná SPA architektúra, ktorá spolu s následnou voľkou technológií bola implementačným základom pre vznikajúcu aplikáciu. Okrem výberu architektúry a voľby použítých technológií bolo nevyhnutné normalizovať tabuľky v existujúcej databáze. Tieto normalizované tabuľky poslúžili ako základ navrhnutých tabuliek v novom databázovom modeli aplikácie, ktorý bol navrhnutý s cieľom predísť duplikácii dát.
+
+Implementačná časť obsahuje detaily ohľadom implementácie serverovej a klientskej časti, s bližším popisom MVC architektúry.
+Okrem samotnej implementácie bolo nutné premigrovať existujúce dáta do novej databázy, aby aplikáciu mohli ihneď začať používať existujúci používatelia starej aplikácie. Nakoľko boli dáta z veľkého množstva v existujúcej databáze duplicitné, a ich očistenie nebolo možné zautomatizovať, musela byť veľká časť dát očistená manuálne.
+
+Po implementácii samotnej aplikácie nasledovalo jej otestovanie, aby sa overilo, či aplikácia neobsahuje implementačné chyby a či zodpovedá zadaným požiadavkám.
+
+Výsledná webová aplikácia pokrýva všetky funkčné a nefunkčné požiadavky, ktoré boli na ňu kladené v analytickej časti práce.
+\end{conclusion}
