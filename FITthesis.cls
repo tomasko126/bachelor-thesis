@@ -188,7 +188,7 @@
 	\ifx1#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
 		\input{prohlaseni1.tex.txt}
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo~z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov,  a~skuto\v cnos\v t, \v ze \v Cesk\'e vysok\'e u\v cen\'\i{} technick\'e v~Praze m\'a pr\'avo na uzavrenie licen\v cnej zmluvy o~pou\v zit\'\i\ tejto pr\'ace ako \v skolsk\'eho diela pod\v la \S{}~60 odst.~1 autorsk\'eho z\'akona.
 		}\else{%
@@ -200,7 +200,7 @@
 	\ifx2#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
 		\input{prohlaseni2.tex.txt}
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo z\'akona \v c.~121/2000~Sb, autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov. V s\'ulade s ustanoven\'\i m \S{}~46 odst.~6 tohoto z\'akona t\'ymto ude\v lujem bezv\'yhradn\'e opr\'avnenie (licenciu) k~pou\v z\'\i vaniu tejto mojej pr\'ace, a to vr\'atane v\v setk\'ych po\v c\'\i ta\v cov\'ych programov ktor\'e s\'u jej s\'u\v cas\v tou alebo pr\'\i lohou a tie\v z v\v setkej ich dokument\'acie (\v dalej len \uv{Dielo}), a to v\v setk\'ym osob\'am, ktor\'e si praj\'u Dielo pou\v z\'iva\v t. Tieto osoby s\'u opr\'avnen\'e Dielo pou\v z\'\i va\v t ak\'ymko\v lvek 
 sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela, ale len pre~nez\'arobkov\'e \'u\v cely. Toto opr\'avnenie je \v casovo, \'uzemne a mno\v zstevne ne\-ob\-me\-dze\-n\'e.
@@ -213,7 +213,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela, ale len pre~nez\'arobkov\'e \'u
 	\ifx3#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
 		\input{prohlaseni3.tex.txt}
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov. \v Dalej prehlasujem, \v ze som s~\v Cesk\'ym vysok\'ym u\v cen\'\i m technick\'ym uzavrel licen\v cn\'u zmluvu o~pou\v zit\'\i\ tejto pr\'ace ako \v skolsk\'eho diela pod\v la \S{}~60 odst.~1 autorsk\'eho z\'akona. T\'ato skuto\v cnos\v t nem\'a vplyv na ust. \S{}~47b z\'akona \v c.~111/1998~Sb. o~vysok\'ych \v skol\'ach.
 		}\else{%
@@ -225,7 +225,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela, ale len pre~nez\'arobkov\'e \'u
 	\ifx4#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
 		\input{prohlaseni4.tex.txt}
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov.  V~s\'ulade s ustanoven\'\i m \S{}~46 odst.~6 tohoto z\'akona t\'ymto ude\v lujem bezv\'yhradn\'e opr\'avnenie (licenciu) k~u\v z\'\i vaniu tejto mojej pr\'ace, a to vr\'atane v\v setk\'ych po\v c\'\i ta\v cov\'ych programov ktor\'e s\'u jej s\'u\v cas\v tou alebo pr\'\i lohou a tie\v z v\v setkej ich dokument\'acie (\v dalej len \uv{Dielo}), a to v\v setk\'ym osob\'am, ktor\'e si praj\'u Dielo u\v z\'iva\v t. 
 
@@ -243,7 +243,7 @@ a~z\'arove\v n sa zav\"azuje spr\'\i stupni\v t zdrojov\'y k\'od tak\'eho diela 
 	\ifx5#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
 		\input{prohlaseni5.tex.txt}
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov.  V~s\'ulade s ustanoven\'\i m \S{}~46 odst.~6 tohoto z\'akona t\'ymto ude\v lujem bezv\'yhradn\'e opr\'avnenie (licenciu) k~u\v z\'\i vaniu tejto mojej pr\'ace, a to vr\'atane v\v setk\'ych po\v c\'\i ta\v cov\'ych programov ktor\'e s\'u jej s\'u\v cas\v tou alebo pr\'\i lohou a tie\v z v\v setkej ich dokument\'acie (\v dalej len \uv{Dielo}), a to v\v setk\'ym osob\'am, ktor\'e si praj\'u Dielo u\v z\'iva\v t. Tieto osoby s\'u opr\'avnen\'e Dielo pou\v z\'\i va\v t ak\'ymko\v lvek 
 sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v zitia). Toto opr\'avnenie je \v casovo, \'uzemne a~mno\v zstevne neobmedzen\'e.
@@ -256,7 +256,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 	\ifx6#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
 		\input{prohlaseni6.tex.txt}
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov.  \v Dalej prehlasujem, \v ze som s~\v CVUT uzavrel dohodu, na z\'aklade ktorej sa \v CVUT vzdalo pr\'ava na uzavrenie licen\v cnej zmluvy o~pou\v z\'\i van\'\i\ tejto pr\'ace ako \v skolsk\'eho diela pod\v la \S{}~60 odst.~1 autorsk\'eho z\'akona. T\'ato skuto\v cnos\v t nem\'a vplyv na ust. \S{}~47b z\'akona \v c.~111/1998~Sb. o~vysok\'ych \v skol\'ach.
 		}\else{
@@ -490,6 +490,8 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 	\fi
 
 	\vfil
+	
+	\clearpage
 
 	\if@abstractendefined
 		\chapterstyletitle{Abstract}\theabstracten
