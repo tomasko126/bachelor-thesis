@@ -88,13 +88,13 @@ V nasledujúcich dvoch tabuľkách (\mintinline{php}{czkp_vrh} a \mintinline{php
 
 Táto tabuľka má za úlohu správu dát týkajúcich sa jednotlivých vrhov. Stĺpec \mintinline{php}{id_prvni_verze} odkazuje na prvý záznam daného vrhu. \\ V stĺpci \mintinline{php}{wp_id_majitel} je uložený identifikátor majiteľa vrhu ukazujúci na systémovú tabuľku \mintinline{php}{wp_users}. Stĺpce \mintinline{php}{otec} a \mintinline{php}{matka} slúžia k ukladaniu identifikátorov otca, resp. matky. Tento identifikátor pochádza z tabuľky \mintinline{php}{czkp_zvire}.
 
-Následne sú do tejto tabuľky ukladané aj údaje ako označenie vrhu (v stĺpci \mintinline{php}{oznaceni}), typ vrhu (\mintinline{php}{typ_priznani}), línia vrhu (\mintinline{php}{linie}), gény vrhu \\ (\mintinline{php}{geny_vrhu}), jeho varietnosť (\mintinline{php}{varietnost}) či dátum narodenia \\ (\mintinline{php}{datum_narozeni}). U každého vrhu sa taktiež zaznamenáva chovná stanica (\mintinline{php}{chov_stanice}), v ktorej sa daný vrh narodil, prípadne kontakt na chovateľa, ktorý je uložený v stĺpci \mintinline{php}{chov_kontakt}. Dôležité informácie, ako počet narodených a odchovaných mláďať sa ukladajú do stĺpcov \mintinline{php}{nar_mladat}, prípadne \mintinline{php}{odchov_mladat}. Počet odchovaných mláďat sa delí na počet odchovaných samcov (\mintinline{php}{odch_kluci}) a samíc (\mintinline{php}{odch_holky}). Počet mláďat uvoľnených pre chov je možné nájsť v stĺpci \mintinline{php}{mlad_chovne}. Rozdiel odchovaných mláďat a mláďat uvoľnených pre chov sa rovná počtu mláďat určených na maznáčika --- tento údaj je možné nájsť v stĺpci \mintinline{php}{mlad_pet}.
+Následne sú do tejto tabuľky ukladané aj údaje ako označenie vrhu (v stĺpci \mintinline{php}{oznaceni}), typ vrhu (\mintinline{php}{typ_priznani}), línia vrhu (\mintinline{php}{linie}), gény vrhu \\ (\mintinline{php}{geny_vrhu}), jeho varietnosť (\mintinline{php}{varietnost}) či dátum narodenia \\ (\mintinline{php}{datum_narozeni}). U každého vrhu sa taktiež zaznamenáva chovná stanica (\mintinline{php}{chov_stanice}), v ktorej sa daný vrh narodil, prípadne kontakt na chovateľa, ktorý je uložený v stĺpci \mintinline{php}{chov_kontakt}. Dôležité informácie, ako počet narodených a odchovaných mláďat sa ukladajú do stĺpcov \mintinline{php}{nar_mladat}, prípadne \mintinline{php}{odchov_mladat}. Počet odchovaných mláďat sa delí na počet odchovaných samcov (\mintinline{php}{odch_kluci}) a samíc (\mintinline{php}{odch_holky}). Počet mláďat uvoľnených pre chov je možné nájsť v stĺpci \mintinline{php}{mlad_chovne}. Rozdiel odchovaných mláďat a mláďat uvoľnených pre chov sa rovná počtu mláďat určených na maznáčika --- tento údaj je možné nájsť v stĺpci \mintinline{php}{mlad_pet}.
 
-Jednotlivé vrhy môžu byť zaregistrované pod klubom ČKP --- tieto registrácie sa taktiež nachádzajú v tabuľke \mintinline{php}{czkp_vrh}. Pre účely registrácie vrhu slúžia stĺpce \mintinline{php}{datum_registrace}, v ktorom je uložený dátum registrácie, \\ \mintinline{php}{reg_cislo_vrhu}, ktorý obsahuje registračné číslo vrhu a \mintinline{php}{rok_reg}, ktorý značí, v ktorom roku bol vrh zaregistrovaný. Registrátor, ktorý zaregistroval daný vrh, môže pripojiť poznámku počas registrácie vrhu, ktorá je uložená v stĺpci \mintinline{php}{poznamka_reg}.
+Jednotlivé vrhy môžu byť zaregistrované pod klubom ČKP --- tieto registrácie sa taktiež nachádzajú v tabuľke \mintinline{php}{czkp_vrh}. Pre účely registrácie vrhu slúžia stĺpce \mintinline{php}{datum_registrace}, v ktorom je uložený dátum registrácie, \\ \mintinline{php}{reg_cislo_vrhu}, ktorý obsahuje registračné číslo vrhu a \mintinline{php}{rok_reg}, ktorý znamená, v ktorom roku bol vrh zaregistrovaný. Registrátor, ktorý zaregistroval daný vrh, môže pripojiť poznámku počas registrácie vrhu, ktorá je uložená v stĺpci \mintinline{php}{poznamka_reg}.
 
 Chovateľ daného vrhu môže taktiež vytvoriť poznámku k vrhu --- táto poznámka sa následne uloží do stĺpca \mintinline{php}{poznamka_chov}.
 
-Ako posledný stĺpec nachádzajúci sa v tabuľke \mintinline{php}{czkp_vrh} je stĺpec \mintinline{php}{kompletni}, ktorý značí, či o uloženom vrhu sú dostupné kompletné informácie, avšak tento údaj sa v aplikácii nepoužíva.
+Ako posledný stĺpec nachádzajúci sa v tabuľke \mintinline{php}{czkp_vrh} je stĺpec \mintinline{php}{kompletni}, ktorý znamená, či o uloženom vrhu sú dostupné kompletné informácie, avšak tento údaj sa v aplikácii nepoužíva.
 
 \subsubsection*{Tabuľka czkp\_zvire}
 
@@ -121,9 +121,9 @@ Predposledný stĺpec \mintinline{php}{overeno_pk} obsahuje informáciu, či zvi
 \subsubsection*{Tabuľka czkp\_mimi}
 
 Úlohou tejto tabuľky je ukladať informácie o mláďatách narodených v jednotlivých vrhoch.
-Rozdiel medzi tabuľkou \mintinline{php}{czkp_mimi} a \mintinline{php}{czkp_zvire} spočíva v tom, že narozdiel od tabuľky \mintinline{php}{czkp_zvire}, v tejto tabuľke sú uložené iba mláďata, ktoré pochádzajú zo známeho vrhu.
+Rozdiel medzi tabuľkou \mintinline{php}{czkp_mimi} a \mintinline{php}{czkp_zvire} spočíva v tom, že na rozdiel od tabuľky \mintinline{php}{czkp_zvire}, v tejto tabuľke sú uložené iba mláďatá, ktoré pochádzajú zo známeho vrhu.
 
-Tabuľka obsahuje stĺpec \mintinline{php}{id_vrhu}, v ktorom je uložený identifikátor záznamu z tabuľky \mintinline{php}{czkp_vrh}. Podľa tohto stĺpcu vieme určiť, v akom vrhu sa dané mláďa narodilo. Pre ukladanie mena a pohlavia mláďata slúžia stĺpce \mintinline{php}{jmeno}, resp. \mintinline{php}{pohlavi}. Chovnosť mláďata sa ukladá do stĺpca \mintinline{php}{chov}. Stĺpec \mintinline{php}{chov_omez} ďalej slovne špecifikuje chovné obmedzenie mláďata. Pre organizáciu je potrebné sledovať, kto dané mláďa chová, a pre tento účel slúži stĺpec \mintinline{php}{chov_kdo}. Pre uloženie dodatočných informácií ohľadom mláďata, ako napríklad typ uší, typ srsti, farba srsti, farba očí a znaky slúžia stĺpce \mintinline{php}{typ_ucha}, \mintinline{php}{typ_srsti}, \mintinline{php}{barva_srsti}, \mintinline{php}{barva_oci} a \mintinline{php}{znaky}.
+Tabuľka obsahuje stĺpec \mintinline{php}{id_vrhu}, v ktorom je uložený identifikátor záznamu z tabuľky \mintinline{php}{czkp_vrh}. Podľa tohto stĺpca vieme určiť, v akom vrhu sa dané mláďa narodilo. Pre ukladanie mena a pohlavia mláďata slúžia stĺpce \mintinline{php}{jmeno}, resp. \mintinline{php}{pohlavi}. Chovnosť mláďata sa ukladá do stĺpca \mintinline{php}{chov}. Stĺpec \mintinline{php}{chov_omez} ďalej slovne špecifikuje chovné obmedzenie mláďata. Pre organizáciu je potrebné sledovať, kto dané mláďa chová, a pre tento účel slúži stĺpec \mintinline{php}{chov_kdo}. Pre uloženie dodatočných informácií ohľadom mláďata, ako napríklad typ uší, typ srsti, farba srsti, farba očí a znaky slúžia stĺpce \mintinline{php}{typ_ucha}, \mintinline{php}{typ_srsti}, \mintinline{php}{barva_srsti}, \mintinline{php}{barva_oci} a \mintinline{php}{znaky}.
 
 \subsubsection*{Tabuľka pp\_informace}
 
@@ -135,19 +135,19 @@ Každý vrh má matku a otca vrhu --- tieto údaje sú ukladané do stĺpcov \mi
 
 Informácie o chovateľovi vrhu sa ukladajú do dvoch stĺpcov, a to \mintinline{php}{chovatel} a \mintinline{php}{chov_kontakt}. Prvý z menovaných stĺpcov obsahuje meno chovateľa a druhý jeho kontakt.
 
-Nakoľko každý vrh môže byť zaregistrovaný, je nutné ukladať údaje o ich registrácii. Pre tieto účely slúžia stĺpce  \mintinline{php}{reg_dat_vyplneni}, ktorý značí dátum požiadania o registráciu majiteľom vrhu, \mintinline{php}{reg_dat_schvaleni}, ktorý obsahuje dátum schválenia vrhu a \mintinline{php}{reg_cislo_vrhu} obsahujúci registračné číslo vrhu.
+Nakoľko každý vrh môže byť zaregistrovaný, je nutné ukladať údaje o ich registrácii. Pre tieto účely slúžia stĺpce  \mintinline{php}{reg_dat_vyplneni}, ktorý znamená dátum požiadania o registráciu majiteľom vrhu, \mintinline{php}{reg_dat_schvaleni}, ktorý obsahuje dátum schválenia vrhu a \mintinline{php}{reg_cislo_vrhu} obsahujúci registračné číslo vrhu.
 
 \subsubsection*{Tabuľka pp\_miminka}
 
 Obsahom tabuľky \mintinline{php}{pp_miminka} sú mláďatá, ktoré boli narodené vo vrhoch uložených v predchádzajúcej tabuľke.
 
-Aby bolo možné zistiť, ku ktorému vrhu jednotlivé mláďa patrí, bolo potrebné, aby tabuľka obsahovala stĺpec \mintinline{php}{id_pp}, ktorý obsahuje identifikátor vrhu, v ktorom sa mláďa narodilo. Tento identifikátor ukazuje do predchádzajúcej tabuľky,  \mintinline{php}{pp_informace}. Následne sa do tabuľky ukladajú dáta týkajúce sa predovšetkým samotného mláďata, ako napríklad jeho meno (\mintinline{php}{mimi_jmeno}), pohlavie (\mintinline{php}{mimi_pohlavi}), typ uší (\mintinline{php}{mimi_typ_ucha}), typ srsti (\mintinline{php}{mimi_typ_srsti}), farba srsti (\mintinline{php}{mimi_barva_srsti}), či farba očí (\mintinline{php}{mimi_barva_oci}) a jeho znaky (\mintinline{php}{mimi_znaky}). K danému zvieraťu taktiež prislúcha majiteľ, ktorý sa ukladá do stĺpca \mintinline{php}{mimi_majitel}. Okrem mena majiteľa sa ukladá nie len jeho kontakt (\mintinline{php}{mimi_maj_kontakt}), ale aj číslo preukazu majiteľa, v prípade že je zároveň členom organizácie (\mintinline{php}{mimi_maj_prukaz}). Medzi posledné informácie ukladajúce sa k danému mláďatu patrí taktiež informácia, či je mláďa určené pre chov (\mintinline{php}{mimi_chov}), prípadne chovné obmedzenie (\mintinline{php}{mimi_chov_omezeni}).
+Aby bolo možné zistiť, ku ktorému vrhu jednotlivé mláďa patrí, bolo potrebné, aby tabuľka obsahovala stĺpec \mintinline{php}{id_pp}, ktorý obsahuje identifikátor vrhu, v ktorom sa mláďa narodilo. Tento identifikátor ukazuje do predchádzajúcej tabuľky,  \mintinline{php}{pp_informace}. Následne sa do tabuľky ukladajú dáta týkajúce sa predovšetkým samotného mláďata, ako napríklad jeho meno (\mintinline{php}{mimi_jmeno}), pohlavie (\mintinline{php}{mimi_pohlavi}), typ uší (\mintinline{php}{mimi_typ_ucha}), typ srsti (\mintinline{php}{mimi_typ_srsti}), farba srsti (\mintinline{php}{mimi_barva_srsti}), či farba očí (\mintinline{php}{mimi_barva_oci}) a jeho znaky (\mintinline{php}{mimi_znaky}). K danému zvieraťu taktiež prislúcha majiteľ, ktorý sa ukladá do stĺpca \mintinline{php}{mimi_majitel}. Okrem mena majiteľa sa ukladá nielen jeho kontakt (\mintinline{php}{mimi_maj_kontakt}), ale aj číslo preukazu majiteľa, v prípade že je zároveň členom organizácie (\mintinline{php}{mimi_maj_prukaz}). Medzi posledné informácie ukladajúce sa k danému mláďatu patrí taktiež informácia, či je mláďa určené pre chov (\mintinline{php}{mimi_chov}), prípadne chovné obmedzenie (\mintinline{php}{mimi_chov_omezeni}).
 
 \subsubsection*{Tabuľka pp\_zadosti}
 
 Posledná tabuľka, ktorá sa nachádza v databáze súčasnej aplikácie, je tabuľka s názvom \mintinline{php}{pp_zadosti}.
 Táto tabuľka má za úlohu zhromažďovať dáta o poslaných, resp. (ne)schválených žiadostiach o schválenie vrhu. 
-Narozdiel od predchádzajúcich tabuliek, v tejto tabuľke sa nachádzajú stĺpce obsahujúce informácie iba k daným žiadostiam.
+Na rozdiel od predchádzajúcich tabuliek, v tejto tabuľke sa nachádzajú stĺpce obsahujúce informácie iba k daným žiadostiam.
 
 Táto tabuľka obsahuje stĺpec \mintinline{php}{id_pp}, ktorého obsahom je identifikátor vrhu z tabuľky \mintinline{php}{pp_informace}, ktorého sa týka daná žiadosť o schválenie vrhu. Tabuľka následne obsahuje stĺpec \mintinline{php}{datum_odoslani}, ktorý je automaticky nastavený na dátum a čas odoslania žiadosti a \mintinline{php}{cas_odpovedi}, ktorý indikuje dátum a čas odpovedi registrátora na danú žiadosť.
 
@@ -177,17 +177,17 @@ Aplikácia musí umožniť jednoduchú správu zvierat, od vytvorenia nového zv
 V evidencii zvierat je pre každé zviera potrebné ukladať nasledujúce údaje:
 
 \begin{itemize}
-	\item meno a prezývku
-	\item dátum narodenia
-	\item majiteľa a chovateľa zvieraťa
-	\item vrh, v ktorom sa zviera narodilo
-	\item matku a otca zvieraťa
-	\item pohlavie
-	\item farbu očí
-	\item typ uší
-	\item farbu a typ srsti
-	\item znaky
-	\item dátum a dôvod úmrtia
+	\item Meno a prezývku,
+	\item dátum narodenia,
+	\item majiteľa a chovateľa zvieraťa,
+	\item vrh, v ktorom sa zviera narodilo,
+	\item matku a otca zvieraťa,
+	\item pohlavie,
+	\item farbu očí,
+	\item typ uší,
+	\item farbu a typ srsti,
+	\item znaky,
+	\item dátum a dôvod úmrtia.
 \end{itemize}
 
 Pre uľahčenie vytvorenia a editovania zvieraťa budú textové polia v maximálnej možnej miere interaktívne.
@@ -202,12 +202,12 @@ Je potrebné, aby aplikácia ponúkala možnosť zaregistrovať evidované zvier
 Pri takejto registrácií sa budú zbierať nasledovné údaje:
 
 \begin{itemize}
-	\item klub\footnote{Na výber z možností: ČKP, SOCHP alebo Ostatné}, pod ktorým bude zviera zaregistrované
-	\item typ registrácie\footnote{Vyžadované iba v prípade registrácie zvieraťa pod klubom ČKP}
-	\item registračné číslo
-	\item dátum registrácie
-	\item informácia, či je nasledovný chov povolený
-	\item informácia o obmedzení chovu
+	\item Klub\footnote{Na výber z možností: ČKP, SOCHP alebo Ostatné}, pod ktorým bude zviera zaregistrované,
+	\item typ registrácie\footnote{Vyžadované iba v prípade registrácie zvieraťa pod klubom ČKP},
+	\item registračné číslo,
+	\item dátum registrácie,
+	\item informácia, či je nasledovný chov povolený,
+	\item informácia o obmedzení chovu.
 \end{itemize}
 
 \subsubsection{Evidencia vrhov}
@@ -217,16 +217,16 @@ Medzi nevyhnutnú funkcionalitu aplikácie sa radí aj evidencia vrhov. Tak ako 
 Pre účel evidencie vrhov sa budú v aplikácii ukladať nasledujúce údaje:
 
 \begin{itemize}
-	\item typ a označenie vrhu
-	\item majiteľ vrhu
-	\item meno a kontakt na chovateľa
-	\item dátum narodenia
-	\item matka a otec vrhu
-	\item línia
-	\item genetické informácie
-	\item počet narodených a odchovaných mláďat
-	\item počet odchovaných samcov a samíc
-	\item počet mláďat určených pre maznanie a pre následný chov
+	\item Typ a označenie vrhu,
+	\item majiteľ vrhu,
+	\item meno a kontakt na chovateľa,
+	\item dátum narodenia,
+	\item matka a otec vrhu,
+	\item línia,
+	\item genetické informácie,
+	\item počet narodených a odchovaných mláďat,
+	\item počet odchovaných samcov a samíc,
+	\item počet mláďat určených pre maznanie a pre následný chov.
 \end{itemize}
 
 Rovnako ako pri evidencii zvierat, tak aj tu umožní aplikácia interaktívne zvoliť matku, otca a majiteľa vrhu zobrazením zoznamu uložených zvierat/ľudí.
@@ -253,17 +253,17 @@ Takáto poznámka by mala mať nastaviteľnú viditelnosť\footnote{Poznámka m�
 Taktiež musí poskytnúť informáciu, kedy bola vytvorená, respektíve editovaná.
 
 
-Nakoľko sa jedná o poznámky pre zviera a vrh, budú zobrazené u príslušných zvieratách, resp. vrhoch, ku ktorým sa vzťahujú.
+Nakoľko sa jedná o poznámky pre zviera a vrh, budú zobrazené u príslušných zvierat, resp. vrhoch, ku ktorým sa vzťahujú.
 
 \subsubsection{Zobrazenie histórie zmien zvierat a vrhov}
 Medzi želanú funkcionalitu novej webovej aplikácie patrí sledovanie a následné zobrazenie histórie zmien pre všetky zvieratá a vrhy
 
 Aplikácia bude zaznamenávať nasledujúce zmeny v systéme:
 \begin{itemize}
-	\item vytvorenie zvieraťa/vrhu
-	\item úprava údajov zvieraťa/vrhu
-	\item zmazanie zvieraťa/vrhu
-	\item obnova\footnote{Obnoviť zviera/vrh bude môcť iba administrátor aplikácie} zmazaného zvieraťa/vrhu
+	\item Vytvorenie zvieraťa/vrhu,
+	\item úprava údajov zvieraťa/vrhu,
+	\item zmazanie zvieraťa/vrhu,
+	\item obnova\footnote{Obnoviť zviera/vrh bude môcť iba administrátor aplikácie} zmazaného zvieraťa/vrhu.
 \end{itemize}
 
 Pri každej zmene popísanej vyššie je taktiež nutné ukladať, kto a kedy danú zmenu vykonal. V prípade úpravy údajov budú navyše zaznamenané tie údaje, ktoré boli zmenené používateľom. Túto históriu zmien bude možné vidieť vo forme tabuľky u každého zvieraťa, resp. vrhu.
@@ -276,11 +276,11 @@ Preukaz bude možné vygenerovať tlačidlom na stránke konkrétneho zvieraťa.
 \subsubsection{Filtrovanie a radenie}\label{filtrovanie-a-radenie}
 Pre vylepšenie používateľskej skúsenosti s aplikáciou bude potrebné implementovať filtrovanie a radenie zvierat ako aj vrhov na príslušných stránkach so zoznamom zvierat, resp. vrhov. Implementácia tejto funkcionality umožní jednoduchšiu prácu s aplikáciou a rýchlejšie nájdenie potrebných informácií.
 
-\subsubsection{Správa používatelov a rolí}\label{sprava-pouzivatelov-a-roli}
-Pre administrátorov aplikácie je nutné implementovať možnosť správy jednotlivých používateľov aplikácie, priradovať im príslušné role, alebo im ich naopak odoberať. Na základe tejto skutočnosti je žiaduce vytvoriť pohľad so zoznamom používateľov a ich rolami, s následnou možnosťou im danú rolu zmeniť, prípadne daných používateľov odobrať.
+\subsubsection{Správa používateľov a rolí}\label{sprava-pouzivatelov-a-roli}
+Pre administrátorov aplikácie je nutné implementovať možnosť správy jednotlivých používateľov aplikácie, priraďovať im príslušné role, alebo im ich naopak odoberať. Na základe tejto skutočnosti je žiaduce vytvoriť pohľad so zoznamom používateľov a ich rolami, s následnou možnosťou im danú rolu zmeniť, prípadne daných používateľov odobrať.
 
 \subsubsection{Lokalizácia aplikácie}
-Nakoľko budú aplikáciu používať nie len českí ale aj zahraniční používatelia, je nutné, aby aplikácia poskytovala obsah lokalizovaný do anglického jazyka. Jazyk bude možné jednoducho zmeniť v menu na paneli webovej aplikácie.
+Nakoľko budú aplikáciu používať nielen českí ale aj zahraniční používatelia, je nutné, aby aplikácia poskytovala obsah lokalizovaný do anglického jazyka. Jazyk bude možné jednoducho zmeniť v menu na paneli webovej aplikácie.
 
 \subsection{Nefunkčné požiadavky}
 Na rozdiel od funkčných požiadaviek, nefunkčné požiadavky umožňujú určiť obmedzenia kladené na aplikáciu. V neposlednom rade majú taktiež zásadný dopad na návrh architektúry webovej aplikácie \cite{co-su-pripady-pouzitia}.
@@ -315,32 +315,32 @@ V nasledujúcich podsekciách budú priblížené jednotlivé role a k nim prís
 Túto rolu bude mať každý používateľ automaticky po registrácii do webovej aplikácie. Bežný používateľ bude môcť v aplikácii: 
 
 \begin{itemize}
-	\item Vytvoriť a zobraziť svoje zvieratá
-	\item Upraviť svoje zvieratá v prípade, že nie sú zaregistrované pod klubom ČKP
-	\item Vytvoriť a upraviť registrácie svojich vlastných zvierat, ktoré nespadajú pod klub ČKP
-	\item Zobraziť zoznam všetkých cudzích zvierat spolu s ich detailmi
-	\item Vytvoriť a zobraziť vrhy, u ktorých je používateľ ich majiteľom
-	\item Upraviť vrhy, ktorých je majiteľom, pokiaľ neboli tieto vrhy schválené žiadosťou
-	\item Zobraziť všetky vrhy typu VP alebo schválené vrhy typu PP a NV spolu s ich detailmi
-	\item Pridať poznámku k zvieratám a vrhom, ktoré vlastní
+	\item Vytvoriť a zobraziť svoje zvieratá,
+	\item upraviť svoje zvieratá v prípade, že nie sú zaregistrované pod klubom ČKP,
+	\item vytvoriť a upraviť registrácie svojich vlastných zvierat, ktoré nespadajú pod klub ČKP,
+	\item zobraziť zoznam všetkých cudzích zvierat spolu s ich detailmi,
+	\item vytvoriť a zobraziť vrhy, u ktorých je používateľ ich majiteľom,
+	\item uraviť vrhy, ktorých je majiteľom, pokiaľ neboli tieto vrhy schválené žiadosťou,
+	\item zobraziť všetky vrhy typu VP alebo schválené vrhy typu PP a NV spolu s ich detailmi,
+	\item pridať poznámku k zvieratám a vrhom, ktoré vlastní.
 \end{itemize}
 
 \subsection{Registrátor zvierat}\label{registrator-zvierat}
 Registrátor zvierat je v hierarchii rolí postavený nad bežným používateľom. Tým pádom má všetky práva bežného používateľa a navyše nasledujúce práva:
 
 \begin{itemize}
-	\item Možnosť pridať poznámku k akýmkoľvek zvieratám
-	\item Možnosť pridať, editovať a vymazať akúkoľvek registráciu u každého zvieraťa
+	\item Možnosť pridať poznámku k akýmkoľvek zvieratám,
+	\item možnosť pridať, editovať a vymazať akúkoľvek registráciu u každého zvieraťa.
 \end{itemize} 
 
-\subsection{Schvalovateľ vrhov}\label{schvalovatel-vrhov}
-Schvalovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným používateľom podobne ako registrátor zvierat, s tým rozdielom, že schvalovateľ vrhu môže v aplikácii:
+\subsection{Schvaľovateľ vrhov}\label{schvaľovateľ-vrhov}
+Schvaľovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným používateľom podobne ako registrátor zvierat, s tým rozdielom, že schvaľovateľ vrhu môže v aplikácii:
 
 \begin{itemize}
-	\item Vidieť a odpovedať na žiadosti o schválenie vrhov
-	\item Editovať akékoľvek zviera a vrh
-	\item Pridať poznámky k akémukoľvek vrhu
-	\item Vygenerovať preukaz zvieraťa
+	\item Vidieť a odpovedať na žiadosti o schválenie vrhov,
+	\item editovať akékoľvek zviera a vrh,
+	\item pridať poznámky k akémukoľvek vrhu,
+	\item vygenerovať preukaz zvieraťa.
 \end{itemize}
 
 \subsection{Administrátor}\label{administrator}
@@ -420,7 +420,7 @@ V tomto prípade sa používateľ aplikácie snaží upraviť existujúce zviera
 
 \begin{enumerate}
 	\item \nameref{uc1}
-	\item Používateľ klikne na rozbalovacie menu u zvieraťa, ktoré chce editovať.
+	\item Používateľ klikne na rozbaľovacie menu u zvieraťa, ktoré chce editovať.
 	\item Po tomto kroku aplikácia ponúkne možnosť editácie alebo zmazania zvieraťa.
 	\item Používateľ zvolí možnosť editácie.
 	\item Aplikácia následne presmeruje používateľa na stránku s editáciou zvieraťa, ktorá bude obsahovať formulár s predvyplnenými údajmi zvieraťa.
@@ -458,11 +458,11 @@ Tento prípad použitia zahŕňa prípad \hyperref[uc2]{zobrazenia detailov zvie
 Tento prípad použitia realizuje funkčnú požiadavku kladenú na aplikáciu, konkrétne \hyperref[evidencia-registracii-zvierata]{evidenciu registrácií zvieraťa}.
 
 \subsection{Prípady použitia vrhov}
-Táto podsekcia popisuje jednotlivé prípady použitie, ktoré sa týkajú vrhov.
+Táto podsekcia popisuje jednotlivé prípady použitia, ktoré sa týkajú vrhov.
 
 \subsection*{UC6 -- Vytvorenie žiadosti o schválenie vrhu}
 
-Tento prípad použitia reálne zahŕňa prípad použitia \uv{zobrazenia detailov vrhu}, avšak pre neuvádzanie duplicitných informácii môže čitateľ vychádzať z prípadu použitia \hyperref[uc2]{zobrazenia detailov zvieraťa}. Scenáre sa v oboch prípadoch obsahovo nelíšia, tak ako bolo uvedené poznámke v sekcii \ref{pripady-pouzitia}.
+Tento prípad použitia reálne zahŕňa prípad použitia \uv{zobrazenia detailov vrhu}, avšak pre neuvádzanie duplicitných informácií môže čitateľ vychádzať z prípadu použitia \hyperref[uc2]{zobrazenia detailov zvieraťa}. Scenáre sa v oboch prípadoch obsahovo nelíšia, tak ako bolo uvedené poznámke v sekcii \ref{pripady-pouzitia}.
 
 Na tento prípad sa taktiež vzťahujú dodatočné obmedzenia pre bežného používateľa vyplývajúce z \ref{bezny-pouzivatel}.
 
@@ -483,7 +483,7 @@ Popísaný prípad použitia realizuje funkčnú požiadavku \hyperref[sprava-zi
 
 Tak ako v predchádzajúcom prípade, tento prípad použitia bude zahŕňať \uv{zobrazenie detailov vrhu}.
 
-Pre tento prípad použitia sa vzťahujú dodatočné obmedzenia -- na žiadosť o schválenie vrhu bude môcť odpovedať používateľ majúci rolu \hyperref[schvalovatel-vrhov]{schvalovateľa žiadostí vrhov} alebo \hyperref[administrator]{administrátora}.
+Pre tento prípad použitia sa vzťahujú dodatočné obmedzenia -- na žiadosť o schválenie vrhu bude môcť odpovedať používateľ majúci rolu \hyperref[schvalovatel-vrhov]{schvaľovateľa žiadostí vrhov} alebo \hyperref[administrator]{administrátora}.
 
 \pagebreak 
 \subsection*{Scenár:}
@@ -493,7 +493,7 @@ Pre tento prípad použitia sa vzťahujú dodatočné obmedzenia -- na žiadosť
 	\item Používateľ stlačí tlačidlo \uv{Odpovedať} pri príslušnej žiadosti o schválenie vrhu.
 	\item Aplikácia zobrazí modálne okno s formulárom pre schválenie vrhu.
 	\item Používateľ vyplní formulár a kliknutím na tlačidlo \uv{Uložiť} sa odošle na server.
-	\item Server spracuje odoslaný formulár a ihneď odošle e-mail žiadatelovi o stave jeho žiadosti.
+	\item Server spracuje odoslaný formulár a ihneď odošle e-mail žiadateľovi o stave jeho žiadosti.
 \end{enumerate}
 
 \subsection*{Alternatívny scenár:}
