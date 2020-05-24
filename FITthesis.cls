@@ -452,6 +452,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 	
 	\vfill
 	
+	{\parskip=0pt
 	\if\@lang1{
 		\noindent {\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v~Praze
 
@@ -462,7 +463,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 		\noindent Czech Technical University in Prague
 		
 		\noindent Faculty of Information Technology
-	}\fi\fi
+	}}\fi\fi
 	
 	\noindent \textcopyright{} \the\year{} \theauthorGN{} \theauthorFN{}. \if\@lang1{V{\v s}echna pr{\' a}va vyhrazena.}\else\if\@lang2{V{\v s}etky pr{\' a}va vyhraden\'e.}\else{All rights reserved.}\fi\fi
 	
