@@ -340,6 +340,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 
 \DeclareRobustCommand{\titlepage}{
         \begin{titlingpage}
+        \parskip=0pt
         \noindent
         \if\@lang1{\includegraphics[width=0.5\textwidth]{cvut-logo-bw}}\else\if\@lang2{\includegraphics[width=0.5\textwidth]{cvut-logo-bw}}\else{\includegraphics[width=0.5\textwidth]{cvut-logo-bw-en}}\fi\fi
         
@@ -370,7 +371,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
                \fi
 
                \vfill
-
+{\parskip=0pt
 \if@departmentdefined
 
                                               \noindent \thedepartment
@@ -394,7 +395,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 
                        \fi           
 
- 
+ }
 
                \vspace{1cm}
 
@@ -452,6 +453,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 	
 	\vfill
 	
+	{\parskip=0pt
 	\if\@lang1{
 		\noindent {\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v~Praze
 
@@ -462,13 +464,12 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 		\noindent Czech Technical University in Prague
 		
 		\noindent Faculty of Information Technology
-	}\fi\fi
+	}}\fi\fi
 	
 	\noindent \textcopyright{} \the\year{} \theauthorGN{} \theauthorFN{}. \if\@lang1{V{\v s}echna pr{\' a}va vyhrazena.}\else\if\@lang2{V{\v s}etky pr{\' a}va vyhraden\'e.}\else{All rights reserved.}\fi\fi
-	
 	\if\@lang1{
 		\noindent \textit{Tato pr{\' a}ce vznikla jako {\v s}koln{\' i} d{\' i}lo na {\v C}esk{\' e}m vysok{\' e}m u{\v c}en{\' i} technick{\' e}m v~Praze, Fakult{\v e} informa{\v c}n{\' i}ch technologi{\' i}. Pr{\' a}ce je chr{\' a}n{\v e}na pr{\' a}vn{\' i}mi p{\v r}edpisy a mezin{\' a}rodn{\' i}mi {\' u}mluvami o~pr{\' a}vu autorsk{\' e}m a pr{\' a}vech souvisej{\' i}c{\' i}ch s~pr{\' a}vem autorsk{\' y}m. K~jej\'\i{}mu u\v zit\'\i{}, s~v\'yjimkou bez\'uplatn\'ych z\'akonn\'ych licenc\'\i{} a nad r\'amec opr\'avn\v en\'\i{} uveden\'ych v~Prohl\'a\v sen\'\i{} na p\v redchoz\'\i{} stran\v e, je nezbytn\'y souhlas autora.}}\else\if\@lang2{
-		\noindent \textit{T\'ato pr\'aca vznikla ako \v skolsk\'e dielo na  FIT \v CVUT v Prahe. Pr\'aca je chr\'anen\'a medzin\'arodn\'ymi predpismi a zmluvami o autorskom pr\'ave a pr\'avach s\'uvisiacich s autorsk\'ym pr\'avom. Na jej vyu\v zitie, s~v\'ynimkou bezplatn\'ych z\'akonn\'ych licenci\'\i, je nutn\'y s\'uhlas autora.}}\else{
+		\noindent \textit{\\T\'ato pr\'aca vznikla ako \v skolsk\'e dielo na  FIT \v CVUT v Prahe. Pr\'aca je chr\'anen\'a medzin\'arodn\'ymi predpismi a zmluvami o autorskom pr\'ave a pr\'avach s\'uvisiacich s autorsk\'ym pr\'avom. Na jej vyu\v zitie, s~v\'ynimkou bezplatn\'ych z\'akonn\'ych licenci\'\i, je nutn\'y s\'uhlas autora.}}\else{
 		\noindent \textit{This thesis is school work as defined by Copyright Act of the Czech Republic. It has been submitted at Czech Technical University in Prague, Faculty of Information Technology. The thesis is protected by the Copyright Act and its usage without author's permission is prohibited (with exceptions defined by the Copyright Act).}
 	}\fi\fi
 	
