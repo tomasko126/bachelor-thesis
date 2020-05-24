@@ -490,6 +490,8 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 	\fi
 
 	\vfil
+	
+	\clearpage
 
 	\if@abstractendefined
 		\chapterstyletitle{Abstract}\theabstracten
