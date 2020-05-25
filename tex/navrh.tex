@@ -92,6 +92,8 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 
 Pre budúcu aplikáciu som sa rozhodol vybrať SPA architektúru, nielen z dôvodu rýchlejšieho a jednoduchšieho procesu vývoja, ale aj vďaka vlastným skúsenostiam z oblasti vývoja SPA aplikácií. Nakoľko aplikácia bude dostupná iba vopred vybraným používateľom, nebude potrebné ju optimalizovať pre webové vyhľadávače.
 
+\pagebreak
+
 \section{Voľba technológií}
 V tejto sekcii sa presunieme od voľby architektúry, na ktorej bude aplikácia postavená, ku voľbe technológií, ktoré budú použité vo výslednej aplikácii.
 
@@ -133,6 +135,8 @@ Nakoľko novovznikajúca aplikácia bude postavená na SPA architektúre, bude p
 Vue.js je progresívny framework pre vytváranie používateľských rozhraní. Tento framework bol navrhnutý od základov tak, aby bol postupne prispôsobiteľný. Nakoľko je zameraný iba na vrstvu zobrazenia, je ľahké ho integrovať s inými knižnicami a existujúcimi projektmi \cite{co-je-vue}.
 
 Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React\footnote{https://reactjs.org} a Angular\footnote{https://angular.io}, avšak z dôvodu doterajších skúseností bol zvolený Vue.js framework.
+
+\pagebreak
 
 \section{Návrh databázy}
 V predchádzajúcej kapitole v podsekcii \ref{sucasny-model-db} bol zanalyzovaný databázový model súčasnej aplikácie.
@@ -208,7 +212,7 @@ Jej štruktúra sa skladá zo stĺpcov \mintinline{php}{creator_id}, čo je iden
 
 Meno zvieraťa, jeho prezývka, pohlavie, dátum narodenia, farba očí, typ uší, farba srsti, typ srsti a jeho znaky budú uložené do príslušných stĺpcov, a to  \mintinline{php}{name}, \mintinline{php}{nickname}, \mintinline{php}{sex}, \mintinline{php}{birthdate}, \mintinline{php}{eyes_color}, \mintinline{php}{ear_type}, \mintinline{php}{fur_color}, \mintinline{php}{fur_type} a \mintinline{php}{markings}.
 
-Údaje o úmrtí zvieraťa ako dátum úmrtia a dôvod úmrtia, budú uložené v stĺpcoch \mintinline{php}{death_data}, respektíve \mintinline{php}{death_reason}.
+Údaje o úmrtí zvieraťa ako dátum úmrtia a dôvod úmrtia, budú uložené v stĺpcoch \mintinline{php}{death_date}, respektíve \mintinline{php}{death_reason}.
 
 Informácia, či je povolený chov, alebo je nejakým spôsobom limitovaný, bude možné nájsť v stĺpcoch \mintinline{php}{breeding_available}, respektíve \mintinline{php}{breeding_limitation}.
 
@@ -264,7 +268,7 @@ Pre účely budúceho rozšírenia aplikácie --- konkrétne prihlasovania sa po
 \subsubsection*{Tabuľka notes}
 Nakoľko je žiaduce ukladať poznámky k jednotlivým zvieratám a vrhom, bude vytvorená tabuľka \mintinline{php}{notes}, do ktorej sa jednotlivé poznámky budú ukladať.
 Táto tabuľka bude obsahovať stĺpec \mintinline{php}{creator_id}, do ktorého sa bude ukladať identifikát používateľa, ktorý daný záznam vytvoril. Ak sa bude jednať o poznámku ku zvierati, jeho identifikátor sa uloží do stĺpca \mintinline{php}{animal_id}. V opačnom prípade -- pri ukladaní poznámky viažucej sa k vrhu -- sa identifikátor daného vrhu uloží do stĺpca \mintinline{php}{litter_id}.
-Ďalej pre účel poznámok bude potrebné ukladať ich kategóriu, viditeľnosť a obsah. Tieto informácie sa budú ukladať do stĺpcov \mintinline{php}{category}, \mintinline{php}{public} a \mintinline{php}{note}.
+Ďalej pre účel poznámok bude potrebné ukladať ich kategóriu, viditeľnosť a obsah. Tieto informácie sa budú ukladať do stĺpcov \mintinline{php}{category}, \mintinline{text}{public} a \mintinline{php}{note}.
 
 \raggedbottom
 

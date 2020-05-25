@@ -5,7 +5,7 @@ Cieľom tejto kapitoly je na základe predošlej analýzy súčasnej aplikácie 
 Implementácia serverovej časti webovej aplikácie sprevádzala využitie zvoleného PHP frameworku, ktorým bol Laravel.
 
 \subsection{Štruktúra projektu}
-Pre inicializáciu nového Laravel projektu som použil príkaz\\ \mintinline{php}{laravel new pedigree-book}. Tento príkaz vytvoril nasledujúcu adresárovú štruktúru.
+Pre inicializáciu nového Laravel projektu som použil príkaz\\ \mintinline{text}{laravel new pedigree-book}. Tento príkaz vytvoril nasledujúcu adresárovú štruktúru.
 
 \begin{figure}[H]
 	\dirtree{%
@@ -92,10 +92,10 @@ V prípade Laravelu sa používa v šablónach značkovací jazyk Blade. Blade u
 \label{animal-overview-view-code}
 \end{figure}
 
-Na obrázku \ref{animal-overview-view-code} sa nachádza ukážka časti šablóny, ktorá je zodpovedná za vygenerovanie preukazu obsahujúci detaily zvieraťa. Ako si je možné všimnúť, obsah tejto šablóny sa skladá z použitia HTML jazyka pre definovanie štruktúry preukazu, zo špeciálnych Blade príkazov ako \mintinline{php}{isset} a \mintinline{php}{endisset}, a z funkcie s premennými v syntaxe jazyka PHP.\pagebreak
+Na obrázku \ref{animal-overview-view-code} sa nachádza ukážka časti šablóny, ktorá je zodpovedná za vygenerovanie preukazu obsahujúci detaily zvieraťa. Ako si je možné všimnúť, obsah tejto šablóny sa skladá z použitia HTML jazyka pre definovanie štruktúry preukazu, zo špeciálnych Blade príkazov ako \mintinline{text}{isset} a \mintinline{php}{endisset}, a z funkcie s premennými v syntaxe jazyka PHP.\pagebreak
 
 \subsubsection*{Controller}
-Controller je poslednou časťou tejto skladačky, ktorá ozrejmí funkčnosť celého MVC vzoru. Jedná se o prostredníka, s ktorým komunikuje používateľ, model i view. Tieto komponenty drží pohromade a zabezpečuje komunikáciu medzi nimi \cite{mvc-architektura}. Samotné controllery aplikácie sa nachádzajú v adresári \mintinline{php}{app/Http/Controllers}.
+Controller je poslednou časťou MVC, ktorá ozrejmí funkčnosť tohto vzoru. Jedná se o prostredníka, s ktorým komunikuje používateľ, model i view. Tieto komponenty drží pohromade a zabezpečuje komunikáciu medzi nimi \cite{mvc-architektura}. Samotné controllery aplikácie sa nachádzajú v adresári \mintinline{php}{app/Http/Controllers}.
 
 \begin{figure}[H]
 \begin{minted}[xleftmargin=1.8em,linenos]{php}
@@ -256,7 +256,7 @@ V prípade \mintinline{php}{AnimalPage} komponentu sa jedná o nasledujúcu logi
 {Ukážka biznis logiky AnimalPage.vue komponentu}
 \label{animal-page-business-code}
 \end{figure}
-
+\pagebreak
 Hodnota atribútu \mintinline{php}{name} určuje meno daného komponentu naprieč celou klientskou aplikáciou.
 Obsah objektu \mintinline{php}{components} deklaruje použité komponenty v rámci \mintinline{php}{AnimalPage}.
 Metóda \mintinline{php}{data} vracia objekt s reaktívnymi atribútami --- pri zmene jednotlivých atribútov Vue.js notifikuje komponent o zmene atribútu. V prípade, že sa daný atribút používa v komponente, Vue.js zaistí jeho znovuvykreslenie.
@@ -274,6 +274,8 @@ Zjednodušený životný cyklus tohto komponentu bude nasledovný\footnote{Infor
 \end{enumerate}
 
 Po zmene jednotlivých komponentov je potrebné spustiť príkaz \mintinline{php}{npm run prod}, ktorý jednotlivé komponenty skompiluje do formy zrozumiteľnej prehliadaču. Pri vývoji aplikácie je však komfortnejšie použiť príkaz \mintinline{php}{npm run watch}, ktorý na pozadí zaistí automatickú kompiláciu komponentov po každej ich zmene. Po následnom znovunačítaní stránky prehliadača (\mintinline{php}{localhost:8000}) sa zobrazia najnovšie zmeny aplikácie.
+
+\pagebreak
 
 \section{Migrácia dát}
 Po implementácii novej aplikácie bolo potrebné zmigrovať existujúce dáta do novej aplikácie. Proces migrácie spočíval vo vytvorení starých tabuliek s dátami v databáze novej aplikácie. Následne boli pre tieto tabuľky vytvorené modelové triedy, ktoré obsahujú logiku pre transformáciu dát zo starých do nových tabuliek. Tieto modelové triedy je možné nájsť v priečinku \mintinline{php}{app/ImportModels}.

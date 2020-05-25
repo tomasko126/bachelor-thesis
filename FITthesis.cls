@@ -42,6 +42,7 @@
 
 \RequirePackage{babel}[2017/05/19]
 
+\RequirePackage[bottom]{footmisc}
 \RequirePackage[unicode,pdfusetitle]{hyperref}[2017/03/14]
 % line breaks in URL
 \def\UrlBreaks{\do\/\do\-\do\_}

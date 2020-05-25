@@ -144,7 +144,7 @@ Obsahom tabuľky \mintinline{php}{pp_miminka} sú mláďatá, ktoré boli narode
 Aby bolo možné zistiť, ku ktorému vrhu jednotlivé mláďa patrí, bolo potrebné, aby tabuľka obsahovala stĺpec \mintinline{php}{id_pp}, ktorý obsahuje identifikátor vrhu, v ktorom sa mláďa narodilo. Tento identifikátor ukazuje do predchádzajúcej tabuľky,  \mintinline{php}{pp_informace}. Následne sa do tabuľky ukladajú dáta týkajúce sa predovšetkým samotného mláďata, ako napríklad jeho meno (\mintinline{php}{mimi_jmeno}), pohlavie (\mintinline{php}{mimi_pohlavi}), typ uší (\mintinline{php}{mimi_typ_ucha}), typ srsti (\mintinline{php}{mimi_typ_srsti}), farba srsti (\mintinline{php}{mimi_barva_srsti}), či farba očí (\mintinline{php}{mimi_barva_oci}) a jeho znaky (\mintinline{php}{mimi_znaky}). K danému zvieraťu taktiež prislúcha majiteľ, ktorý sa ukladá do stĺpca \mintinline{php}{mimi_majitel}. Okrem mena majiteľa sa ukladá nielen jeho kontakt (\mintinline{php}{mimi_maj_kontakt}), ale aj číslo preukazu majiteľa, v prípade že je zároveň členom organizácie (\mintinline{php}{mimi_maj_prukaz}). Medzi posledné informácie ukladajúce sa k danému mláďatu patrí taktiež informácia, či je mláďa určené pre chov (\mintinline{php}{mimi_chov}), prípadne chovné obmedzenie (\mintinline{php}{mimi_chov_omezeni}).
 
 \subsubsection*{Tabuľka pp\_zadosti}
-
+\raggedbottom
 Posledná tabuľka, ktorá sa nachádza v databáze súčasnej aplikácie, je tabuľka s názvom \mintinline{php}{pp_zadosti}.
 Táto tabuľka má za úlohu zhromažďovať dáta o poslaných, resp. (ne)schválených žiadostiach o schválenie vrhu. 
 Na rozdiel od predchádzajúcich tabuliek, v tejto tabuľke sa nachádzajú stĺpce obsahujúce informácie iba k daným žiadostiam.
@@ -346,6 +346,8 @@ Schvaľovateľ vrhov je taktiež postavený v hierarchii rolí nad bežným pou�
 \subsection{Administrátor}\label{administrator}
 Ako obvykle, pre administrátora neplatia žiadne reštrikcie, čo znamená, že bude mať prístup ku všetkej funkcionalite definovanej vo funkčných požiadavkách v sekcii \ref{funkcne-poziadavky}.
 
+\pagebreak
+
 \section{Prípady použitia}\label{pripady-pouzitia}
 Prípady použitia sú špecifikácie rôznych činností, ktoré môžu používatelia s aplikáciou vykonávať \cite{co-su-pripady-pouzitia}. Tieto prípady použitia budú zachytené vo forme scenáru a budú vychádzať nielen zo známych funkčných požiadaviek popísaných v sekcii \ref{funkcne-poziadavky}, ale aj z jednotlivých používateľských rolí, ktoré boli definované v sekcii \ref{pouzivatelske-role}.
 
@@ -485,7 +487,6 @@ Tak ako v predchádzajúcom prípade, tento prípad použitia bude zahŕňať \u
 
 Pre tento prípad použitia sa vzťahujú dodatočné obmedzenia -- na žiadosť o schválenie vrhu bude môcť odpovedať používateľ majúci rolu \hyperref[schvalovatel-vrhov]{schvaľovateľa žiadostí vrhov} alebo \hyperref[administrator]{administrátora}.
 
-\pagebreak 
 \subsection*{Scenár:}
 
 \begin{enumerate}

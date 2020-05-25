@@ -62,5 +62,5 @@ Pri jednotlivých testoch sa nevyužíva MySQL databáza ako v prípade samotnej
 \section{Overenie správnosti importu}
 Nakoľko dáta museli byť pred samotným importom očistené z dôvodu ich nekonzistencie a duplicity, nebolo možné overiť správnosť importu oproti originálnym dátam. Preto som pristúpil ku kontrole importovaných dát voči očisteným dátam. Táto kontrola bola vykonaná porovnaním počtu záznamov importovaných a očistených dát
 
- Zo začiatku boli niektoré informácie zle importované --- táto skutočnosť sa týkala najmä previazanosti záznamov medzi jednotlivými tabuľkami. Následné opravy dát v databáze a v logike importu tieto problémy odstránili. Keďže dáta prešli takýmto náročnejším procesom importu, je možné, že niektoré dáta v databáze sa stále nebudú zhodovať s originálnymi dátami -- v tomto prípade musia byť dáta dodatočne manuálne upravené.
+ Zo začiatku boli niektoré informácie zle importované --- táto skutočnosť sa týkala najmä previazanosti záznamov medzi jednotlivými tabuľkami. Následné opravy dát v databáze a v logike importu tieto problémy odstránili. Keďže dáta prešli takýmto náročnejším procesom importu, nie je možné 100\% garantovať kompletnú zhodu s originálnymi dátami. Pri prípadnom výskyte tejto nekonzistencie musia byť dotknuté dáta manuálne upravené.
 
