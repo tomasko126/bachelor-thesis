@@ -2,12 +2,12 @@
 Testovanie aplikácie je nevyhnutnou súčasťou pre potvrdenie, že implementovaná funkcionalita funguje podľa špecifikácie. Táto kapitola popisuje jednotkové a integračné testy, ktoré boli použité na otestovanie správnej funkcionality aplikácie. Následne sa kapitola venuje procesu kontroly a overenia správnosti importu existujúcich dát do novej databázy.
 
 \section{Jednotkové testy}
-Jednotkové testy sú testy, ktoré testujú jednotlivé komponenty softvéru. Účelom týchto testov je overiť, či každý komponent softvéru funguje tak, ako je navrhnutý. Jednotka je najmenšia testovateľná súčasť akéhokoľvek softvéru. Zvyčajne má jeden alebo niekoľko vstupov a zvyčajne jeden výstup \cite{co-je-unit-testing}.
+Jednotkové testy sú testy, ktoré testujú jednotlivé komponenty softvéru. Účelom týchto testov je overiť, či každý komponent softvéru funguje tak, ako je navrhnutý. Jednotka je najmenšia testovateľná súčasť akéhokoľvek softvéru. Zvyčajne má jeden alebo niekoľko vstupov a zvyčajne jeden výstup \cite{co-je-unit-testing} (vlastný preklad).
 
 Nakoľko biznis logika tejto aplikácie nie je rozsiahla, boli namiesto jednotkových testov vytvorené integračné testy.
 
 \section{Integračné testy}
-Integračné testovanie je úroveň testovania aplikácie, pri ktorej sa jednotlivé komponenty kombinujú a testujú ako skupina. Účelom tejto úrovne testovania je odhaliť poruchy v interakcii medzi integrovanými komponentami \cite{co-su-integracne-testy}.
+Integračné testovanie je úroveň testovania aplikácie, pri ktorej sa jednotlivé komponenty kombinujú a testujú ako skupina. Účelom tejto úrovne testovania je odhaliť poruchy v interakcii medzi integrovanými komponentami \cite{co-su-integracne-testy} (vlastný preklad).
 
 Samotné integračné testy sa zameriavajú na testovanie komunikácie medzi klientom a serverom, pri ktorých sa overuje aktuálna a očakávaná odpoveď servera. Počas behu jednotlivých testov dochádza k overeniu autentifikácie používateľa, prístupu do databázy, respektíve overeniu práv používateľa k danej akcii.
 

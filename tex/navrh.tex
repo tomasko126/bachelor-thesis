@@ -7,7 +7,7 @@ Dôležitý aspekt pri návrhu aplikácie spočíva vo výbere architektúry, na
 V nasledujúcich sekciách sú zdokumentované dva typy architektúr, z ktorých bude na základe porovnania a vlastných skúseností s tvorbou webových aplikácií vybraná jedna, ktorá bude definovať podobu budúcej webovej aplikácie.
 
 \subsection{Architektúra MPA aplikácie}
-MPA je skratka pre viac-stránkovú webovú aplikáciu. Takáto aplikácia vždy načíta celú stránku a zobrazí novú v prípade  interakcie s aplikáciou -- zvyčajne po odoslaní formuláru používateľom alebo presmerovaním na inú stránku aplikácie \cite{spa-vs-mpa-1}.
+MPA je skratka pre viac-stránkovú webovú aplikáciu. Takáto aplikácia vždy načíta celú stránku a zobrazí novú v prípade  interakcie s aplikáciou -- zvyčajne po odoslaní formuláru používateľom alebo presmerovaním na inú stránku aplikácie \cite{spa-vs-mpa-1} (vlastný preklad).
 
 \subsubsection*{Priebeh komunikácie medzi serverom a klientom}
 Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci diagram s jeho popisom.
@@ -27,29 +27,29 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 	\item Klient túto stránku načíta, čím príde k obnoveniu stránky.
 \end{enumerate}
 
-Technológia AJAX čiastočne rieši problém znovunačítavania celej stránky dynamickým aktualizovaním tých častí aplikácie, ktoré boli používateľom zmenené. Avšak zakomponovanie tejto technológie do MPA sťažuje a komplikuje celý vývojový proces aplikácie \cite{mpa-architektura}.
+Technológia AJAX čiastočne rieši problém znovunačítavania celej stránky dynamickým aktualizovaním tých častí aplikácie, ktoré boli používateľom zmenené. Avšak zakomponovanie tejto technológie do MPA sťažuje a komplikuje celý vývojový proces aplikácie \cite{mpa-architektura} (vlastný preklad).
 
 \subsubsection*{Výhody použitia MPA architektúry}
 
 \begin{itemize}
-	\item Jednoduchá optimalizácia stránok pre webové vyhľadávače \cite{spa-vs-mpa-1},
-	\item umožňuje jednoduchú správu informácií na jednotlivých stránkach \cite{spa-vs-mpa-3},
-	\item je potrebný menší rozsah nástrojov a znalostí na rozdiel od vývoja SPA aplikácie \cite{spa-vs-mpa-2},
-	\item veľa dostupných riešení pre vývoj MPA aplikácií \cite{spa-vs-mpa-2}.
+	\item Jednoduchá optimalizácia stránok pre webové vyhľadávače \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item umožňuje jednoduchú správu informácií na jednotlivých stránkach \cite{spa-vs-mpa-3} (vlastný preklad),
+	\item je potrebný menší rozsah nástrojov a znalostí na rozdiel od vývoja SPA aplikácie \cite{spa-vs-mpa-2} (vlastný preklad),
+	\item veľa dostupných riešení pre vývoj MPA aplikácií \cite{spa-vs-mpa-2} (vlastný preklad).
 \end{itemize}
 
 
 \subsubsection*{Nevýhody použitia MPA architektúry}
 
 \begin{itemize}
-	\item Zvýšený čas načítavania stránok kvôli neustálemu obnovovaniu stránok (neplatí pri použití technológie AJAX) \cite{spa-vs-mpa-1},
-	\item znížený výkon aplikácie, kvôli neustálemu načítavaniu väčšieho množstva informácií naraz pred následným poslaním stránky používateľovi \cite{spa-vs-mpa-1},
-	\item úzka previazanosť vývoja aplikácie na strane servera a klienta, čo znemožňuje prípadné neskoršie nasadenie rôznych technológií \cite{spa-vs-mpa-2}
+	\item Zvýšený čas načítavania stránok kvôli neustálemu obnovovaniu stránok (neplatí pri použití technológie AJAX) \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item znížený výkon aplikácie, kvôli neustálemu načítavaniu väčšieho množstva informácií naraz pred následným poslaním stránky používateľovi \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item úzka previazanosť vývoja aplikácie na strane servera a klienta, čo znemožňuje prípadné neskoršie nasadenie rôznych technológií \cite{spa-vs-mpa-2} (vlastný preklad).
 \end{itemize}.
 
 
 \subsection{Architektúra SPA aplikácie}
-SPA je skratka pre single-page aplikáciu. Single-page aplikácia je aplikácia, ktorá nepotrebuje znovunačítanie stránky počas jej používania. Na tomto type architektúry sú postavené aplikácie ako Gmail\footnote{https://gmail.com}, Google Mapy\footnote{https://maps.google.com}, Facebook\footnote{https://facebook.com} či GitHub\footnote{https://github.com}. V tomto prípade sa o aktualizáciu obsahu na stránke nestará server, ale klient, zväčša pomocou frameworku\footnote{Sada podporných programov uľahčujúca vývoj aplikácie} bežiacom v prostredí webového prehliadača \cite{spa-vs-mpa-3}.
+SPA je skratka pre single-page aplikáciu. Single-page aplikácia je aplikácia, ktorá nepotrebuje znovunačítanie stránky počas jej používania. Na tomto type architektúry sú postavené aplikácie ako Gmail\footnote{https://gmail.com}, Google Mapy\footnote{https://maps.google.com}, Facebook\footnote{https://facebook.com} či GitHub\footnote{https://github.com}. V tomto prípade sa o aktualizáciu obsahu na stránke nestará server, ale klient, zväčša pomocou frameworku\footnote{Sada podporných programov uľahčujúca vývoj aplikácie} bežiacom v prostredí webového prehliadača \cite{spa-vs-mpa-3} (vlastný preklad).
 
 \subsubsection*{Priebeh komunikácie medzi serverom a klientom}
 Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci diagram s jeho popisom.
@@ -65,7 +65,7 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 	\item Klient vrátenú stránku serverom vykreslí.
 	\item Klient vyplní formulár, ktorý sa následne odošle na server pomocou AJAXu.
 	\item Server prijme údaje od klienta, ktoré následne spracuje.
-	\item Po spracovaní údajov server vráti späť klientovi aktualizované údaje (v JSON\footnote{Formát na výmenu dát medzi klientom a serverom \cite{co-je-json} } formáte),
+	\item Po spracovaní údajov server vráti späť klientovi aktualizované údaje (v JSON\footnote{Formát na výmenu dát medzi klientom a serverom \cite{co-je-json} (vlastný preklad)} formáte),
 	\item Klient zahodí staré údaje na stránke a nahradí ich novými, čím príde k obnoveniu údajov ale nie stránky.
 \end{enumerate}
 
@@ -73,18 +73,18 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 \subsubsection*{Výhody použitia SPA architektúry}
 
 \begin{itemize}
-	\item Rýchlosť a responzívnosť aplikácie založenej na aktualizovaní iba tej časti aplikácie, ktorá sa zmenila \cite{spa-vs-mpa-1},
-	\item zjednodušený proces vývoja, nakoľko sa o vykreslenie obsahu nestará server ale klientský framework \cite{spa-vs-mpa-3},
-	\item minimálna previazanosť kódu aplikácie na strane servera a klienta, čo umožňuje jednoduchú správu používaných knižníc bez ovplyvnenia ďalších častí aplikácie \cite{spa-vs-mpa-2}.
+	\item Rýchlosť a responzívnosť aplikácie založenej na aktualizovaní iba tej časti aplikácie, ktorá sa zmenila \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item zjednodušený proces vývoja, nakoľko sa o vykreslenie obsahu nestará server ale klientský framework \cite{spa-vs-mpa-3} (vlastný preklad),
+	\item minimálna previazanosť kódu aplikácie na strane servera a klienta, čo umožňuje jednoduchú správu používaných knižníc bez ovplyvnenia ďalších častí aplikácie \cite{spa-vs-mpa-2} (vlastný preklad).
 \end{itemize}
 
 
 \subsubsection*{Nevýhody použitia SPA architektúry}
 
 \begin{itemize}
-	\item Ťažká optimalizácia aplikácie pre webové vyhľadávače, nakoľko sa o vykreslenie obsahu stará Javascript\footnote{Programovací jazyk bežiaci vo webovom prehliadači}, ktorý webové vyhľadávače neinterpretujú \cite{spa-vs-mpa-1},
-	\item prvé načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože sa musí všetok obsah aplikácie stiahnuť do zariadenia \cite{spa-vs-mpa-1},
-	\item nemožnosť zobrazenia aplikácie pri vypnutom Javascripte vo webovom prehliadači \cite{spa-vs-mpa-2}
+	\item Ťažká optimalizácia aplikácie pre webové vyhľadávače, nakoľko sa o vykreslenie obsahu stará Javascript\footnote{Programovací jazyk bežiaci vo webovom prehliadači}, ktorý webové vyhľadávače neinterpretujú \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item prvé načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože sa musí všetok obsah aplikácie stiahnuť do zariadenia \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item nemožnosť zobrazenia aplikácie pri vypnutom Javascripte vo webovom prehliadači \cite{spa-vs-mpa-2} (vlastný preklad).
 \end{itemize}.
 
 
@@ -101,7 +101,7 @@ V tejto sekcii sa presunieme od voľby architektúry, na ktorej bude aplikácia 
 Medzi zvolené technológie bude jednoznačne patriť programovací jazyk PHP, nakoľko jeho voľba je jedným z nefunkčných požiadaviek kladených na budúcu aplikáciu. 
 
 \subsubsection*{Framework}
-Vývoj softvéru je komplexný proces, ktorý zahŕňa nielen výslednú implementáciu konkrétneho softvéru, ale aj analýzu, návrh, a v neposlednom rade aj testovanie softvéru. Softvérové frameworky uľahčujú prácu vývojárom tým, že im umožňujú prevziať kontrolu nad celým procesom vývoja softvéru alebo jeho väčšiny \cite{co-je-framework}.
+Vývoj softvéru je komplexný proces, ktorý zahŕňa nielen výslednú implementáciu konkrétneho softvéru, ale aj analýzu, návrh, a v neposlednom rade aj testovanie softvéru. Softvérové frameworky uľahčujú prácu vývojárom tým, že im umožňujú prevziať kontrolu nad celým procesom vývoja softvéru alebo jeho väčšiny \cite{co-je-framework} (vlastný preklad).
 
 Medzi niektoré výhody použitia frameworku patrí:
 
@@ -117,22 +117,22 @@ Spomedzi menovaných bol vybraný na základe doterajších skúseností posledn
 
 \subsection{HTML 5}
 HTML -- HyperText Markup Language -- je značkovací jazyk používaný pre definovanie významu a štruktúry dokumentov. Ako už z názvu vyplýva, HTML používa značky pre definovanie elementov v dokumente s rozdielnymi vlastnosťami, ako napríklad nadpis, odstavec, tabuľky a iné.
-Tieto značky sú interpretované webovým prehliadačom, ktorý ich následne vykreslí na stránku \cite{co-je-html}.
+Tieto značky sú interpretované webovým prehliadačom, ktorý ich následne vykreslí na stránku \cite{co-je-html} (vlastný preklad).
 
 Najnovšou verziou tohto jazyka je verzia HTML 5.
 
 \subsection{CSS 3}
-Cascading Style Sheets (CSS) je jazyk, ktorý sa používa na ilustráciu vzhľadu, štýlu a formátu dokumentu a jeho elementov napísaného v akomkoľvek značkovacom jazyku. Využíva sa najmä v spojitosti s webovými stránkami. CSS je tvorený pravidlami aplikovanými na jednotlivé elementy dokumentu. Tieto pravidlá sú definované selektorom elementu, ktorý určuje polohu elementu v dokumente, a CSS pravidlami rôzneho typu, ktoré definujú konkrétny štýl daného elementu \cite{co-je-css}. 
+Cascading Style Sheets (CSS) je jazyk, ktorý sa používa na ilustráciu vzhľadu, štýlu a formátu dokumentu a jeho elementov napísaného v akomkoľvek značkovacom jazyku. Využíva sa najmä v spojitosti s webovými stránkami. CSS je tvorený pravidlami aplikovanými na jednotlivé elementy dokumentu. Tieto pravidlá sú definované selektorom elementu, ktorý určuje polohu elementu v dokumente, a CSS pravidlami rôzneho typu, ktoré definujú konkrétny štýl daného elementu \cite{co-je-css} (vlastný preklad). 
 
 CSS3 je momentálne najnovšia verzia jazyka CSS.
 
 \subsection{JavaScript}
-JavaScript je jednoduchý programovací jazyk, pomocou ktorého môžu vývojári webových stránok vytvárať interaktívne a dynamické webové stránky. Bol vyvinutý spoločnosťou Netscape, ale v súčasnosti ho používa väčšina webových prehliadačov. Je to programovací jazyk s otvoreným zdrojovým kódom, ktorý môže ktokoľvek používať \cite{co-je-js}.
+JavaScript je jednoduchý programovací jazyk, pomocou ktorého môžu vývojári webových stránok vytvárať interaktívne a dynamické webové stránky. Bol vyvinutý spoločnosťou Netscape, ale v súčasnosti ho používa väčšina webových prehliadačov. Je to programovací jazyk s otvoreným zdrojovým kódom, ktorý môže ktokoľvek používať \cite{co-je-js} (vlastný preklad).
 
 \subsubsection*{Framework}
 Nakoľko novovznikajúca aplikácia bude postavená na SPA architektúre, bude potrebné, aby sa stránky vykresľovali na strane klienta. To sa dá samozrejme dosiahnuť bez použitia frameworku, ktorý by sa postaral o aktualizáciu komponentov na stránke, avšak z dôvodu rýchlejšieho procesu vývoja som sa rozhodol použiť framework Vue.js\footnote{https://vuejs.org}.
 
-Vue.js je progresívny framework pre vytváranie používateľských rozhraní. Tento framework bol navrhnutý od základov tak, aby bol postupne prispôsobiteľný. Nakoľko je zameraný iba na vrstvu zobrazenia, je ľahké ho integrovať s inými knižnicami a existujúcimi projektmi \cite{co-je-vue}.
+Vue.js je progresívny framework pre vytváranie používateľských rozhraní. Tento framework bol navrhnutý od základov tak, aby bol postupne prispôsobiteľný. Nakoľko je zameraný iba na vrstvu zobrazenia, je ľahké ho integrovať s inými knižnicami a existujúcimi projektmi \cite{co-je-vue} (vlastný preklad).
 
 Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React\footnote{https://reactjs.org} a Angular\footnote{https://angular.io}, avšak z dôvodu doterajších skúseností bol zvolený Vue.js framework.
 
@@ -144,9 +144,9 @@ V predchádzajúcej kapitole v podsekcii \ref{sucasny-model-db} bol zanalyzovan�
 Táto sekcia popíše normalizáciu súčasnej databázy a na základe poznatkov vyplývajúcich z analýzy o súčasnom databázovom modeli bude navrhnutý databázový model pre vznikajúcu aplikáciu, ktorý bude brať do úvahy funkčné požiadavky kladené na aplikáciu.
 
 \subsection{Normalizácia databázy}
-Normalizácia databázy je proces efektívneho usporiadania údajov v databáze. Tento proces má dva ciele: odstránenie nadbytočných údajov (napríklad neukladanie tých istých údajov vo viac ako jednej tabuľke) a zabezpečenie ukladania iba  súvisiacich údajov do tabuľky. Normalizovaná databáza znižuje množstvo miesta potrebného na ukladanie dát a navyše zabezpečí, že dáta sú logicky usporiadané \cite{co-je-normalizacia}.
+Normalizácia databázy je proces efektívneho usporiadania údajov v databáze. Tento proces má dva ciele: odstránenie nadbytočných údajov (napríklad neukladanie tých istých údajov vo viac ako jednej tabuľke) a zabezpečenie ukladania iba  súvisiacich údajov do tabuľky. Normalizovaná databáza znižuje množstvo miesta potrebného na ukladanie dát a navyše zabezpečí, že dáta sú logicky usporiadané \cite{co-je-normalizacia} (vlastný preklad).
 
-Pri návrhu databázy je žiaduce dosiahnuť tretiu normálovú formu (3NF) pre každú tabuľku v databáze, pretože až takáto databáza sa považuje za normalizovanú \cite{normalizovana-tabulka}.
+Pri návrhu databázy je žiaduce dosiahnuť tretiu normálovú formu (3NF) pre každú tabuľku v databáze, pretože až takáto databáza sa považuje za normalizovanú \cite{normalizovana-tabulka} (vlastný preklad).
 
 Proces normalizácie tabuľky zahŕňa jej konverziu do prvej normálovej formy (ak v nej nie je), následne do druhej normálovej formy (ak ju nespĺňa) a na koniec do tretej normálovej formy.
 
@@ -155,26 +155,26 @@ Tabuľka je v prvej normálovej forme (1NF), ak spĺňa nasledujúce vlastnosti:
 	\item Obsahuje iba atomické hodnoty v každom stĺpci,
 	\item hodnoty uložené v stĺpci sa viažu iba na daný stĺpec,
 	\item všetky stĺpce v tabuľke majú unikátny názov,
-	\item nezáleží na poradí ukladania dát do stĺpcov \cite{typy-normalizacie}. 
+	\item nezáleží na poradí ukladania dát do stĺpcov \cite{typy-normalizacie} (vlastný preklad). 
 \end{itemize}
 
 Tabuľka je v druhej normálovej forme (2NF), ak má nasledujúce vlastnosti:
 \begin{itemize}
 	\item Tabuľka spĺňa 1NF,
-	\item nemôže obsahovať čiastočnú závislosť \cite{typy-normalizacie}.
+	\item nemôže obsahovať čiastočnú závislosť \cite{typy-normalizacie} (vlastný preklad).
 \end{itemize}
 
-Čiastočná závislosť v tabuľke existuje, pokiaľ atribút v tabuľke závisí od časti primárneho kľúča a nie od celého kľúča \cite{ciastocna-zavislost}. 
+Čiastočná závislosť v tabuľke existuje, pokiaľ atribút v tabuľke závisí od časti primárneho kľúča a nie od celého kľúča \cite{ciastocna-zavislost} (vlastný preklad). 
 
 \pagebreak
 
 Na to, aby tabuľka bola v tretej normálovej forme (3NF), musí navyše mať nasledujúce vlastnosti:
 \begin{itemize}
 	\item Tabuľka spĺňa 2NF,
-	\item nemôže obsahovať tranzitívnu závislosť \cite{typy-normalizacie}.
+	\item nemôže obsahovať tranzitívnu závislosť \cite{typy-normalizacie} (vlastný preklad).
 \end{itemize}
 
-Tranzitívna závislosť predstavuje tri alebo viac atribútov, ktoré majú funkčnú závislosť medzi sebou, čo znamená, že stĺpec A závisí na stĺpci B cez stĺpec C \cite{tranzitivna-zavislost}.
+Tranzitívna závislosť predstavuje tri alebo viac atribútov, ktoré majú funkčnú závislosť medzi sebou, čo znamená, že stĺpec A závisí na stĺpci B cez stĺpec C \cite{tranzitivna-zavislost} (vlastný preklad).
 
 \subsubsection{Tabuľka czkp\_vrh}
 Na základe analýzy a splnenia požiadavky 3NF bude potrebné, aby údaje o chovateľovi sa nenachádzali priamo v tabuľke vrhov, ale cez cudzí kľúč smerujúci do tabuľky určenej pre chovateľov/majiteľov.
