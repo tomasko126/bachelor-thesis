@@ -1323,7 +1323,7 @@ FUNCTION {misc}
 { output.bibitem
   format.authors output
   add.colon
-  format.title output
+  format.title emphasize output
   new.sentence
   howpublished "howpublished" bibinfo.check output
   format.date output
