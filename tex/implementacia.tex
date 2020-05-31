@@ -158,7 +158,7 @@ Route::middleware('auth:sanctum')->group(function() {
 \label{router-code}
 \end{figure}
 
-Na obrázku \ref{router-code} je zobrazená ukážka routeru. V prípade, ak HTTP požiadavka prichádzajúca na server bude mať adresu v tvare\\ \uv{https://domena.sk/animals/<id>/export}\footnote{<id> sa nahradí ľubovoľným číslom}, router spustí metódu \mintinline{php}{export} v controlleri \mintinline{php}{AnimalsController}.
+Na obrázku \ref{router-code} je zobrazená ukážka routeru. V prípade, ak HTTP požiadavka prichádzajúca na server bude mať adresu v tvare\\ \uv{https://domena.sk/animals/<id>/export} (<id> sa nahradí ľubovoľným číslom), router spustí metódu \mintinline{php}{export} v controlleri \mintinline{php}{AnimalsController}.
 
 \section{Klientská časť}
 Klientská časť aplikácie sa skladá prevažne z implementácie jednotlivých stránok, ktoré sa skladajú z viacerých nezávislých komponent, ktoré spolu komunikujú. Tieto stránky sú zobrazované klientskym frameworkom Vue.js, ktorý sa stará o správne zobrazenie jednotlivých stránok na základe adresy, na ktorej sa používateľ nachádza.
@@ -267,7 +267,7 @@ Metóda \mintinline{php}{data} vracia objekt s reaktívnymi atribútami --- pri 
 Dané atribúty sa taktiež používajú na ukladanie stavu jednotlivých komponentov.
 Objekt \mintinline{php}{methods} obsahuje biznis metódy, ktoré môžu byť volané inými metódami. V tomto prípade sa používateľská metóda \mintinline{php}{loadData} spustí po tom, čo sa spustí exekúcia metódy \mintinline{php}{created}. Metóda \mintinline{php}{created} je ale systémová -- konkrétne sa exekuuje po vytvorení daného komponentu na stránke.
 
-Zjednodušený životný cyklus tohto komponentu bude nasledovný\footnote{Informácie o kompletnom životnom cykle komponentov je možné nájsť na https://vuejs.org/v2/guide/instance.html}:
+Zjednodušený životný cyklus tohto komponentu bude nasledovný:
 \begin{enumerate}
 	\item Vue.js vytvorí a zobrazí komponent \mintinline{php}{AnimalPage}.
 	\item Po vytvorení tohto komponentu bude automaticky spustená metóda \mintinline{php}{created}, ktorá vzápätí zavolá metódu \mintinline{php}{loadData}.

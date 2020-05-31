@@ -205,8 +205,8 @@ Je potrebné, aby aplikácia ponúkala možnosť zaregistrovať evidované zvier
 Pri takejto registrácií sa budú zbierať nasledovné údaje:
 
 \begin{itemize}
-	\item Klub\footnote{Na výber z možností: ČKP, SOCHP alebo Ostatné}, pod ktorým bude zviera zaregistrované,
-	\item typ registrácie\footnote{Vyžadované iba v prípade registrácie zvieraťa pod klubom ČKP},
+	\item Klub, pod ktorým bude zviera zaregistrované (na výber z možností: ČKP, SOCHP alebo Ostatné),
+	\item typ registrácie (vyžadované iba v prípade registrácie zvieraťa pod klubom ČKP),
 	\item registračné číslo,
 	\item dátum registrácie,
 	\item informácia, či je nasledovný chov povolený,
@@ -237,7 +237,7 @@ Rovnako ako pri evidencii zvierat, tak aj tu umožní aplikácia interaktívne z
 \subsubsection{Správa žiadostí o schválenie vrhov}\label{sprava-ziadosti-o-schvalenie-vrhu}
 Pre organizáciu je žiaduce, aby aplikácia obsahovala správu žiadostí o schválenie vrhu.
 
-V rámci žiadosti o schválenie vrhu sa rozlišujú dva typy osôb -- žiadateľ o schválenie vrhu\footnote{Zväčša majiteľ daného vrhu} a registrátor vrhu.
+V rámci žiadosti o schválenie vrhu sa rozlišujú dva typy osôb -- žiadateľ o schválenie vrhu (zväčša majiteľ daného vrhu) a registrátor vrhu.
 
 Aplikácia žiadateľovi umožní poslať žiadosť o schválenie vrhu s možnosťou zanechania poznámky pre registrátora.
 Po odoslaní a úspešnom spracovaní tejto žiadosti serverom sa odošle e-mail všetkým registrátorom s informáciou o vytvorení novej žiadosti o schválenie vrhu. Na tento e-mail bude môcť zareagovať akýkoľvek registrátor, ktorý sa na základe dostupných informácií o vrhu rozhodne, či danú žiadosť schváli alebo zamietne.
@@ -252,7 +252,7 @@ V prípade vrhu bude rodokmeň zobrazovať predkov matky a otca daného vrhu.
 
 \subsubsection{Tvorba poznámok pre zviera a vrh}
 V rámci aplikácie bude potrebné implementovať poznámky, ktoré budú môcť byť priradené jednotlivým zvieratám a vrhom.
-Takáto poznámka by mala mať nastaviteľnú viditelnosť\footnote{Poznámka môže byť buď verejná alebo súkromná} a typ\footnote{Typ poznámky je jeden z nasledujúcich: všeobecná, upozornenie alebo výstraha}.
+Takáto poznámka by mala mať nastaviteľnú viditelnosť (rozdelenie poznámky na verejnú a súkromnú) a typ (všeobecná, upozornenie alebo výstraha).
 Taktiež musí poskytnúť informáciu, kedy bola vytvorená, respektíve editovaná.
 
 
@@ -268,7 +268,7 @@ Aplikácia bude zaznamenávať nasledujúce zmeny v systéme:
 	\item Vytvorenie zvieraťa/vrhu,
 	\item úprava údajov zvieraťa/vrhu,
 	\item zmazanie zvieraťa/vrhu,
-	\item obnova\footnote{Obnoviť zviera/vrh bude môcť iba administrátor aplikácie} zmazaného zvieraťa/vrhu.
+	\item obnova zmazaného zvieraťa/vrhu.
 \end{itemize}
 
 Pri každej zmene popísanej vyššie je taktiež nutné ukladať, kto a kedy danú zmenu vykonal. V prípade úpravy údajov budú navyše zaznamenané tie údaje, ktoré boli zmenené používateľom. Túto históriu zmien bude možné vidieť vo forme tabuľky u každého zvieraťa, resp. vrhu.
@@ -301,7 +301,7 @@ Prostredie bude naviac responzívne, čo uľahčí prípadný prístup do systé
 Po konzultácii s vedúcim práce boli vymedzené nasledovné technológie, ktoré budú použité na strane servera.
 
 Ako programovací jazyk bude použítý jazyk PHP vo verzii 7.3, hoci momentálne existuje novšia verzia jazyku -- 7.4 \cite{verzie-php} (vlastný preklad).
-Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu\footnote{Server poskytujúci webovú aplikáciu používateľom na internete, v tomto prípade sa jedná o webhosting Endora -- www.endora.cz}, na ktorom bude aplikácia nasadená.
+Dôvod výberu nižšej verzie jazyka je daný PHP podporou webhostingu (server poskytujúci webovú aplikáciu používateľom na internete, v tomto prípade sa jedná o webhosting Endora -- www.endora.cz), na ktorom bude aplikácia nasadená.
 
 Pre ukladanie dát potrebných pre funkčnosť aplikácie a ich následné spracovávanie bude použitý rovnaký databázový systém, ako v súčasnej aplikácii -- MySQL. Tento databázový systém bude použitý vo verzii 5.6.
 
@@ -456,7 +456,7 @@ Tento prípad použitia zahŕňa prípad \hyperref[uc2]{zobrazenia detailov zvie
 
 \begin{enumerate}
 	\item \nameref{uc2}
-	\item Kliknutím na tlačidlo \uv{Pridať novú registráciu} aplikácia zobrazí registračný formulár v modálnom okne\footnote{Menšie okno aplikácie prekrývajúce jej hlavný obsah}.
+	\item Kliknutím na tlačidlo \uv{Pridať novú registráciu} aplikácia zobrazí registračný formulár v modálnom okne (v menšom okne aplikácie prekrývajúce jej hlavný obsah).
 	\item Používateľ vyplní potrebné polia.
 	\item Po stlačení tlačidla \uv{Uložiť} sa vyplnený formulár odošle na server.
 	\item Po úspešnom spracovaní formuláru serverom sa modálne okno zavrie.

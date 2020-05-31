@@ -49,7 +49,7 @@ Technológia AJAX čiastočne rieši problém znovunačítavania celej stránky 
 
 
 \subsection{Architektúra SPA aplikácie}
-SPA je skratka pre single-page aplikáciu. Single-page aplikácia je aplikácia, ktorá nepotrebuje znovunačítanie stránky počas jej používania. Na tomto type architektúry sú postavené aplikácie ako Gmail\footnote{https://gmail.com}, Google Mapy\footnote{https://maps.google.com}, Facebook\footnote{https://facebook.com} či GitHub\footnote{https://github.com}. V tomto prípade sa o aktualizáciu obsahu na stránke nestará server, ale klient, zväčša pomocou frameworku\footnote{Sada podporných programov uľahčujúca vývoj aplikácie} bežiacom v prostredí webového prehliadača \cite{spa-vs-mpa-3} (vlastný preklad).
+SPA je skratka pre single-page aplikáciu. Single-page aplikácia je aplikácia, ktorá nepotrebuje znovunačítanie stránky počas jej používania. Na tomto type architektúry sú postavené aplikácie ako Gmail, Google Mapy, Facebook či GitHub. V tomto prípade sa o aktualizáciu obsahu na stránke nestará server, ale klient, zväčša pomocou frameworku (sady podporných programov uľahčujúca vývoj aplikácie) bežiacom v prostredí webového prehliadača \cite{spa-vs-mpa-3} (vlastný preklad).
 
 \subsubsection*{Priebeh komunikácie medzi serverom a klientom}
 Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci diagram s jeho popisom.
@@ -65,7 +65,7 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 	\item Klient vrátenú stránku serverom vykreslí.
 	\item Klient vyplní formulár, ktorý sa následne odošle na server pomocou AJAXu.
 	\item Server prijme údaje od klienta, ktoré následne spracuje.
-	\item Po spracovaní údajov server vráti späť klientovi aktualizované údaje (v JSON\footnote{Formát na výmenu dát medzi klientom a serverom \cite{co-je-json} (vlastný preklad)} formáte),
+	\item Po spracovaní údajov server vráti späť klientovi aktualizované údaje (v JSON formáte),
 	\item Klient zahodí staré údaje na stránke a nahradí ich novými, čím príde k obnoveniu údajov ale nie stránky.
 \end{enumerate}
 
@@ -82,7 +82,7 @@ Celkový priebeh komunikácie medzi klientom a serverom zachytáva nasledujúci 
 \subsubsection*{Nevýhody použitia SPA architektúry}
 
 \begin{itemize}
-	\item Ťažká optimalizácia aplikácie pre webové vyhľadávače, nakoľko sa o vykreslenie obsahu stará Javascript\footnote{Programovací jazyk bežiaci vo webovom prehliadači}, ktorý webové vyhľadávače neinterpretujú \cite{spa-vs-mpa-1} (vlastný preklad),
+	\item Ťažká optimalizácia aplikácie pre webové vyhľadávače, nakoľko sa o vykreslenie obsahu stará Javascript (programovací jazyk bežiaci vo webovom prehliadači), ktorý webové vyhľadávače neinterpretujú \cite{spa-vs-mpa-1} (vlastný preklad),
 	\item prvé načítanie aplikácie trvá dlhší čas v porovnaní s MPA architektúrou, pretože sa musí všetok obsah aplikácie stiahnuť do zariadenia \cite{spa-vs-mpa-1} (vlastný preklad),
 	\item nemožnosť zobrazenia aplikácie pri vypnutom Javascripte vo webovom prehliadači \cite{spa-vs-mpa-2} (vlastný preklad).
 \end{itemize}.
@@ -112,7 +112,7 @@ Medzi niektoré výhody použitia frameworku patrí:
 	\item skrátenie času vývoju výslednej aplikácie.
 \end{itemize}
 
-Pre vývoj webových aplikácií v PHP existujú viaceré frameworky, ako napríklad CakePHP\footnote{https://cakephp.org}, Nette\footnote{https://nette.org}, Symfony\footnote{https://symfony.com}, Laravel\footnote{https://laravel.com} a iné.
+Pre vývoj webových aplikácií v PHP existujú viaceré frameworky, ako napríklad CakePHP, Nette, Symfony, Laravel a iné.
 Spomedzi menovaných bol vybraný na základe doterajších skúseností posledný z nich -- Laravel.
 
 \subsection{HTML 5}
@@ -130,11 +130,11 @@ CSS3 je momentálne najnovšia verzia jazyka CSS.
 JavaScript je jednoduchý programovací jazyk, pomocou ktorého môžu vývojári webových stránok vytvárať interaktívne a dynamické webové stránky. Bol vyvinutý spoločnosťou Netscape, ale v súčasnosti ho používa väčšina webových prehliadačov. Je to programovací jazyk s otvoreným zdrojovým kódom, ktorý môže ktokoľvek používať \cite{co-je-js} (vlastný preklad).
 
 \subsubsection*{Framework}
-Nakoľko novovznikajúca aplikácia bude postavená na SPA architektúre, bude potrebné, aby sa stránky vykresľovali na strane klienta. To sa dá samozrejme dosiahnuť bez použitia frameworku, ktorý by sa postaral o aktualizáciu komponentov na stránke, avšak z dôvodu rýchlejšieho procesu vývoja som sa rozhodol použiť framework Vue.js\footnote{https://vuejs.org}.
+Nakoľko novovznikajúca aplikácia bude postavená na SPA architektúre, bude potrebné, aby sa stránky vykresľovali na strane klienta. To sa dá samozrejme dosiahnuť bez použitia frameworku, ktorý by sa postaral o aktualizáciu komponentov na stránke, avšak z dôvodu rýchlejšieho procesu vývoja som sa rozhodol použiť framework Vue.js.
 
 Vue.js je progresívny framework pre vytváranie používateľských rozhraní. Tento framework bol navrhnutý od základov tak, aby bol postupne prispôsobiteľný. Nakoľko je zameraný iba na vrstvu zobrazenia, je ľahké ho integrovať s inými knižnicami a existujúcimi projektmi \cite{co-je-vue} (vlastný preklad).
 
-Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React\footnote{https://reactjs.org} a Angular\footnote{https://angular.io}, avšak z dôvodu doterajších skúseností bol zvolený Vue.js framework.
+Pre vytváranie používateľského rozhrania existujú aj iné frameworky, ako napríklad React a Angular, avšak z dôvodu doterajších skúseností bol zvolený Vue.js framework.
 
 \pagebreak
 
